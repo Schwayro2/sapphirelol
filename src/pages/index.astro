@@ -10,6 +10,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -141,6 +142,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         color: transparent;
         font-size: 1.2rem;
         font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
       }
 
       @keyframes fadeOut {
@@ -181,15 +185,15 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         <h2 class="section-title">Why Choose Us</h2>
         <div class="grid features-grid">
           <div class="card">
-            <h3>🛡️ Undetected</h3>
+            <h3><i class="fas fa-shield-alt"></i> Undetected</h3>
             <p>Secure and consistently updated tools.</p>
           </div>
           <div class="card">
-            <h3>⚡ Performance</h3>
+            <h3><i class="fas fa-bolt"></i> Performance</h3>
             <p>Lightweight, optimized, and lag-free.</p>
           </div>
           <div class="card">
-            <h3>🔁 Always Fresh</h3>
+            <h3><i class="fas fa-sync-alt"></i> Always Fresh</h3>
             <p>Daily maintenance ensures compatibility.</p>
           </div>
         </div>
