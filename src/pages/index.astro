@@ -17,17 +17,16 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       :root {
         --primary: #6366f1;
         --primary-dark: #4f46e5;
-        --accent: var(--primary);
         --text: #1f2937;
         --text-light: #6b7280;
         --bg: #ffffff;
         --card: #f9fafb;
         --border: #e5e7eb;
-        --radius: 12px;
-        --shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        --radius: 10px;
+        --shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
       }
 
-      *, *::before, *::after {
+      * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
@@ -36,29 +35,23 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       body {
         font-family: 'Inter', sans-serif;
         color: var(--text);
-        background-color: var(--bg);
+        background: var(--bg);
         line-height: 1.5;
         scroll-behavior: smooth;
       }
 
       main {
-        max-width: 1200px;
+        max-width: 1000px;
         margin: auto;
-        padding: 2rem;
+        padding: 1.5rem;
       }
 
       .hero {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
         text-align: center;
-        padding: 6rem 1rem;
-        position: relative;
-        background: radial-gradient(circle at center, rgba(99,102,241,0.05), transparent);
+        padding: 5rem 1rem 3rem;
         opacity: 0;
         transform: translateY(20px);
-        transition: all 1s ease-out;
+        transition: all 0.8s ease-out;
       }
 
       .hero.visible {
@@ -67,50 +60,46 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       }
 
       .hero h1 {
-        font-size: 3rem;
-        font-weight: 800;
+        font-size: 2.5rem;
+        font-weight: 700;
         background: linear-gradient(90deg, var(--primary), var(--primary-dark));
         -webkit-background-clip: text;
         color: transparent;
-        margin-bottom: 1rem;
-        animation: fadeSlideUp 1.2s ease-out;
+        margin-bottom: 0.75rem;
       }
 
       .hero p {
-        max-width: 600px;
         color: var(--text-light);
-        margin-bottom: 2rem;
-        animation: fadeIn 1.5s ease-out;
+        margin-bottom: 1.5rem;
+        font-size: 1.125rem;
       }
 
       .btn {
-        padding: 0.75rem 1.5rem;
+        padding: 0.65rem 1.25rem;
         border-radius: var(--radius);
-        text-decoration: none;
         font-weight: 600;
-        transition: background 0.3s ease, transform 0.2s ease;
+        text-decoration: none;
+        transition: 0.3s ease;
       }
 
       .btn-primary {
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        color: #fff;
+        background: var(--primary);
+        color: white;
       }
 
       .btn-primary:hover {
-        transform: translateY(-2px);
-        background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        background: var(--primary-dark);
       }
 
       .section-title {
         text-align: center;
-        font-size: 2rem;
-        margin: 4rem 0 2rem;
-        animation: fadeSlideUp 1s ease forwards;
+        font-size: 1.75rem;
+        margin: 3rem 0 1.5rem;
       }
 
       .grid {
         display: grid;
-        gap: 2rem;
+        gap: 1.5rem;
       }
 
       @media (min-width: 768px) {
@@ -122,27 +111,17 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       .card {
         background: var(--card);
         border: 1px solid var(--border);
-        padding: 1.5rem;
+        padding: 1.25rem;
         border-radius: var(--radius);
         box-shadow: var(--shadow);
-        transition: transform 0.4s ease, opacity 0.4s ease;
         opacity: 0;
-        transform: translateY(40px);
+        transform: translateY(30px);
+        transition: all 0.5s ease-out;
       }
 
       .card.visible {
         opacity: 1;
         transform: translateY(0);
-      }
-
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-
-      @keyframes fadeSlideUp {
-        0% { opacity: 0; transform: translateY(40px); }
-        100% { opacity: 1; transform: translateY(0); }
       }
 
       @keyframes fadeOut {
@@ -157,34 +136,52 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       <section class="hero animate-on-scroll">
         <h1>Next-Level Game Enhancements</h1>
         <p>Premium tools for competitive players who demand performance and discretion.</p>
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center;">
           <a href="#products" class="btn btn-primary">Explore Products</a>
           <a href="#features" class="btn" style="border: 1px solid var(--border); color: var(--primary);">How It Works</a>
         </div>
       </section>
 
       <section id="products" class="animate-on-scroll">
-        <h2 class="section-title">Our Premium Solutions</h2>
+        <h2 class="section-title">Premium Solutions</h2>
         <div class="grid products-grid">
-          <div class="card"> <h3 style="color: var(--primary);">Fortnite Suite</h3> <p style="color: var(--text-light);">Complete ESP, aim assistance, and loot radar</p> <ul> <li>Player ESP</li> <li>Aim assist</li> <li>Loot radar</li> <li>Custom UI</li> </ul> </div>
+          <div class="card">
+            <h3 style="color: var(--primary);">Fortnite Suite</h3>
+            <p style="color: var(--text-light); font-size: 0.95rem;">ESP, aim assist, and radar tools</p>
+            <ul style="margin-top: 0.75rem; padding-left: 1.25rem; font-size: 0.95rem;">
+              <li>Player ESP</li>
+              <li>Smart aim</li>
+              <li>Loot radar</li>
+              <li>UI customization</li>
+            </ul>
+          </div>
         </div>
       </section>
 
       <section id="features" class="animate-on-scroll">
-        <h2 class="section-title">Key Features</h2>
+        <h2 class="section-title">Why Choose Us</h2>
         <div class="grid features-grid">
-          <div class="card"> <h3>🛡️ Undetected</h3> <p>Stay safe with encryption and frequent updates.</p> </div>
-          <div class="card"> <h3>⚡ High Performance</h3> <p>Optimized to run smooth without lag.</p> </div>
-          <div class="card"> <h3>🔄 Daily Updates</h3> <p>Always compatible with the latest patches.</p> </div>
+          <div class="card">
+            <h3>🛡️ Undetected</h3>
+            <p>Secure and consistently updated tools.</p>
+          </div>
+          <div class="card">
+            <h3>⚡ Performance</h3>
+            <p>Lightweight, optimized, and lag-free.</p>
+          </div>
+          <div class="card">
+            <h3>🔁 Always Fresh</h3>
+            <p>Daily maintenance ensures compatibility.</p>
+          </div>
         </div>
       </section>
 
       <section class="testimonials animate-on-scroll">
-        <h2 class="section-title">What Our Users Say</h2>
+        <h2 class="section-title">User Feedback</h2>
         <div class="grid testimonials-grid">
-          <div class="card"> <p>"6 months, no bans, natural feeling ESP and aim. Unreal."</p> <strong>- ProPlayer123</strong> </div>
-          <div class="card"> <p>"Went from Diamond to Immortal. Worth every penny."</p> <strong>- CompetitiveGamer</strong> </div>
-          <div class="card"> <p>"Fast support, flawless setup. 10/10 experience."</p> <strong>- StreamerXYZ</strong> </div>
+          <div class="card"> <p>"6 months no ban, everything works smooth."</p> <strong>- ProPlayer123</strong> </div>
+          <div class="card"> <p>"Made Immortal with aim assist and radar."</p> <strong>- CompetitiveGamer</strong> </div>
+          <div class="card"> <p>"Support was fast and setup was easy."</p> <strong>- StreamerXYZ</strong> </div>
         </div>
       </section>
     </main>
@@ -193,7 +190,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const animatedEls = document.querySelectorAll('.animate-on-scroll, .card');
-
         const observer = new IntersectionObserver(entries => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
