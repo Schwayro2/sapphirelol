@@ -11,24 +11,20 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style is:global>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
       
       :root {
-        --color-primary: #3b82f6;
-        --color-primary-dark: #2563eb;
-        --color-accent: #f59e0b;
-        --color-text: #1e293b;
-        --color-text-light: #64748b;
-        --color-bg: #f8fafc;
-        --color-card: #ffffff;
-        --color-border: #e2e8f0;
-        --radius-lg: 16px;
-        --radius-md: 8px;
-        --radius-sm: 4px;
-        --shadow-sm: 0 1px 3px rgba(15,23,42,0.03);
-        --shadow-md: 0 4px 6px -1px rgba(15,23,42,0.05), 0 2px 4px -1px rgba(15,23,42,0.03);
-        --shadow-lg: 0 10px 15px -3px rgba(15,23,42,0.05), 0 4px 6px -2px rgba(15,23,42,0.03);
-        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --color-plasma-1: #6366f1;
+        --color-plasma-2: #ec4899;
+        --color-plasma-3: #8b5cf6;
+        --color-text: #e0e7ff;
+        --color-bg: #0f172a;
+        --color-card: rgba(15, 23, 42, 0.7);
+        --radius-lg: 24px;
+        --radius-md: 12px;
+        --radius-sm: 6px;
+        --shadow-plasma: 0 0 40px rgba(99, 102, 241, 0.2);
+        --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       }
       
       * {
@@ -38,7 +34,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       }
       
       body {
-        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        font-family: 'Space Grotesk', sans-serif;
         line-height: 1.6;
         color: var(--color-text);
         background: var(--color-bg);
@@ -52,213 +48,185 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         padding: 0 2rem;
       }
       
+      /* Plasma Gradient Effects */
+      @keyframes plasma-pulse {
+        0% { opacity: 0.8; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(1.2); }
+        100% { opacity: 0.8; transform: scale(1); }
+      }
+      
       /* Hero Section */
       .hero {
-        min-height: 90vh;
+        min-height: 100vh;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         text-align: center;
-        padding: 4rem 0;
         position: relative;
         overflow: hidden;
-        background: linear-gradient(45deg, rgba(59,130,246,0.03) 0%, rgba(245,158,11,0.02) 100%);
+      }
+      
+      .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          45deg,
+          var(--color-plasma-1),
+          var(--color-plasma-2),
+          var(--color-plasma-3)
+        );
+        opacity: 0.15;
+        filter: blur(100px);
+        animation: plasma-pulse 8s infinite;
       }
       
       .hero-content {
+        position: relative;
+        z-index: 1;
         max-width: 800px;
+        padding: 4rem;
+        background: var(--color-card);
+        backdrop-filter: blur(20px);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(99, 102, 241, 0.2);
+        box-shadow: var(--shadow-plasma);
+      }
+      
+      .hero h1 {
+        font-size: 4.5rem;
+        font-weight: 700;
+        margin: 0 0 2rem;
+        background: linear-gradient(
+          45deg,
+          var(--color-plasma-1),
+          var(--color-plasma-2),
+          var(--color-plasma-3)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        line-height: 1.1;
+      }
+      
+      .hero p {
+        font-size: 1.5rem;
+        color: rgba(224, 231, 255, 0.8);
+        margin-bottom: 3rem;
+      }
+      
+      /* Games Grid */
+      .games-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+        padding: 8rem 0;
+      }
+      
+      .game-card {
+        position: relative;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        transform: translateY(0);
+        transition: var(--transition);
+      }
+      
+      .game-card:hover {
+        transform: translateY(-10px);
+      }
+      
+      .game-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          45deg,
+          var(--color-plasma-1),
+          var(--color-plasma-2),
+          var(--color-plasma-3)
+        );
+        opacity: 0.3;
+        z-index: -1;
+      }
+      
+      .game-card::after {
+        content: '';
+        position: absolute;
+        inset: 1px;
+        background: var(--color-bg);
+        border-radius: var(--radius-lg);
+        z-index: -1;
+      }
+      
+      .game-content {
+        padding: 2.5rem;
         position: relative;
         z-index: 1;
       }
       
-      .hero h1 {
-        font-size: 4rem;
-        font-weight: 800;
-        margin: 0 0 2rem;
-        line-height: 1.1;
-        background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+      .game-logo {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 2rem;
+        filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.3));
+        transition: transform 0.4s ease;
+      }
+      
+      .game-card:hover .game-logo {
+        transform: scale(1.1) rotate(-5deg);
+      }
+      
+      .game-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(
+          45deg,
+          var(--color-plasma-1),
+          var(--color-plasma-2)
+        );
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
       }
       
-      .hero p {
-        font-size: 1.25rem;
-        max-width: 600px;
-        margin: 0 auto 3rem;
-        color: var(--color-text-light);
-      }
-      
-      /* Button Styles */
-      .btn-group {
-        display: flex;
-        gap: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.875rem 2.25rem;
-        border-radius: var(--radius-md);
-        font-weight: 600;
-        text-decoration: none;
-        transition: var(--transition);
-        position: relative;
-        overflow: hidden;
-        border: 2px solid transparent;
-      }
-      
-      .btn-primary {
-        background: linear-gradient(45deg, var(--color-primary), var(--color-primary-dark));
-        color: white;
-        box-shadow: var(--shadow-md);
-      }
-      
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
-      }
-      
-      .btn-secondary {
-        background: var(--color-card);
-        color: var(--color-primary);
-        border-color: var(--color-border);
-        box-shadow: var(--shadow-sm);
-      }
-      
-      .btn-secondary:hover {
-        border-color: var(--color-primary);
-        transform: translateY(-2px);
-      }
-      
-      /* Products Grid */
-      .products-section {
-        padding: 6rem 0;
-      }
-      
-      .section-title {
-        text-align: center;
-        font-size: 2.5rem;
-        margin-bottom: 4rem;
-        position: relative;
-      }
-      
-      .products-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2.5rem;
-        margin: 0 auto;
-      }
-      
-      .product-card {
-        background: var(--color-card);
-        border-radius: var(--radius-lg);
-        padding: 2.5rem;
-        border: 1px solid var(--color-border);
-        box-shadow: var(--shadow-sm);
-        transition: var(--transition);
-        position: relative;
-        overflow: hidden;
-      }
-      
-      .product-card:hover {
-        transform: translateY(-8px);
-        box-shadow: var(--shadow-lg);
-      }
-      
-      .product-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 1.5rem;
-      }
-      
-      .product-title {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin: 0;
-        color: var(--color-primary);
-      }
-      
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.375rem 1rem;
-        border-radius: var(--radius-md);
-        font-size: 0.875rem;
-        font-weight: 600;
-      }
-      
-      .badge-undetected {
-        background: rgba(34,197,94,0.1);
-        color: #16a34a;
-      }
-      
-      .product-features {
-        margin: 2rem 0;
-        padding-left: 0;
+      .game-details {
         list-style: none;
+        padding-left: 0;
       }
       
-      .product-features li {
-        margin-bottom: 1rem;
-        padding-left: 2rem;
-        position: relative;
-        color: var(--color-text-light);
-      }
-      
-      .product-features li::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0.375rem;
-        width: 1.25rem;
-        height: 1.25rem;
-        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233b82f6'%3E%3Cpath d='M9.9997 15.1709L19.1927 5.97891L20.6077 7.39291L9.9997 18.0009L3.63574 11.6369L5.04974 10.2229L9.9997 15.1709Z'%3E%3C/path%3E%3C/svg%3E");
-      }
-      
-      /* Features Section */
-      .features-section {
-        padding: 6rem 0;
-        background: rgba(249,250,251,0.5);
-      }
-      
-      .feature-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 3rem;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-      
-      .feature-card {
-        padding: 2.5rem;
-        border-radius: var(--radius-lg);
-        background: var(--color-card);
-        box-shadow: var(--shadow-sm);
-        transition: var(--transition);
-        text-align: center;
-      }
-      
-      .feature-icon {
-        width: 64px;
-        height: 64px;
-        background: linear-gradient(45deg, var(--color-primary), var(--color-primary-dark));
-        border-radius: var(--radius-lg);
+      .game-details li {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(99, 102, 241, 0.1);
         display: flex;
         align-items: center;
-        justify-content: center;
-        margin: 0 auto 1.5rem;
+        gap: 0.75rem;
       }
       
-      .feature-icon svg {
-        width: 32px;
-        height: 32px;
-        fill: white;
+      .game-details li:last-child {
+        border-bottom: 0;
+      }
+      
+      /* Floating Animation */
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0px); }
+      }
+      
+      .floating-element {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(
+          45deg,
+          var(--color-plasma-1),
+          var(--color-plasma-2)
+        );
+        opacity: 0.1;
+        filter: blur(60px);
+        animation: float 6s infinite;
+        z-index: -1;
       }
     </style>
   </head>
@@ -267,95 +235,70 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <main>
       <!-- Hero Section -->
       <section class="hero">
+        <div class="floating-element" style="top: 20%; left: 10%"></div>
+        <div class="floating-element" style="top: 60%; right: 15%"></div>
+        
         <div class="hero-content animate-on-scroll">
-          <h1>Elevate Your Gaming Experience</h1>
-          <p>Advanced tools designed for competitive players seeking precision and discretion</p>
-          <div class="btn-group">
-            <a href="#products" class="btn btn-primary">Discover Solutions</a>
-            <a href="#features" class="btn btn-secondary">Learn More</a>
-          </div>
+          <h1>Next-Level Gaming Experience</h1>
+          <p>Premium enhancements for today's top competitive titles</p>
         </div>
       </section>
       
-      <!-- Products Section -->
-      <section id="products" class="products-section">
-        <h2 class="section-title animate-on-scroll">Game-Specific Solutions</h2>
-        <div class="products-grid">
-          <!-- Product 1 -->
-          <div class="product-card animate-on-scroll">
-            <div class="product-header">
-              <h3 class="product-title">Fortnite Suite</h3>
-              <span class="badge badge-undetected">UNDETECTED</span>
-            </div>
-            <ul class="product-features">
-              <li>Real-time player tracking</li>
-              <li>Adaptive aim assistance</li>
-              <li>Smart loot detection</li>
-              <li>Customizable interfaces</li>
-            </ul>
-          </div>
-          
-          <!-- Product 2 -->
-          <div class="product-card animate-on-scroll" style="transition-delay: 100ms">
-            <div class="product-header">
-              <h3 class="product-title">Valorant Toolkit</h3>
-              <span class="badge badge-undetected">UNDETECTED</span>
-            </div>
-            <ul class="product-features">
-              <li>Precision trigger system</li>
-              <li>Recoil prediction</li>
-              <li>Tactical radar overlay</li>
-              <li>Performance optimization</li>
-            </ul>
-          </div>
-          
-          <!-- Product 3 -->
-          <div class="product-card animate-on-scroll" style="transition-delay: 200ms">
-            <div class="product-header">
-              <h3 class="product-title">Warzone Package</h3>
-              <span class="badge badge-undetected">UNDETECTED</span>
-            </div>
-            <ul class="product-features">
-              <li>Advanced environmental scanning</li>
-              <li>Weapon configuration profiles</li>
-              <li>Dynamic safe zone analysis</li>
-              <li>Real-time threat detection</li>
+      <!-- Supported Games -->
+      <section class="games-grid">
+        <!-- Fortnite -->
+        <div class="game-card animate-on-scroll">
+          <div class="game-content">
+            <img src="/fortnite-logo.png" alt="Fortnite" class="game-logo" />
+            <h3 class="game-title">Fortnite</h3>
+            <ul class="game-details">
+              <li>🟢 Full ESP System</li>
+              <li>🎯 Smart Aim Assist</li>
+              <li>📦 Loot Radar</li>
+              <li>🛡️ Undetected</li>
             </ul>
           </div>
         </div>
-      </section>
-      
-      <!-- Features Section -->
-      <section id="features" class="features-section">
-        <div class="feature-grid">
-          <div class="feature-card animate-on-scroll">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
-              </svg>
-            </div>
-            <h3>Advanced Protection</h3>
-            <p>Military-grade encryption and memory management for complete security</p>
+        
+        <!-- Valorant -->
+        <div class="game-card animate-on-scroll" style="animation-delay: 0.2s">
+          <div class="game-content">
+            <img src="/valorant-logo.png" alt="Valorant" class="game-logo" />
+            <h3 class="game-title">Valorant</h3>
+            <ul class="game-details">
+              <li>🔫 Precision Trigger</li>
+              <li>🎮 Recoil Control</li>
+              <li>📡 Radar Hack</li>
+              <li>🛡️ Undetected</li>
+            </ul>
           </div>
-          
-          <div class="feature-card animate-on-scroll" style="transition-delay: 100ms">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M23 12l-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68L23 12zm-10 5h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-              </svg>
-            </div>
-            <h3>Continuous Updates</h3>
-            <p>Daily system optimizations and anti-detection improvements</p>
+        </div>
+        
+        <!-- Warzone -->
+        <div class="game-card animate-on-scroll" style="animation-delay: 0.4s">
+          <div class="game-content">
+            <img src="/warzone-logo.png" alt="Warzone" class="game-logo" />
+            <h3 class="game-title">Warzone</h3>
+            <ul class="game-details">
+              <li>👁️ Advanced ESP</li>
+              <li>🎯 Auto Aimbot</li>
+              <li>🗺️ Map Awareness</li>
+              <li>🛡️ Undetected</li>
+            </ul>
           </div>
-          
-          <div class="feature-card animate-on-scroll" style="transition-delay: 200ms">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/>
-              </svg>
-            </div>
-            <h3>Performance Optimized</h3>
-            <p>Low resource usage with maximum efficiency</p>
+        </div>
+        
+        <!-- Apex Legends -->
+        <div class="game-card animate-on-scroll" style="animation-delay: 0.6s">
+          <div class="game-content">
+            <img src="/apex-logo.png" alt="Apex Legends" class="game-logo" />
+            <h3 class="game-title">Apex Legends</h3>
+            <ul class="game-details">
+              <li>👻 Player ESP</li>
+              <li>🔍 Item Highlight</li>
+              <li>💨 Movement Assist</li>
+              <li>🛡️ Undetected</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -364,20 +307,37 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <Footer />
     
     <script>
-      // Enhanced Intersection Observer with delays
       document.addEventListener('DOMContentLoaded', () => {
+        // Parallax effect for floating elements
+        document.addEventListener('mousemove', (e) => {
+          const elements = document.querySelectorAll('.floating-element');
+          const speed = 0.02;
+          
+          elements.forEach(element => {
+            const x = (window.innerWidth - e.pageX * speed) / 100;
+            const y = (window.innerHeight - e.pageY * speed) / 100;
+            element.style.transform = `translate(${x}px, ${y}px)`;
+          });
+        });
+        
+        // Intersection Observer with staggered delays
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              entry.target.style.opacity = 1;
-              entry.target.style.transform = 'translateY(0)';
+              const delay = entry.target.style.animationDelay || '0s';
+              setTimeout(() => {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = 'translateY(0)';
+              }, parseFloat(delay) * 1000);
             }
           });
-        }, { threshold: 0.1 });
-
+        }, { threshold: 0.15 });
+        
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
           observer.observe(el);
-          el.style.transition = `opacity 0.6s ease-out, transform 0.6s ease-out ${el.dataset.delay || '0s'}`;
+          el.style.opacity = 0;
+          el.style.transform = 'translateY(30px)';
+          el.style.transition = 'all 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
         });
       });
     </script>
