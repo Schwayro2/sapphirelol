@@ -24,6 +24,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         --border: #e5e7eb;
         --radius: 10px;
         --shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        --plasma-gradient: linear-gradient(90deg, #ff41ca, #5f007f, #2335be, #c321a5, #2af5ff);
       }
 
       * {
@@ -62,8 +63,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       .hero h1 {
         font-size: 2.5rem;
         font-weight: 700;
-        background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+        background: var(--plasma-gradient);
         -webkit-background-clip: text;
+        background-clip: text;
         color: transparent;
         margin-bottom: 0.75rem;
       }
