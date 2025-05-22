@@ -9,336 +9,286 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style is:global>
-      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap');
       
       :root {
-        --color-plasma-1: #6366f1;
-        --color-plasma-2: #ec4899;
-        --color-plasma-3: #8b5cf6;
-        --color-text: #e0e7ff;
-        --color-bg: #0f172a;
-        --color-card: rgba(15, 23, 42, 0.7);
-        --radius-lg: 24px;
-        --radius-md: 12px;
-        --radius-sm: 6px;
-        --shadow-plasma: 0 0 40px rgba(99, 102, 241, 0.2);
-        --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        --plasma-1: #6366f1;
+        --plasma-2: #ec4899;
+        --plasma-3: #8b5cf6;
+        --bg-dark: #0b081c;
+        --text-primary: #f0f0ff;
+        --text-glow: rgba(224, 231, 255, 0.1);
+        --gradient-1: linear-gradient(135deg, var(--plasma-1), var(--plasma-2), var(--plasma-3));
       }
-      
+
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
       }
-      
+
       body {
-        font-family: 'Space Grotesk', sans-serif;
-        line-height: 1.6;
-        color: var(--color-text);
-        background: var(--color-bg);
-        scroll-behavior: smooth;
-        -webkit-font-smoothing: antialiased;
+        font-family: 'Chakra Petch', sans-serif;
+        background: var(--bg-dark);
+        color: var(--text-primary);
+        overflow-x: hidden;
       }
-      
-      main {
-        max-width: 1440px;
-        margin: 0 auto;
-        padding: 0 2rem;
+
+      /* Matrix Reveal Animation */
+      @keyframes matrixReveal {
+        0% { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); }
+        100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
       }
-      
-      /* Plasma Gradient Effects */
-      @keyframes plasma-pulse {
-        0% { opacity: 0.8; transform: scale(1); }
-        50% { opacity: 0.4; transform: scale(1.2); }
-        100% { opacity: 0.8; transform: scale(1); }
+
+      /* Plasma Core Animation */
+      @keyframes plasmaCore {
+        0% { filter: hue-rotate(0deg); }
+        100% { filter: hue-rotate(360deg); }
       }
-      
-      /* Hero Section */
-      .hero {
+
+      .hero-section {
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        text-align: center;
         position: relative;
         overflow: hidden;
       }
-      
-      .hero::before {
-        content: '';
+
+      .hero-bg {
         position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          45deg,
-          var(--color-plasma-1),
-          var(--color-plasma-2),
-          var(--color-plasma-3)
-        );
+        width: 150vw;
+        height: 150vh;
+        background: var(--gradient-1);
+        mix-blend-mode: screen;
+        animation: plasmaCore 20s linear infinite;
         opacity: 0.15;
         filter: blur(100px);
-        animation: plasma-pulse 8s infinite;
       }
-      
+
       .hero-content {
+        text-align: center;
         position: relative;
-        z-index: 1;
-        max-width: 800px;
+        z-index: 2;
         padding: 4rem;
-        background: var(--color-card);
-        backdrop-filter: blur(20px);
-        border-radius: var(--radius-lg);
-        border: 1px solid rgba(99, 102, 241, 0.2);
-        box-shadow: var(--shadow-plasma);
       }
-      
-      .hero h1 {
-        font-size: 4.5rem;
-        font-weight: 700;
-        margin: 0 0 2rem;
-        background: linear-gradient(
-          45deg,
-          var(--color-plasma-1),
-          var(--color-plasma-2),
-          var(--color-plasma-3)
-        );
+
+      .hero-title {
+        font-size: 5rem;
+        background: var(--gradient-1);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        line-height: 1.1;
+        margin-bottom: 2rem;
+        text-shadow: 0 0 50px var(--plasma-1);
+        animation: matrixReveal 2s cubic-bezier(0.87, 0, 0.13, 1) forwards;
+        line-height: 1;
       }
-      
-      .hero p {
+
+      .hero-subtitle {
         font-size: 1.5rem;
-        color: rgba(224, 231, 255, 0.8);
+        color: var(--text-primary);
+        opacity: 0.8;
         margin-bottom: 3rem;
+        animation: fadeInUp 1s 0.5s forwards;
+        opacity: 0;
       }
-      
+
       /* Games Grid */
       .games-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 3rem;
-        padding: 8rem 0;
+        gap: 4rem;
+        padding: 8rem 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
       }
-      
+
       .game-card {
         position: relative;
-        border-radius: var(--radius-lg);
+        border-radius: 20px;
         overflow: hidden;
-        transform: translateY(0);
-        transition: var(--transition);
+        transform: translateZ(0);
+        transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
       }
-      
-      .game-card:hover {
-        transform: translateY(-10px);
-      }
-      
+
       .game-card::before {
         content: '';
         position: absolute;
         inset: 0;
-        background: linear-gradient(
-          45deg,
-          var(--color-plasma-1),
-          var(--color-plasma-2),
-          var(--color-plasma-3)
-        );
+        background: var(--gradient-1);
         opacity: 0.3;
         z-index: -1;
       }
-      
+
       .game-card::after {
         content: '';
         position: absolute;
         inset: 1px;
-        background: var(--color-bg);
-        border-radius: var(--radius-lg);
-        z-index: -1;
-      }
-      
-      .game-content {
-        padding: 2.5rem;
-        position: relative;
+        background: var(--bg-dark);
+        border-radius: 20px;
         z-index: 1;
       }
-      
+
+      .game-content {
+        position: relative;
+        z-index: 2;
+        padding: 2.5rem;
+        background: linear-gradient(180deg, rgba(11, 8, 28, 0.8) 0%, rgba(11, 8, 28, 0.9) 100%);
+      }
+
       .game-logo {
-        width: 120px;
-        height: 120px;
+        width: 160px;
+        height: 160px;
         margin: 0 auto 2rem;
-        filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.3));
-        transition: transform 0.4s ease;
+        filter: drop-shadow(0 0 30px var(--plasma-1));
+        transform: translateY(50px);
+        opacity: 0;
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
       }
-      
+
       .game-card:hover .game-logo {
-        transform: scale(1.1) rotate(-5deg);
+        transform: translateY(0) rotate(-5deg);
+        filter: drop-shadow(0 0 50px var(--plasma-2));
       }
-      
+
       .game-title {
         font-size: 2rem;
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-        background: linear-gradient(
-          45deg,
-          var(--color-plasma-1),
-          var(--color-plasma-2)
-        );
+        background: var(--gradient-1);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
+        margin-bottom: 1.5rem;
+        transform: translateY(30px);
+        opacity: 0;
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
       }
-      
-      .game-details {
-        list-style: none;
-        padding-left: 0;
+
+      .game-card:hover .game-title {
+        transform: translateY(0);
       }
-      
-      .game-details li {
-        padding: 0.75rem 0;
-        border-bottom: 1px solid rgba(99, 102, 241, 0.1);
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-      }
-      
-      .game-details li:last-child {
-        border-bottom: 0;
-      }
-      
-      /* Floating Animation */
-      @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-20px); }
-        100% { transform: translateY(0px); }
-      }
-      
-      .floating-element {
+
+      /* Particle Animation */
+      .particles {
         position: absolute;
-        width: 200px;
-        height: 200px;
-        background: linear-gradient(
-          45deg,
-          var(--color-plasma-1),
-          var(--color-plasma-2)
-        );
-        opacity: 0.1;
-        filter: blur(60px);
-        animation: float 6s infinite;
-        z-index: -1;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .particle {
+        position: absolute;
+        background: var(--gradient-1);
+        border-radius: 50%;
+        filter: blur(15px);
+        animation: float 8s infinite;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translate(0, 0); }
+        25% { transform: translate(10px, 10px); }
+        50% { transform: translate(-10px, 20px); }
+        75% { transform: translate(20px, -10px); }
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .animate-entry {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      .animate-entry.active {
+        opacity: 1;
+        transform: translateY(0);
       }
     </style>
   </head>
   <body>
     <Header />
+    
     <main>
-      <!-- Hero Section -->
-      <section class="hero">
-        <div class="floating-element" style="top: 20%; left: 10%"></div>
-        <div class="floating-element" style="top: 60%; right: 15%"></div>
+      <section class="hero-section">
+        <div class="particles">
+          <div class="particle" style="top: 20%; left: 15%; width: 120px; height: 120px; animation-delay: -2s"></div>
+          <div class="particle" style="top: 60%; right: 10%; width: 80px; height: 80px; animation-delay: -5s"></div>
+        </div>
         
-        <div class="hero-content animate-on-scroll">
-          <h1>Next-Level Gaming Experience</h1>
-          <p>Premium enhancements for today's top competitive titles</p>
+        <div class="hero-bg"></div>
+        
+        <div class="hero-content">
+          <h1 class="hero-title">NEXT-LEVEL<br/>GAMING EXPERIENCE</h1>
+          <p class="hero-subtitle">Elite performance enhancements for champion-tier players</p>
         </div>
       </section>
-      
-      <!-- Supported Games -->
+
       <section class="games-grid">
         <!-- Fortnite -->
-        <div class="game-card animate-on-scroll">
+        <div class="game-card animate-entry">
           <div class="game-content">
-            <img src="/fortnite-logo.png" alt="Fortnite" class="game-logo" />
+            <img src="/fortnite-logo.webp" class="game-logo" alt="Fortnite" />
             <h3 class="game-title">Fortnite</h3>
-            <ul class="game-details">
-              <li>🟢 Full ESP System</li>
-              <li>🎯 Smart Aim Assist</li>
-              <li>📦 Loot Radar</li>
-              <li>🛡️ Undetected</li>
-            </ul>
           </div>
         </div>
-        
+
         <!-- Valorant -->
-        <div class="game-card animate-on-scroll" style="animation-delay: 0.2s">
+        <div class="game-card animate-entry" style="transition-delay: 0.2s">
           <div class="game-content">
-            <img src="/valorant-logo.png" alt="Valorant" class="game-logo" />
+            <img src="/valorant-logo.webp" class="game-logo" alt="Valorant" />
             <h3 class="game-title">Valorant</h3>
-            <ul class="game-details">
-              <li>🔫 Precision Trigger</li>
-              <li>🎮 Recoil Control</li>
-              <li>📡 Radar Hack</li>
-              <li>🛡️ Undetected</li>
-            </ul>
           </div>
         </div>
-        
+
         <!-- Warzone -->
-        <div class="game-card animate-on-scroll" style="animation-delay: 0.4s">
+        <div class="game-card animate-entry" style="transition-delay: 0.4s">
           <div class="game-content">
-            <img src="/warzone-logo.png" alt="Warzone" class="game-logo" />
+            <img src="/warzone-logo.webp" class="game-logo" alt="Warzone" />
             <h3 class="game-title">Warzone</h3>
-            <ul class="game-details">
-              <li>👁️ Advanced ESP</li>
-              <li>🎯 Auto Aimbot</li>
-              <li>🗺️ Map Awareness</li>
-              <li>🛡️ Undetected</li>
-            </ul>
           </div>
         </div>
-        
+
         <!-- Apex Legends -->
-        <div class="game-card animate-on-scroll" style="animation-delay: 0.6s">
+        <div class="game-card animate-entry" style="transition-delay: 0.6s">
           <div class="game-content">
-            <img src="/apex-logo.png" alt="Apex Legends" class="game-logo" />
+            <img src="/apex-logo.webp" class="game-logo" alt="Apex Legends" />
             <h3 class="game-title">Apex Legends</h3>
-            <ul class="game-details">
-              <li>👻 Player ESP</li>
-              <li>🔍 Item Highlight</li>
-              <li>💨 Movement Assist</li>
-              <li>🛡️ Undetected</li>
-            </ul>
           </div>
         </div>
       </section>
     </main>
-    
+
     <Footer />
-    
+
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        // Parallax effect for floating elements
-        document.addEventListener('mousemove', (e) => {
-          const elements = document.querySelectorAll('.floating-element');
-          const speed = 0.02;
-          
-          elements.forEach(element => {
-            const x = (window.innerWidth - e.pageX * speed) / 100;
-            const y = (window.innerHeight - e.pageY * speed) / 100;
-            element.style.transform = `translate(${x}px, ${y}px)`;
-          });
-        });
-        
-        // Intersection Observer with staggered delays
+        // Matrix-style reveal observer
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              const delay = entry.target.style.animationDelay || '0s';
-              setTimeout(() => {
-                entry.target.style.opacity = 1;
-                entry.target.style.transform = 'translateY(0)';
-              }, parseFloat(delay) * 1000);
+              entry.target.classList.add('active');
             }
           });
         }, { threshold: 0.15 });
-        
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-          observer.observe(el);
-          el.style.opacity = 0;
-          el.style.transform = 'translateY(30px)';
-          el.style.transition = 'all 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
+
+        // Particle interaction
+        document.addEventListener('mousemove', (e) => {
+          const particles = document.querySelectorAll('.particle');
+          particles.forEach(particle => {
+            const speed = 0.03;
+            const x = (window.innerWidth - e.clientX) * speed;
+            const y = (window.innerHeight - e.clientY) * speed;
+            particle.style.transform = `translate(${x}px, ${y}px)`;
+          });
         });
+
+        // Activate animations
+        document.querySelectorAll('.animate-entry').forEach(el => observer.observe(el));
       });
     </script>
   </body>
