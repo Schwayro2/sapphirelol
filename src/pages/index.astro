@@ -17,7 +17,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       :root {
         --primary: #6366f1;
         --primary-dark: #4f46e5;
-        --accent: #f43f5e;
+        --accent: var(--primary);
         --text: #1f2937;
         --text-light: #6b7280;
         --bg: #ffffff;
@@ -58,7 +58,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         background: radial-gradient(circle at center, rgba(99,102,241,0.05), transparent);
         opacity: 0;
         transform: translateY(20px);
-        transition: all 0.8s ease-out;
+        transition: all 1s ease-out;
       }
 
       .hero.visible {
@@ -69,11 +69,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       .hero h1 {
         font-size: 3rem;
         font-weight: 800;
-        background: linear-gradient(90deg, var(--primary), var(--accent));
+        background: linear-gradient(90deg, var(--primary), var(--primary-dark));
         -webkit-background-clip: text;
         color: transparent;
         margin-bottom: 1rem;
-        animation: fadeInUp 1.2s ease-out;
+        animation: fadeSlideUp 1.2s ease-out;
       }
 
       .hero p {
@@ -105,6 +105,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         text-align: center;
         font-size: 2rem;
         margin: 4rem 0 2rem;
+        animation: fadeSlideUp 1s ease forwards;
       }
 
       .grid {
@@ -124,7 +125,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         padding: 1.5rem;
         border-radius: var(--radius);
         box-shadow: var(--shadow);
-        transition: transform 0.3s ease, opacity 0.3s ease;
+        transition: transform 0.4s ease, opacity 0.4s ease;
         opacity: 0;
         transform: translateY(40px);
       }
@@ -139,9 +140,14 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         to { opacity: 1; }
       }
 
-      @keyframes fadeInUp {
-        0% { opacity: 0; transform: translateY(30px); }
+      @keyframes fadeSlideUp {
+        0% { opacity: 0; transform: translateY(40px); }
         100% { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes fadeOut {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(20px); }
       }
     </style>
   </head>
@@ -186,17 +192,19 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const elements = document.querySelectorAll('.animate-on-scroll, .card');
-        const observer = new IntersectionObserver((entries) => {
+        const animatedEls = document.querySelectorAll('.animate-on-scroll, .card');
+
+        const observer = new IntersectionObserver(entries => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
+            } else {
+              entry.target.classList.remove('visible');
             }
           });
         }, { threshold: 0.1 });
 
-        elements.forEach(el => observer.observe(el));
+        animatedEls.forEach(el => observer.observe(el));
       });
     </script>
   </body>
