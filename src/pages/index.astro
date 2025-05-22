@@ -14,25 +14,27 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
       
       :root {
-        --color-primary: #6366f1;
-        --color-primary-dark: #4f46e5;
-        --color-accent: #f43f5e;
-        --color-text: #1f2937;
-        --color-text-light: #6b7280;
-        --color-bg: #ffffff;
-        --color-card: #f9fafb;
-        --color-border: #e5e7eb;
-        --radius-lg: 12px;
+        --color-primary: #3b82f6;
+        --color-primary-dark: #2563eb;
+        --color-accent: #f59e0b;
+        --color-text: #1e293b;
+        --color-text-light: #64748b;
+        --color-bg: #f8fafc;
+        --color-card: #ffffff;
+        --color-border: #e2e8f0;
+        --radius-lg: 16px;
         --radius-md: 8px;
         --radius-sm: 4px;
-        --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-        --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-        --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        --shadow-sm: 0 1px 3px rgba(15,23,42,0.03);
+        --shadow-md: 0 4px 6px -1px rgba(15,23,42,0.05), 0 2px 4px -1px rgba(15,23,42,0.03);
+        --shadow-lg: 0 10px 15px -3px rgba(15,23,42,0.05), 0 4px 6px -2px rgba(15,23,42,0.03);
         --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
       
       * {
         box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
       
       body {
@@ -40,65 +42,42 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         line-height: 1.6;
         color: var(--color-text);
         background: var(--color-bg);
-        margin: 0;
-        padding: 0;
         scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
       }
       
       main {
-        max-width: 1400px;
+        max-width: 1440px;
         margin: 0 auto;
         padding: 0 2rem;
-        overflow-x: hidden;
-      }
-      
-      /* Scroll animations */
-      .animate-on-scroll {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-      }
-      
-      .animate-on-scroll.visible {
-        opacity: 1;
-        transform: translateY(0);
       }
       
       /* Hero Section */
       .hero {
-        min-height: 80vh;
+        min-height: 90vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
-        padding: 6rem 0;
+        padding: 4rem 0;
         position: relative;
         overflow: hidden;
+        background: linear-gradient(45deg, rgba(59,130,246,0.03) 0%, rgba(245,158,11,0.02) 100%);
       }
       
-      .hero::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, rgba(255,255,255,0) 70%);
-        z-index: -1;
-        animation: pulse 15s infinite alternate;
-      }
-      
-      @keyframes pulse {
-        0% { transform: scale(1); opacity: 0.3; }
-        100% { transform: scale(1.2); opacity: 0.1; }
+      .hero-content {
+        max-width: 800px;
+        position: relative;
+        z-index: 1;
       }
       
       .hero h1 {
-        font-size: 3.5rem;
+        font-size: 4rem;
         font-weight: 800;
-        margin: 0 0 1.5rem;
-        background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+        margin: 0 0 2rem;
+        line-height: 1.1;
+        background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -106,78 +85,79 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       
       .hero p {
         font-size: 1.25rem;
-        max-width: 700px;
+        max-width: 600px;
         margin: 0 auto 3rem;
         color: var(--color-text-light);
       }
       
       /* Button Styles */
+      .btn-group {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      
       .btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 0.75rem 2rem;
+        padding: 0.875rem 2.25rem;
         border-radius: var(--radius-md);
         font-weight: 600;
         text-decoration: none;
         transition: var(--transition);
         position: relative;
         overflow: hidden;
-        border: none;
-        cursor: pointer;
+        border: 2px solid transparent;
       }
       
       .btn-primary {
-        background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+        background: linear-gradient(45deg, var(--color-primary), var(--color-primary-dark));
         color: white;
-        box-shadow: 0 4px 6px rgba(99, 102, 241, 0.3);
+        box-shadow: var(--shadow-md);
       }
       
       .btn-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(99, 102, 241, 0.4);
-      }
-      
-      .btn-primary::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-      
-      .btn-primary:hover::after {
-        opacity: 1;
+        box-shadow: var(--shadow-lg);
       }
       
       .btn-secondary {
-        background: white;
+        background: var(--color-card);
         color: var(--color-primary);
-        border: 1px solid var(--color-border);
+        border-color: var(--color-border);
+        box-shadow: var(--shadow-sm);
       }
       
       .btn-secondary:hover {
         border-color: var(--color-primary);
         transform: translateY(-2px);
-        box-shadow: var(--shadow-sm);
       }
       
       /* Products Grid */
+      .products-section {
+        padding: 6rem 0;
+      }
+      
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 4rem;
+        position: relative;
+      }
+      
       .products-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 2rem;
-        margin: 5rem 0;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
+        margin: 0 auto;
       }
       
       .product-card {
         background: var(--color-card);
         border-radius: var(--radius-lg);
-        padding: 2rem;
+        padding: 2.5rem;
         border: 1px solid var(--color-border);
         box-shadow: var(--shadow-sm);
         transition: var(--transition);
@@ -188,22 +168,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       .product-card:hover {
         transform: translateY(-8px);
         box-shadow: var(--shadow-lg);
-        border-color: var(--color-primary);
-      }
-      
-      .product-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 4px;
-        height: 0;
-        background: linear-gradient(to bottom, var(--color-primary), var(--color-accent));
-        transition: height 0.3s ease;
-      }
-      
-      .product-card:hover::before {
-        height: 100%;
       }
       
       .product-header {
@@ -223,107 +187,78 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       .badge {
         display: inline-flex;
         align-items: center;
-        padding: 0.25rem 0.75rem;
-        border-radius: 9999px;
-        font-size: 0.75rem;
+        padding: 0.375rem 1rem;
+        border-radius: var(--radius-md);
+        font-size: 0.875rem;
         font-weight: 600;
       }
       
       .badge-undetected {
-        background: #dcfce7;
-        color: #166534;
-      }
-      
-      .badge-updated {
-        background: #dbeafe;
-        color: #1e40af;
+        background: rgba(34,197,94,0.1);
+        color: #16a34a;
       }
       
       .product-features {
-        margin: 1.5rem 0;
-        padding-left: 1.25rem;
+        margin: 2rem 0;
+        padding-left: 0;
+        list-style: none;
       }
       
       .product-features li {
-        margin-bottom: 0.5rem;
+        margin-bottom: 1rem;
+        padding-left: 2rem;
         position: relative;
+        color: var(--color-text-light);
       }
       
       .product-features li::before {
-        content: '✓';
-        color: var(--color-primary);
-        font-weight: bold;
+        content: '';
         position: absolute;
-        left: -1.25rem;
+        left: 0;
+        top: 0.375rem;
+        width: 1.25rem;
+        height: 1.25rem;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233b82f6'%3E%3Cpath d='M9.9997 15.1709L19.1927 5.97891L20.6077 7.39291L9.9997 18.0009L3.63574 11.6369L5.04974 10.2229L9.9997 15.1709Z'%3E%3C/path%3E%3C/svg%3E");
       }
       
       /* Features Section */
       .features-section {
-        margin: 6rem 0;
+        padding: 6rem 0;
+        background: rgba(249,250,251,0.5);
+      }
+      
+      .feature-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 3rem;
+        max-width: 1200px;
+        margin: 0 auto;
       }
       
       .feature-card {
-        padding: 2rem;
+        padding: 2.5rem;
         border-radius: var(--radius-lg);
         background: var(--color-card);
         box-shadow: var(--shadow-sm);
         transition: var(--transition);
-      }
-      
-      .feature-card:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-md);
+        text-align: center;
       }
       
       .feature-icon {
-        width: 48px;
-        height: 48px;
-        background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-        border-radius: var(--radius-md);
+        width: 64px;
+        height: 64px;
+        background: linear-gradient(45deg, var(--color-primary), var(--color-primary-dark));
+        border-radius: var(--radius-lg);
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 1.5rem;
-        color: white;
-        font-size: 1.5rem;
+        margin: 0 auto 1.5rem;
       }
       
-      /* Testimonials */
-      .testimonials {
-        margin: 6rem 0;
-        position: relative;
-      }
-      
-      .testimonial-card {
-        background: white;
-        border-radius: var(--radius-lg);
-        padding: 2rem;
-        box-shadow: var(--shadow-md);
-        margin: 1rem;
-        position: relative;
-      }
-      
-      .testimonial-card::before {
-        content: '"';
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        font-size: 4rem;
-        color: var(--color-primary);
-        opacity: 0.1;
-        font-family: serif;
-        line-height: 1;
-      }
-      
-      /* Footer */
-      footer {
-        background: var(--color-card);
-        padding: 4rem 0;
-        margin-top: 6rem;
-        border-top: 1px solid var(--color-border);
+      .feature-icon svg {
+        width: 32px;
+        height: 32px;
+        fill: white;
       }
     </style>
   </head>
@@ -331,114 +266,96 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <Header />
     <main>
       <!-- Hero Section -->
-      <section class="hero animate-on-scroll">
-        <h1>Next-Level Game Enhancements</h1>
-        <p>Premium tools designed for competitive players who demand performance and discretion</p>
-        <div style="display: flex; gap: 1rem;">
-          <a href="#products" class="btn btn-primary">Explore Products</a>
-          <a href="#features" class="btn btn-secondary">How It Works</a>
+      <section class="hero">
+        <div class="hero-content animate-on-scroll">
+          <h1>Elevate Your Gaming Experience</h1>
+          <p>Advanced tools designed for competitive players seeking precision and discretion</p>
+          <div class="btn-group">
+            <a href="#products" class="btn btn-primary">Discover Solutions</a>
+            <a href="#features" class="btn btn-secondary">Learn More</a>
+          </div>
         </div>
       </section>
       
       <!-- Products Section -->
-      <section id="products" class="animate-on-scroll">
-        <h2 style="text-align: center; font-size: 2.25rem; margin-bottom: 3rem;">Our Premium Solutions</h2>
+      <section id="products" class="products-section">
+        <h2 class="section-title animate-on-scroll">Game-Specific Solutions</h2>
         <div class="products-grid">
           <!-- Product 1 -->
-          <div class="product-card">
+          <div class="product-card animate-on-scroll">
             <div class="product-header">
               <h3 class="product-title">Fortnite Suite</h3>
               <span class="badge badge-undetected">UNDETECTED</span>
             </div>
-            <p style="color: var(--color-text-light);">Complete ESP, aim assistance, and loot radar</p>
             <ul class="product-features">
-              <li>Player ESP with health bars</li>
-              <li>Smart aim assistance</li>
-              <li>Loot radar system</li>
-              <li>Customizable UI</li>
+              <li>Real-time player tracking</li>
+              <li>Adaptive aim assistance</li>
+              <li>Smart loot detection</li>
+              <li>Customizable interfaces</li>
             </ul>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span class="badge badge-updated">UPDATED TODAY</span>
-              <a href="#" class="btn btn-primary" style="padding: 0.5rem 1.5rem;">Get Access</a>
-            </div>
           </div>
           
           <!-- Product 2 -->
-          <div class="product-card">
+          <div class="product-card animate-on-scroll" style="transition-delay: 100ms">
             <div class="product-header">
               <h3 class="product-title">Valorant Toolkit</h3>
               <span class="badge badge-undetected">UNDETECTED</span>
             </div>
-            <p style="color: var(--color-text-light);">Triggerbot, recoil control, and radar</p>
             <ul class="product-features">
-              <li>Precision triggerbot</li>
-              <li>Recoil stabilization</li>
-              <li>Minimap enhancements</li>
-              <li>Performance optimized</li>
+              <li>Precision trigger system</li>
+              <li>Recoil prediction</li>
+              <li>Tactical radar overlay</li>
+              <li>Performance optimization</li>
             </ul>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span class="badge badge-updated">UPDATED 1D AGO</span>
-              <a href="#" class="btn btn-primary" style="padding: 0.5rem 1.5rem;">Get Access</a>
-            </div>
           </div>
           
           <!-- Product 3 -->
-          <div class="product-card">
+          <div class="product-card animate-on-scroll" style="transition-delay: 200ms">
             <div class="product-header">
               <h3 class="product-title">Warzone Package</h3>
               <span class="badge badge-undetected">UNDETECTED</span>
             </div>
-            <p style="color: var(--color-text-light);">Advanced ESP, aimbot, and item highlights</p>
             <ul class="product-features">
-              <li>Full player ESP</li>
-              <li>Weapon customization</li>
-              <li>Loot highlighting</li>
-              <li>Safe zone predictions</li>
+              <li>Advanced environmental scanning</li>
+              <li>Weapon configuration profiles</li>
+              <li>Dynamic safe zone analysis</li>
+              <li>Real-time threat detection</li>
             </ul>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span class="badge badge-updated">UPDATED 2D AGO</span>
-              <a href="#" class="btn btn-primary" style="padding: 0.5rem 1.5rem;">Get Access</a>
-            </div>
           </div>
         </div>
       </section>
       
       <!-- Features Section -->
-      <section id="features" class="features-section animate-on-scroll">
-        <div class="feature-card">
-          <div class="feature-icon">🛡️</div>
-          <h3>Undetected</h3>
-          <p>Our proprietary technology ensures your account stays safe with military-grade encryption and regular updates.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h3>High Performance</h3>
-          <p>Optimized code that won't impact your game performance or cause lag during crucial moments.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">🔄</div>
-          <h3>Daily Updates</h3>
-          <p>We update our software daily to stay ahead of anti-cheat systems and game patches.</p>
-        </div>
-      </section>
-      
-      <!-- Testimonials -->
-      <section class="testimonials animate-on-scroll">
-        <h2 style="text-align: center; font-size: 2.25rem; margin-bottom: 3rem;">Trusted by Competitive Players</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-          <div class="testimonial-card">
-            <p>"I've been using this for 6 months across multiple accounts - not a single ban. The ESP is crystal clear and the aim assist feels natural."</p>
-            <p style="font-weight: 600; margin-top: 1rem;">- ProPlayer123</p>
+      <section id="features" class="features-section">
+        <div class="feature-grid">
+          <div class="feature-card animate-on-scroll">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+              </svg>
+            </div>
+            <h3>Advanced Protection</h3>
+            <p>Military-grade encryption and memory management for complete security</p>
           </div>
-          <div class="testimonial-card">
-            <p>"The Valorant toolkit took me from Diamond to Immortal in 2 weeks. The recoil control is game-changing."</p>
-            <p style="font-weight: 600; margin-top: 1rem;">- CompetitiveGamer</p>
+          
+          <div class="feature-card animate-on-scroll" style="transition-delay: 100ms">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M23 12l-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68L23 12zm-10 5h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+              </svg>
+            </div>
+            <h3>Continuous Updates</h3>
+            <p>Daily system optimizations and anti-detection improvements</p>
           </div>
-          <div class="testimonial-card">
-            <p>"Customer support is incredible. They helped me set everything up and answered all my questions within minutes."</p>
-            <p style="font-weight: 600; margin-top: 1rem;">- StreamerXYZ</p>
+          
+          <div class="feature-card animate-on-scroll" style="transition-delay: 200ms">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/>
+              </svg>
+            </div>
+            <h3>Performance Optimized</h3>
+            <p>Low resource usage with maximum efficiency</p>
           </div>
         </div>
       </section>
@@ -447,34 +364,20 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <Footer />
     
     <script>
-      // Intersection Observer for scroll animations
+      // Enhanced Intersection Observer with delays
       document.addEventListener('DOMContentLoaded', () => {
-        const animateElements = document.querySelectorAll('.animate-on-scroll');
-        
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
+              entry.target.style.opacity = 1;
+              entry.target.style.transform = 'translateY(0)';
             }
           });
-        }, {
-          threshold: 0.1
-        });
-        
-        animateElements.forEach(element => {
-          observer.observe(element);
-        });
-        
-        // Button hover effects
-        const buttons = document.querySelectorAll('.btn-primary');
-        buttons.forEach(button => {
-          button.addEventListener('mousemove', (e) => {
-            const rect = button.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            button.style.setProperty('--mouse-x', `${x}px`);
-            button.style.setProperty('--mouse-y', `${y}px`);
-          });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+          observer.observe(el);
+          el.style.transition = `opacity 0.6s ease-out, transform 0.6s ease-out ${el.dataset.delay || '0s'}`;
         });
       });
     </script>
