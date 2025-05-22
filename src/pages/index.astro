@@ -97,6 +97,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         text-align: center;
         font-size: 1.75rem;
         margin: 3rem 0 1.5rem;
+        background: var(--plasma-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
       }
 
       .grid {
@@ -130,6 +134,15 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         transform: translateY(0);
       }
 
+      .card h3 {
+        background: var(--plasma-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+
       @keyframes fadeOut {
         from { opacity: 1; transform: translateY(0); }
         to { opacity: 0; transform: translateY(20px); }
@@ -152,7 +165,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         <h2 class="section-title">Premium Solutions</h2>
         <div class="grid products-grid">
           <div class="card">
-            <h3 style="color: var(--primary);">Fortnite Suite</h3>
+            <h3>Fortnite Suite</h3>
             <p style="color: var(--text-light); font-size: 0.95rem;">ESP, aim assist, and radar tools</p>
             <ul style="margin-top: 0.75rem; padding-left: 1.25rem; font-size: 0.95rem;">
               <li>Player ESP</li>
