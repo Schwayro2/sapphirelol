@@ -38,6 +38,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         color: var(--text);
         background-color: var(--bg);
         line-height: 1.5;
+        scroll-behavior: smooth;
       }
 
       main {
@@ -55,6 +56,14 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         padding: 6rem 1rem;
         position: relative;
         background: radial-gradient(circle at center, rgba(99,102,241,0.05), transparent);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease-out;
+      }
+
+      .hero.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       .hero h1 {
@@ -64,12 +73,14 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         -webkit-background-clip: text;
         color: transparent;
         margin-bottom: 1rem;
+        animation: fadeInUp 1.2s ease-out;
       }
 
       .hero p {
         max-width: 600px;
         color: var(--text-light);
         margin-bottom: 2rem;
+        animation: fadeIn 1.5s ease-out;
       }
 
       .btn {
@@ -113,11 +124,24 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         padding: 1.5rem;
         border-radius: var(--radius);
         box-shadow: var(--shadow);
-        transition: transform 0.2s ease;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        opacity: 0;
+        transform: translateY(40px);
       }
 
-      .card:hover {
-        transform: translateY(-4px);
+      .card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
       }
     </style>
   </head>
@@ -136,54 +160,25 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       <section id="products" class="animate-on-scroll">
         <h2 class="section-title">Our Premium Solutions</h2>
         <div class="grid products-grid">
-          <!-- Repeat for each product -->
-          <!-- Example Product Card -->
-          <div class="card">
-            <h3 style="color: var(--primary);">Fortnite Suite</h3>
-            <p style="color: var(--text-light);">Complete ESP, aim assistance, and loot radar</p>
-            <ul>
-              <li>Player ESP</li>
-              <li>Aim assist</li>
-              <li>Loot radar</li>
-              <li>Custom UI</li>
-            </ul>
-          </div>
+          <div class="card"> <h3 style="color: var(--primary);">Fortnite Suite</h3> <p style="color: var(--text-light);">Complete ESP, aim assistance, and loot radar</p> <ul> <li>Player ESP</li> <li>Aim assist</li> <li>Loot radar</li> <li>Custom UI</li> </ul> </div>
         </div>
       </section>
 
       <section id="features" class="animate-on-scroll">
         <h2 class="section-title">Key Features</h2>
         <div class="grid features-grid">
-          <div class="card">
-            <h3>🛡️ Undetected</h3>
-            <p>Stay safe with encryption and frequent updates.</p>
-          </div>
-          <div class="card">
-            <h3>⚡ High Performance</h3>
-            <p>Optimized to run smooth without lag.</p>
-          </div>
-          <div class="card">
-            <h3>🔄 Daily Updates</h3>
-            <p>Always compatible with the latest patches.</p>
-          </div>
+          <div class="card"> <h3>🛡️ Undetected</h3> <p>Stay safe with encryption and frequent updates.</p> </div>
+          <div class="card"> <h3>⚡ High Performance</h3> <p>Optimized to run smooth without lag.</p> </div>
+          <div class="card"> <h3>🔄 Daily Updates</h3> <p>Always compatible with the latest patches.</p> </div>
         </div>
       </section>
 
       <section class="testimonials animate-on-scroll">
         <h2 class="section-title">What Our Users Say</h2>
         <div class="grid testimonials-grid">
-          <div class="card">
-            <p>"6 months, no bans, natural feeling ESP and aim. Unreal."</p>
-            <strong>- ProPlayer123</strong>
-          </div>
-          <div class="card">
-            <p>"Went from Diamond to Immortal. Worth every penny."</p>
-            <strong>- CompetitiveGamer</strong>
-          </div>
-          <div class="card">
-            <p>"Fast support, flawless setup. 10/10 experience."</p>
-            <strong>- StreamerXYZ</strong>
-          </div>
+          <div class="card"> <p>"6 months, no bans, natural feeling ESP and aim. Unreal."</p> <strong>- ProPlayer123</strong> </div>
+          <div class="card"> <p>"Went from Diamond to Immortal. Worth every penny."</p> <strong>- CompetitiveGamer</strong> </div>
+          <div class="card"> <p>"Fast support, flawless setup. 10/10 experience."</p> <strong>- StreamerXYZ</strong> </div>
         </div>
       </section>
     </main>
@@ -191,10 +186,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const elements = document.querySelectorAll('.animate-on-scroll');
+        const elements = document.querySelectorAll('.animate-on-scroll, .card');
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('visible');
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
           });
         }, { threshold: 0.1 });
 
