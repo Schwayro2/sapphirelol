@@ -9,7 +9,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,59 +44,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       main {
         max-width: 1000px;
         margin: auto;
-        padding: 1.5rem;
-      }
-
-      .hero {
-        text-align: center;
-        padding: 5rem 1rem 3rem;
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.8s ease-out;
-      }
-
-      .hero.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .hero h1 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        background: var(--plasma-gradient);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        margin-bottom: 0.75rem;
-      }
-
-      .hero p {
-        color: var(--text-light);
-        margin-bottom: 1.5rem;
-        font-size: 1.125rem;
-      }
-
-      .btn {
-        padding: 0.65rem 1.25rem;
-        border-radius: var(--radius);
-        font-weight: 600;
-        text-decoration: none;
-        transition: 0.3s ease;
-      }
-
-      .btn-primary {
-        background: var(--primary);
-        color: white;
-      }
-
-      .btn-primary:hover {
-        background: var(--primary-dark);
+        padding: 2rem 1.5rem;
       }
 
       .section-title {
         text-align: center;
         font-size: 1.75rem;
-        margin: 3rem 0 1.5rem;
+        margin: 3rem 0 2rem;
         background: var(--plasma-gradient);
         -webkit-background-clip: text;
         background-clip: text;
@@ -110,135 +63,69 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       }
 
       @media (min-width: 768px) {
-        .products-grid, .testimonials-grid {
+        .grid {
           grid-template-columns: repeat(3, 1fr);
-        }
-
-        .features-grid {
-          grid-template-columns: repeat(2, 1fr);
         }
       }
 
       .card {
         background: var(--card);
         border: 1px solid var(--border);
-        padding: 1.25rem;
+        padding: 1.5rem;
         border-radius: var(--radius);
         box-shadow: var(--shadow);
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.5s ease-out;
-      }
-
-      .card.visible {
-        opacity: 1;
-        transform: translateY(0);
+        transition: all 0.3s ease-out;
       }
 
       .card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
         background: var(--plasma-gradient);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        font-size: 1.2rem;
-        font-weight: 600;
         display: flex;
         align-items: center;
         gap: 0.5rem;
       }
 
-      @keyframes fadeOut {
-        from { opacity: 1; transform: translateY(0); }
-        to { opacity: 0; transform: translateY(20px); }
+      .card p,
+      .card ul {
+        color: var(--text-light);
+        font-size: 0.95rem;
+      }
+
+      .card ul {
+        padding-left: 1.25rem;
+        margin-top: 0.75rem;
+      }
+
+      .card ul li {
+        margin-bottom: 0.5rem;
       }
     </style>
   </head>
   <body>
     <Header />
-    $1
-
-<section id="about-server" class="animate-on-scroll">
-  <h2 class="section-title">About Our Community</h2>
-  <div class="grid features-grid">
+    <main>
+      <section id="about-server">
+  <h2 class="section-title">Meet the Team</h2>
+  <div class="grid">
     <div class="card">
-      <h3>Established & Experienced</h3>
-      <p>Our journey began back in 2020 with the launch of Black Ops Cold War. Since then, we've continuously delivered premium software for competitive players seeking a reliable edge across Call of Duty titles and beyond.</p>
+      <h3><i class="fab fa-discord"></i> Schwayro</h3>
+      <p>Owner</p>
     </div>
     <div class="card">
-      <h3>Proven Reputation</h3>
-      <p>With years of operation, we've grown a trusted user base through consistent updates, fast support, and a zero-compromise focus on safety and stability. Many of our clients have been with us from the start.</p>
+      <h3><i class="fab fa-discord"></i> Chaotic</h3>
+      <p>Admin</p>
     </div>
     <div class="card">
-      <h3>Connect With Leadership</h3>
-      <p>Reach out directly to our core team on Discord for inquiries or support:</p>
-      <ul style="margin-top: 0.75rem; padding-left: 1.25rem; font-size: 0.95rem;">
-        <li><i class="fab fa-discord"></i> <a href="https://discord.com/users/admin1" target="_blank">Admin1</a></li>
-        <li><i class="fab fa-discord"></i> <a href="https://discord.com/users/admin2" target="_blank">Admin2</a></li>
-        <li><i class="fab fa-discord"></i> <a href="https://discord.com/users/owner" target="_blank">Server Owner</a></li>
-      </ul>
+      <h3><i class="fab fa-discord"></i> Diego</h3>
+      <p>Admin</p>
     </div>
   </div>
 </section>
-
-      <section id="products" class="animate-on-scroll">
-  <h2 class="section-title">Premium Products</h2>
-  $1
-    <div class="card">
-      <h3>Temporary HWID Spoofer</h3>
-      <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.95rem;">
-        <li>Instant spoof on launch</li>
-        <li>Resets on reboot</li>
-        <li>Compatible with most AC</li>
-        <li>Fast & lightweight</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-      <section id="features" class="animate-on-scroll">
-        <h2 class="section-title">Why Choose Us</h2>
-        <div class="grid features-grid">
-          <div class="card">
-            <h3><i class="fas fa-shield-alt"></i> Undetected</h3>
-            <p>Our software integrates stealth technology and consistent backend updates to avoid detection by modern anti-cheat systems.</p>
-          </div>
-          <div class="card">
-            <h3><i class="fas fa-bolt"></i> Performance</h3>
-            <p>Built for speed and stability, our solutions are lightweight and optimized to maintain flawless performance without game interruptions.</p>
-          </div>
-          <div class="card">
-            <h3><i class="fas fa-sync-alt"></i> Always Fresh</h3>
-            <p>Stay ahead with tools that are updated daily, ensuring compatibility with every patch, update, and meta change in your favorite games.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="testimonials animate-on-scroll">
-        <h2 class="section-title">User Feedback</h2>
-        <div class="grid testimonials-grid">
-          <div class="card"> <p>"I've been using the Fortnite Suite across multiple seasons—still undetected, insanely responsive, and always ahead of the curve."</p> <strong>- ProPlayer123</strong> </div>
-          <div class="card"> <p>"Went from Diamond to Immortal in just two weeks thanks to the seamless aim assist and smart radar features. Unreal advantage!"</p> <strong>- CompetitiveGamer</strong> </div>
-          <div class="card"> <p>"Support was lightning-fast and extremely helpful. Setup was smooth and I felt confident within minutes of installing."</p> <strong>- StreamerXYZ</strong> </div>
-        </div>
-      </section>
     </main>
     <Footer />
-
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const animatedEls = document.querySelectorAll('.animate-on-scroll, .card');
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-            } else {
-              entry.target.classList.remove('visible');
-            }
-          });
-        }, { threshold: 0.1 });
-
-        animatedEls.forEach(el => observer.observe(el));
-      });
-    </script>
   </body>
 </html>
