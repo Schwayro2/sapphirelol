@@ -7,44 +7,98 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style is:global>
+      :root {
+        --color-primary: #8a2be2; /* Purple accent */
+        --color-dark: #1a1a1a;
+        --color-text: #e0e0e0;
+        --color-bg: #121212;
+        --space-sm: 0.5rem;
+        --space-md: 1rem;
+        --space-lg: 2rem;
+        --radius: 4px;
+      }
+      
+      body {
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        line-height: 1.6;
+        color: var(--color-text);
+        background: var(--color-bg);
+        margin: 0;
+        padding: 0;
+      }
+      
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: var(--space-lg);
+      }
+      
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--space-lg);
+        margin-top: var(--space-lg);
+      }
+      
+      .product-card {
+        background: #1e1e1e;
+        border-radius: var(--radius);
+        padding: var(--space-md);
+        border: 1px solid #333;
+        transition: transform 0.2s;
+      }
+      
+      .product-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--color-primary);
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>🔥 Premium Game Enhancements</h1>
+      <p class="subtitle">
+        Unlock the full potential of your favorite games with our undetected, regularly updated cheats
+      </p>
+      
+      <div class="products-grid">
+        <div class="product-card">
+          <h2>Fortnite ESP</h2>
+          <p>Full player ESP, item radar, and aim assistance</p>
+          <p><strong>Status:</strong> Undetected</p>
+          <p><strong>Last Updated:</strong> Today</p>
+        </div>
+        
+        <div class="product-card">
+          <h2>Valorant Triggerbot</h2>
+          <p>Precision aiming assistance with customizable settings</p>
+          <p><strong>Status:</strong> Undetected</p>
+          <p><strong>Last Updated:</strong> Yesterday</p>
+        </div>
+        
+        <div class="product-card">
+          <h2>Call of Duty: Warzone</h2>
+          <p>Wallhacks, radar, and recoil control</p>
+          <p><strong>Status:</strong> Undetected</p>
+          <p><strong>Last Updated:</strong> 2 days ago</p>
+        </div>
+      </div>
+      
+      <section style="margin-top: 3rem;">
+        <h2>Why Choose Us?</h2>
+        <ul>
+          <li>✅ 100% undetected - No bans reported</li>
+          <li>🔄 Daily updates to stay ahead of anti-cheat</li>
+          <li>📱 Easy-to-use interfaces</li>
+          <li>🔒 Secure downloads with no malware</li>
+          <li>🛡️ Custom protection for each game</li>
+        </ul>
+      </section>
+    </main>
+    <Footer />
+  </body>
 </html>
