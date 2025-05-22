@@ -1,62 +1,229 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage="/blog-placeholder-about.jpg"
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style is:global>
+      :root {
+        --primary: #6366f1;
+        --primary-dark: #4f46e5;
+        --text: #1f2937;
+        --text-light: #6b7280;
+        --bg: #ffffff;
+        --card: #f9fafb;
+        --border: #e5e7eb;
+        --radius: 10px;
+        --shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        --plasma-gradient: linear-gradient(90deg, #ff41ca, #5f007f, #2335be, #c321a5, #2af5ff);
+      }
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+      body {
+        font-family: 'Inter', sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.5;
+        scroll-behavior: smooth;
+      }
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+      main {
+        max-width: 1000px;
+        margin: auto;
+        padding: 1.5rem;
+      }
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+      .hero {
+        text-align: center;
+        padding: 5rem 1rem 3rem;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease-out;
+      }
+
+      .hero.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: var(--plasma-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 0.75rem;
+      }
+
+      .hero p {
+        color: var(--text-light);
+        margin-bottom: 1.5rem;
+        font-size: 1.125rem;
+      }
+
+      .btn {
+        padding: 0.65rem 1.25rem;
+        border-radius: var(--radius);
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.3s ease;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-dark);
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 1.75rem;
+        margin: 3rem 0 1.5rem;
+        background: var(--plasma-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .grid {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      @media (min-width: 768px) {
+        .products-grid, .testimonials-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 1.25rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.5s ease-out;
+      }
+
+      .card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .card h3 {
+        background: var(--plasma-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-size: 1.2rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      @keyframes fadeOut {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(20px); }
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="hero animate-on-scroll">
+        <h1>Next-Level Game Enhancements</h1>
+        <p>Discover cutting-edge tools engineered for elite gamers who demand stealth, precision, and top-tier performance.</p>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center;">
+          <a href="#products" class="btn btn-primary">Explore Products</a>
+          <a href="#features" class="btn" style="border: 1px solid var(--border); color: var(--primary);">How It Works</a>
+        </div>
+      </section>
+
+      <section id="products" class="animate-on-scroll">
+  <h2 class="section-title">Premium Products</h2>
+  $1
+    <div class="card">
+      <h3>Temporary HWID Spoofer</h3>
+      <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.95rem;">
+        <li>Instant spoof on launch</li>
+        <li>Resets on reboot</li>
+        <li>Compatible with most AC</li>
+        <li>Fast & lightweight</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+      <section id="features" class="animate-on-scroll">
+        <h2 class="section-title">Why Choose Us</h2>
+        <div class="grid features-grid">
+          <div class="card">
+            <h3><i class="fas fa-shield-alt"></i> Undetected</h3>
+            <p>Our software integrates stealth technology and consistent backend updates to avoid detection by modern anti-cheat systems.</p>
+          </div>
+          <div class="card">
+            <h3><i class="fas fa-bolt"></i> Performance</h3>
+            <p>Built for speed and stability, our solutions are lightweight and optimized to maintain flawless performance without game interruptions.</p>
+          </div>
+          <div class="card">
+            <h3><i class="fas fa-sync-alt"></i> Always Fresh</h3>
+            <p>Stay ahead with tools that are updated daily, ensuring compatibility with every patch, update, and meta change in your favorite games.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonials animate-on-scroll">
+        <h2 class="section-title">User Feedback</h2>
+        <div class="grid testimonials-grid">
+          <div class="card"> <p>"I've been using the Fortnite Suite across multiple seasons—still undetected, insanely responsive, and always ahead of the curve."</p> <strong>- ProPlayer123</strong> </div>
+          <div class="card"> <p>"Went from Diamond to Immortal in just two weeks thanks to the seamless aim assist and smart radar features. Unreal advantage!"</p> <strong>- CompetitiveGamer</strong> </div>
+          <div class="card"> <p>"Support was lightning-fast and extremely helpful. Setup was smooth and I felt confident within minutes of installing."</p> <strong>- StreamerXYZ</strong> </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const animatedEls = document.querySelectorAll('.animate-on-scroll, .card');
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            } else {
+              entry.target.classList.remove('visible');
+            }
+          });
+        }, { threshold: 0.1 });
+
+        animatedEls.forEach(el => observer.observe(el));
+      });
+    </script>
+  </body>
+</html>
