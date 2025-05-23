@@ -8,7 +8,7 @@ import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 
 // Get blog posts sorted by publication date (newest first)
-const posts = (await getCollection('blog')).sort(
+const posts = (await getCollection('shop')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
