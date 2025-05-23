@@ -7,7 +7,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 
 type Props = CollectionEntry<'shop'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, buyLink, price } = Astro.props;
 ---
 
 <html lang="en">
@@ -44,6 +44,30 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			.title h1 {
 				margin: 0 0 0.5em 0;
 			}
+			.buy-btn {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.7em;
+				margin: 1.2em auto 1.2em auto;
+				font-size: 1.12rem;
+				padding: 0.82em 2.4em;
+				border-radius: 13px;
+				background: linear-gradient(90deg, #06b6d4, #6366f1 85%);
+				color: #fff;
+				font-weight: 700;
+				box-shadow: 0 6px 22px 0 rgba(99,102,241,0.14);
+				transition: background 0.18s, transform 0.16s;
+				border: none;
+				cursor: pointer;
+				text-decoration: none;
+			}
+			.buy-btn:hover, .buy-btn:focus {
+				background: linear-gradient(95deg, #6366f1, #06b6d4 85%);
+				color: #fff;
+				transform: scale(1.04) translateY(-2px);
+				text-decoration: none;
+			}
 			.date {
 				margin-bottom: 0.5em;
 				color: rgb(var(--gray));
@@ -52,6 +76,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				font-style: italic;
 			}
 		</style>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 	</head>
 
 	<body>
@@ -74,6 +99,17 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 							}
 						</div>
 						<h1>{title}</h1>
+						{buyLink && (
+							<a
+								href={buyLink}
+								class="buy-btn"
+								target="_blank"
+								rel="noopener"
+							>
+								<i class="fa-solid fa-cart-shopping"></i>
+								{price ? `Buy Now – $${price}` : "Buy Now"}
+							</a>
+						)}
 						<hr />
 					</div>
 					<slot />
