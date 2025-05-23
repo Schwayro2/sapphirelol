@@ -62,17 +62,25 @@ try {
       }
 
       .hero {
-        text-align: center;
-        padding: 4rem 1rem;
-        background: var(--primary); /* Solid background color */
+        position: relative;
+        height: 60vh; /* Full height for a striking appearance */
+        background: url('path/to/your/background-image.jpg') no-repeat center center/cover; /* Full-width background image */
         color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .hero-content {
+        background: rgba(0, 0, 0, 0.6); /* Semi-transparent background for better text visibility */
         border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        margin-bottom: 2rem;
+        padding: 2rem;
       }
 
       .hero h1 {
-        font-size: 3rem;
+        font-size: 3.5rem;
         font-weight: 700;
         margin-bottom: 1rem;
         text-transform: uppercase; /* Make the title more impactful */
@@ -80,9 +88,23 @@ try {
 
       .hero p {
         font-size: 1.25rem;
-        max-width: 700px;
         margin: 0 auto 1.5rem;
-        line-height: 1.6; /* Improved line height for readability */
+        max-width: 600px; /* Limit width for better readability */
+      }
+
+      .btn-hero {
+        background: var(--primary);
+        color: white;
+        padding: 0.75rem 2rem;
+        border-radius: var(--radius);
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.3s ease, transform 0.3s ease;
+      }
+
+      .btn-hero:hover {
+        background: var(--primary-dark);
+        transform: scale(1.05); /* Slightly enlarge on hover */
       }
 
       .products-grid {
@@ -136,25 +158,6 @@ try {
         margin: 0.75rem 0;
       }
 
-      .btn {
-        display: inline-block;
-        padding: 0.75rem 1.5rem;
-        border-radius: var(--radius);
-        font-weight: 600;
-        text-decoration: none;
-        transition: background 0.3s ease, transform 0.3s ease;
-        text-align: center;
-        width: 100%;
-        margin-top: 1rem;
-        background: var(--primary);
-        color: white;
-      }
-
-      .btn:hover {
-        background: var(--primary-dark);
-        transform: translateY(-2px);
-      }
-
       .section-title {
         text-align: center;
         font-size: 2rem;
@@ -182,8 +185,11 @@ try {
     
     <main>
       <section class="hero">
-        <h1>Elevate Your Game</h1>
-        <p>Discover top-tier gaming enhancements crafted for players who strive for excellence and performance.</p>
+        <div class="hero-content">
+          <h1>Unleash Your Gaming Potential</h1>
+          <p>Join the ranks of elite players with our premium gaming tools designed for performance and precision.</p>
+          <a href="#products" class="btn btn-hero">Shop Now</a>
+        </div>
       </section>
 
       <section aria-label="Our Products">
