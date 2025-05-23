@@ -158,17 +158,126 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         color: #fff;
         box-shadow: 0 1.5px 16px rgba(90,0,160,0.13);
       }
-      /* (rest of your styles remain as you have) */
+
+      /* SECTION TITLES */
+      .section-title {
+        text-align: center;
+        font-size: 1.75rem;
+        margin: 3.5rem 0 2.2rem 0;
+        background: var(--plasma-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        letter-spacing: -1.2px;
+      }
+
+      /* PRODUCTS GRID */
+      .products-grid {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 700px) {
+        .products-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .card {
+        background: var(--card);
+        border: 1.5px solid var(--border);
+        padding: 1.3rem 1.25rem 1.5rem 1.25rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.5s cubic-bezier(.46,.03,.52,.96);
+        position: relative;
+        z-index: 1;
+        min-height: 210px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+      .card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .card h3 {
+        background: var(--plasma-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-size: 1.15rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.55rem;
+      }
+      .card ul {
+        margin-top: 0.4rem;
+        padding-left: 1.15rem;
+        font-size: 0.98rem;
+        color: var(--text-light);
+        line-height: 1.7;
+      }
+      /* FEATURES GRID */
+      .features-grid {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 700px) {
+        .features-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .features-grid .card p {
+        margin-top: 0.5rem;
+        color: var(--text-light);
+        font-size: 1.05rem;
+      }
+
+      /* TESTIMONIALS */
+      .testimonials-grid {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 700px) {
+        .testimonials-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .testimonials .card {
+        min-height: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+      }
+      .testimonials .card p {
+        font-size: 1.04rem;
+        font-style: italic;
+        color: var(--text);
+        margin-bottom: 0.6rem;
+      }
+      .testimonials .card strong {
+        color: var(--primary-dark);
+        font-size: 0.98rem;
+        font-weight: 700;
+      }
     </style>
   </head>
   <body>
     <Header />
     <main>
-      <!-- HERO SECTION REWORKED -->
+      <!-- HERO SECTION -->
       <section class="hero animate-on-scroll">
         <div class="hero-bg"></div>
         <img
-          src="https://files.catbox.moe/s0z1tu.png"
+          src="https://files.catbox.moe/71hhkc.png"
           alt="ImGui Menu Showcase"
           class="hero-imgui"
           id="imguiMenu"
@@ -185,9 +294,76 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         </div>
       </section>
 
-      <!-- (rest of your page, unchanged) -->
-      <!-- ... -->
-      <!-- products, features, testimonials, etc -->
+      <!-- PRODUCTS SECTION -->
+      <section id="products" class="animate-on-scroll">
+        <h2 class="section-title">Premium Products</h2>
+        <div class="products-grid">
+          <div class="card">
+            <h3>BO6 / Warzone External</h3>
+            <ul>
+              <li>Aimbot with smoothing</li>
+              <li>ESP (Players, Loot, Vehicles)</li>
+              <li>Config support</li>
+              <li>Stream-proof</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Permanent HWID Spoofer</h3>
+            <ul>
+              <li>UEFI kernel-based</li>
+              <li>Spoofs serials & SMBIOS</li>
+              <li>Stealth boot cleanup</li>
+              <li>Persistent across reboots</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Temporary HWID Spoofer</h3>
+            <ul>
+              <li>Instant spoof on launch</li>
+              <li>Resets on reboot</li>
+              <li>Compatible with most AC</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURES SECTION -->
+      <section id="features" class="animate-on-scroll">
+        <h2 class="section-title">Why Choose Us?</h2>
+        <div class="features-grid">
+          <div class="card">
+            <h3><i class="fas fa-shield-alt"></i> Undetected!</h3>
+            <p>Our software has its own stealthy methods and receives consistent backend updates to avoid detection by modern anti-cheat systems.</p>
+          </div>
+          <div class="card">
+            <h3><i class="fas fa-bolt"></i> Good Performance</h3>
+            <p>Built for speed and stability, our solutions are lightweight and optimized to maintain flawless performance without game interruptions.</p>
+          </div>
+          <div class="card">
+            <h3><i class="fas fa-sync-alt"></i> Always Updated</h3>
+            <p>Stay ahead with tools that are updated daily, ensuring compatibility with every patch, update, and meta change in your favorite games.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS SECTION -->
+      <section class="testimonials animate-on-scroll">
+        <h2 class="section-title">User Feedback</h2>
+        <div class="testimonials-grid">
+          <div class="card">
+            <p>"I've been using the Fortnite Suite across multiple seasons—still undetected, insanely responsive, and always ahead of the curve."</p>
+            <strong>- ProPlayer123</strong>
+          </div>
+          <div class="card">
+            <p>"Went from Diamond to Immortal in just two weeks thanks to the seamless aim assist and smart radar features. Unreal advantage!"</p>
+            <strong>- CompetitiveGamer</strong>
+          </div>
+          <div class="card">
+            <p>"Support was lightning-fast and extremely helpful. Setup was smooth and I felt confident within minutes of installing."</p>
+            <strong>- StreamerXYZ</strong>
+          </div>
+        </div>
+      </section>
     </main>
     <Footer />
     <script>
