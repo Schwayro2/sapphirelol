@@ -39,7 +39,6 @@ try {
         --border: #e5e7eb;
         --radius: 12px;
         --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        --plasma-gradient: linear-gradient(90deg, #ff41ca, #5f007f, #2335be, #c321a5, #2af5ff);
       }
 
       * {
@@ -65,7 +64,7 @@ try {
       .hero {
         text-align: center;
         padding: 4rem 1rem;
-        background: var(--plasma-gradient);
+        background: var(--primary); /* Solid background color */
         color: white;
         border-radius: var(--radius);
         box-shadow: var(--shadow);
@@ -76,12 +75,14 @@ try {
         font-size: 3rem;
         font-weight: 700;
         margin-bottom: 1rem;
+        text-transform: uppercase; /* Make the title more impactful */
       }
 
       .hero p {
         font-size: 1.25rem;
         max-width: 700px;
         margin: 0 auto 1.5rem;
+        line-height: 1.6; /* Improved line height for readability */
       }
 
       .products-grid {
@@ -181,8 +182,8 @@ try {
     
     <main>
       <section class="hero">
-        <h1>Premium Gaming Tools</h1>
-        <p>Unlock your full potential with our cutting-edge enhancements, designed for competitive players who demand excellence.</p>
+        <h1>Elevate Your Game</h1>
+        <p>Discover top-tier gaming enhancements crafted for players who strive for excellence and performance.</p>
       </section>
 
       <section aria-label="Our Products">
