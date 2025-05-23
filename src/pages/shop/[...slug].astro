@@ -4,43 +4,18 @@ import BlogPost from '../../layouts/BlogPost.astro';
 import { render } from 'astro:content';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('shop');
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: post,
-  }));
+	const posts = await getCollection('shop');
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: post,
+	}));
 }
 type Props = CollectionEntry<'shop'>;
 
 const post = Astro.props;
 const { Content } = await render(post);
-const buyLink = post.data.buyLink; // Make sure buyLink is in your product frontmatter!
-const price = post.data.price;
 ---
 
 <BlogPost {...post.data}>
-  <div style="display:flex; flex-direction:column; align-items:center; gap:1.3rem; margin-bottom:2.2rem;">
-    {buyLink && (
-      <a
-        href={buyLink}
-        class="btn btn-buy"
-        style="margin-top: 1.1rem; font-size:1.18rem; padding:1em 3em; border-radius:14px; background:linear-gradient(90deg,#06b6d4,#6366f1 85%); color:#fff; font-weight:800; box-shadow:0 8px 28px 0 rgba(99,102,241,0.18); display:inline-flex; align-items:center; gap:0.8em;"
-        target="_blank"
-        rel="noopener"
-      >
-        <i class="fa-solid fa-cart-shopping"></i>
-        {price ? `Buy Now – $${price}` : "Buy Now"}
-      </a>
-    )}
-  </div>
-  <Content />
+	<Content />
 </BlogPost>
-
-<style>
-  .btn.btn-buy:hover {
-    background: linear-gradient(95deg,#6366f1,#06b6d4 85%) !important;
-    color: #fff;
-    transform: scale(1.05) translateY(-2px);
-    text-decoration: none;
-  }
-</style>
