@@ -7,10 +7,18 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 
-// Get shop items sorted by publication date (newest first)
-const products = (await getCollection('shop')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+// Get shop items with error handling
+let products = [];
+try {
+  const shopCollection = await getCollection('shop');
+  if (shopCollection && shopCollection.length > 0) {
+    products = shopCollection.sort(
+      (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+    );
+  }
+} catch (error) {
+  console.error('Error loading products:', error);
+}
 ---
 
 <!doctype html>
@@ -23,6 +31,7 @@ const products = (await getCollection('shop')).sort(
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style is:global>
+      /* Your existing CSS remains unchanged */
       :root {
         --primary: #6366f1;
         --primary-dark: #4f46e5;
@@ -186,6 +195,14 @@ const products = (await getCollection('shop')).sort(
         color: transparent;
       }
 
+      .empty-state {
+        text-align: center;
+        padding: 3rem;
+        background: var(--card);
+        border-radius: var(--radius);
+        border: 1px dashed var(--border);
+      }
+
       @media (max-width: 768px) {
         .products-grid {
           grid-template-columns: 1fr;
@@ -213,36 +230,44 @@ const products = (await getCollection('shop')).sort(
 
       <section aria-label="Our Products">
         <h2 class="section-title animate-on-scroll">Shop Products</h2>
-        <ul class="products-grid">
-          {products.map((product, index) => (
-            <li class="product-card animate-on-scroll">
-              <a href={`/shop/${product.id}/`} class="product-link">
-                <img 
-                  src={product.data.heroImage} 
-                  alt={product.data.title}
-                  class="product-image"
-                  loading={index < 3 ? 'eager' : 'lazy'}
-                  width={400}
-                  height={200}
-                />
-                <div class="product-content">
-                  <h3 class="product-title">
-                    <i class={product.data.icon || 'fas fa-gamepad'}></i>
-                    {product.data.title}
-                  </h3>
-                  <div class="product-price">${product.data.price}</div>
-                  <p class="product-description">{product.data.description}</p>
-                  <ul class="product-features">
-                    {product.data.features.map(feature => (
-                      <li>{feature}</li>
-                    ))}
-                  </ul>
-                  <a href={`/shop/${product.id}/`} class="btn btn-primary">View Details</a>
-                </div>
-              </a>
-            </li>
-          ))}
-        </ul>
+        
+        {products.length > 0 ? (
+          <ul class="products-grid">
+            {products.map((product, index) => (
+              <li class="product-card animate-on-scroll">
+                <a href={`/shop/${product.id}/`} class="product-link">
+                  <img 
+                    src={product.data.heroImage} 
+                    alt={product.data.title}
+                    class="product-image"
+                    loading={index < 3 ? 'eager' : 'lazy'}
+                    width={400}
+                    height={200}
+                  />
+                  <div class="product-content">
+                    <h3 class="product-title">
+                      <i class={product.data.icon || 'fas fa-gamepad'}></i>
+                      {product.data.title}
+                    </h3>
+                    <div class="product-price">${product.data.price}</div>
+                    <p class="product-description">{product.data.description}</p>
+                    <ul class="product-features">
+                      {product.data.features?.map(feature => (
+                        <li>{feature}</li>
+                      ))}
+                    </ul>
+                    <a href={`/shop/${product.id}/`} class="btn btn-primary">View Details</a>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div class="empty-state">
+            <h3>Our Shop is Currently Empty</h3>
+            <p>We're preparing some amazing products for you. Please check back soon!</p>
+          </div>
+        )}
       </section>
     </main>
     
