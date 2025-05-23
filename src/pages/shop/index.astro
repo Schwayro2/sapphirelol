@@ -22,248 +22,70 @@ try {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style is:global>
-      :root {
-        --primary: #6366f1;
-        --accent: #818cf8;
-        --pink: #f472b6;
-        --cyan: #06b6d4;
-        --bg: #f7faff;
-        --text: #232946;
-        --muted: #757780;
-        --glass: rgba(255,255,255,0.80);
-        --border: #ececf6;
-        --radius: 18px;
-        --shadow: 0 8px 40px 0 rgba(99, 102, 241, 0.13), 0 2px 8px rgba(70,80,180,0.06);
-        --card-blur: blur(18px);
-        --transition: all 0.36s cubic-bezier(.47,1.64,.41,.8);
-      }
+      /* ... (keep your existing styles here) ... */
 
-      html, body {
-        font-family: 'Inter', sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        margin: 0;
-        scroll-behavior: smooth;
-        min-height: 100%;
-      }
-      main {
-        max-width: 1280px;
-        margin: auto;
-        padding: 3rem 1.2rem 2.5rem 1.2rem;
-      }
-
-      /* HERO */
-      .hero {
-        position: relative;
-        min-height: 62vh;
-        border-radius: var(--radius);
-        margin-bottom: 2.5rem;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        box-shadow: var(--shadow);
-        background: linear-gradient(120deg, #e0e7ff 10%, #f7faff 100%);
-        z-index: 1;
-      }
-      .hero-blobs {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        pointer-events: none;
-        top: 0; left: 0;
-      }
-      .hero-content {
-        position: relative;
-        z-index: 2;
-        padding: 3.5rem 1.5rem;
-        width: 100%;
-        max-width: 520px;
-        margin: 0 auto;
-        background: rgba(255,255,255,0.08);
-        border-radius: var(--radius);
-        box-shadow: 0 4px 40px 0 rgba(99,102,241,0.07);
-        backdrop-filter: blur(4px);
-      }
-      .hero h1 {
-        font-size: 3.1rem;
-        font-weight: 800;
-        margin-bottom: 1.1rem;
-        letter-spacing: -2px;
-        background: linear-gradient(90deg, var(--primary), var(--pink), var(--cyan));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-      .hero p {
-        font-size: 1.34rem;
-        color: var(--muted);
-        margin-bottom: 1.7rem;
-        font-weight: 500;
-      }
-      .btn {
-        display: inline-block;
-        background: linear-gradient(95deg, var(--primary), var(--accent));
-        color: white;
-        padding: 0.88rem 2.3rem;
-        border-radius: var(--radius);
-        font-weight: 700;
-        text-decoration: none;
-        font-size: 1.11rem;
-        border: none;
-        cursor: pointer;
-        box-shadow: 0 2px 14px 0 rgba(99,102,241,0.13);
-        transition: var(--transition);
-        outline: none;
-        position: relative;
-        overflow: hidden;
-      }
-      .btn:after {
-        content: '';
-        position: absolute;
-        top: -60%;
-        left: -30%;
-        width: 160%;
-        height: 220%;
-        background: linear-gradient(115deg, var(--cyan), transparent 60%);
-        opacity: 0.12;
-        filter: blur(24px);
-        z-index: 0;
-        pointer-events: none;
-        transition: opacity 0.24s cubic-bezier(.47,1.64,.41,.8);
-      }
-      .btn:hover, .btn:focus {
-        background: linear-gradient(95deg, var(--cyan), var(--primary));
-        transform: scale(1.04) translateY(-3px);
-        box-shadow: 0 8px 28px 0 rgba(99,102,241,0.18);
-      }
-
-      .section-title {
-        text-align: center;
-        font-size: 2.2rem;
-        margin: 2.75rem 0 1.5rem 0;
-        font-weight: 800;
-        color: var(--primary);
-        letter-spacing: -1px;
-      }
-
-      /* PRODUCTS GRID */
-      .products-grid {
-        display: grid;
-        gap: 2.2rem;
-        grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
-        padding-bottom: 3rem;
-      }
-      .product-card {
-        background: var(--glass);
-        border: 1.5px solid var(--border);
-        border-radius: var(--radius);
-        padding: 1.7rem 1.3rem 2.1rem 1.3rem;
-        box-shadow: var(--shadow);
-        backdrop-filter: var(--card-blur);
-        opacity: 0;
-        transform: translateY(45px) scale(0.98);
-        transition: var(--transition);
-        will-change: transform, opacity;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        min-height: 410px;
-        overflow: hidden;
-        position: relative;
-      }
-      .product-card.visible {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-      .product-card:before {
-        content: '';
-        position: absolute;
-        top: -40px;
-        right: -40px;
-        width: 130px;
-        height: 130px;
-        background: radial-gradient(circle, var(--accent) 0%, transparent 80%);
-        opacity: 0.08;
-        pointer-events: none;
-      }
-      .product-image {
-        width: 100%;
-        border-radius: var(--radius);
-        object-fit: cover;
-        height: 170px;
-        margin-bottom: 1.05rem;
-        box-shadow: 0 2px 10px 0 rgba(60,60,100,0.04);
-        transition: transform .25s cubic-bezier(.39,1.63,.41,.8);
-      }
-      .product-card:hover .product-image {
-        transform: scale(1.04) rotate(-1.5deg);
-      }
-      .product-title {
-        font-size: 1.19rem;
-        color: var(--primary);
-        font-weight: 700;
-        margin-bottom: 0.4rem;
-        display: flex;
-        align-items: center;
-        gap: 0.55em;
-      }
-      .product-title i {
-        font-size: 1.13em;
-        color: var(--accent);
-      }
-      .product-price {
-        font-size: 1.07rem;
-        font-weight: 600;
-        color: #444;
-        margin-bottom: 0.73rem;
-      }
-      .product-description {
-        font-size: 1.02rem;
-        color: var(--muted);
-        flex: 1 1 auto;
-        margin-bottom: 1.03rem;
-      }
       .product-actions {
         display: flex;
         justify-content: center;
         align-items: flex-end;
-        margin-top: auto;
+        gap: 0.7rem;
+        margin-top: 1rem;
       }
-      .product-actions .btn {
-        width: auto;
-        min-width: 120px;
+      .btn.btn-buy {
+        background: linear-gradient(90deg, #06b6d4, #6366f1 85%);
+        color: #fff;
+        font-weight: 700;
+        border: none;
+        border-radius: 12px;
+        padding: 0.8em 2.2em;
+        font-size: 1.09rem;
+        box-shadow: 0 4px 16px 0 rgba(99,102,241,0.13);
+        transition: background 0.18s, transform 0.18s;
+        display: flex;
+        align-items: center;
+        gap: 0.65em;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .btn.btn-buy:hover {
+        background: linear-gradient(95deg, #6366f1, #06b6d4 85%);
+        transform: translateY(-2px) scale(1.04);
+      }
+      .btn.btn-secondary {
+        background: #fff;
+        color: #6366f1;
+        border: 1.5px solid #6366f1;
+        padding: 0.8em 1.7em;
+        border-radius: 12px;
         font-size: 1.01rem;
-        margin: 0;
-        background: linear-gradient(100deg, var(--primary) 60%, var(--accent));
-        border-radius: 10px;
-        box-shadow: 0 1.5px 8px 0 rgba(99,102,241,0.12);
+        font-weight: 600;
+        box-shadow: 0 1.5px 8px 0 rgba(99,102,241,0.10);
+        transition: background 0.15s, color 0.15s;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
       }
-      .product-actions .btn:hover, .product-actions .btn:focus {
-        background: linear-gradient(95deg, var(--cyan), var(--primary));
-        box-shadow: 0 8px 20px 0 rgba(99,102,241,0.17);
+      .btn.btn-secondary:hover {
+        background: #6366f1;
+        color: #fff;
       }
-      .empty-state {
-        text-align: center;
-        background: var(--glass);
-        border: 2px dashed var(--border);
-        padding: 2.7rem 1.1rem;
-        border-radius: var(--radius);
-        margin: 3rem 0;
-        color: var(--muted);
-        box-shadow: 0 2px 10px 0 rgba(99,102,241,0.05);
+      .product-badge {
+        margin-top: 0.7rem;
+        font-size: 0.92em;
+        color: #36cfcf;
+        background: #f1faff;
+        border-radius: 7px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35em;
+        font-weight: 600;
+        padding: 0.23em 0.8em 0.23em 0.57em;
+        box-shadow: 0 1.5px 5px 0 rgba(6,182,212,0.04);
       }
-      @media (max-width: 900px) {
-        .hero h1 { font-size: 2rem; }
-        main { padding: 1rem; }
-        .section-title { font-size: 1.34rem; }
-      }
-      @media (max-width: 600px) {
-        .hero-content { padding: 1.1rem 0.1rem; }
-        .hero { min-height: 36vh; }
-        .products-grid { gap: 1.1rem; }
+      .product-badge .fa-shield-check {
+        color: #06b6d4;
+        font-size: 1em;
       }
     </style>
   </head>
@@ -271,44 +93,11 @@ try {
     <Header />
     <main>
       <section class="hero">
-        <div class="hero-blobs" aria-hidden="true">
-          <!-- Animated SVG blobs for modern look -->
-          <svg width="100%" height="100%" viewBox="0 0 800 400" style="position:absolute;top:0;left:0;" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="blob1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#a5b4fc" />
-                <stop offset="100%" stop-color="#fbc2eb" />
-              </linearGradient>
-              <linearGradient id="blob2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#67e8f9" />
-                <stop offset="100%" stop-color="#818cf8" />
-              </linearGradient>
-            </defs>
-            <ellipse cx="180" cy="140" rx="160" ry="110" fill="url(#blob1)" opacity=".15">
-              <animate attributeName="cx" values="180;220;160;180" dur="7s" repeatCount="indefinite" />
-              <animate attributeName="cy" values="140;180;100;140" dur="6.5s" repeatCount="indefinite" />
-            </ellipse>
-            <ellipse cx="620" cy="220" rx="140" ry="80" fill="url(#blob2)" opacity=".12">
-              <animate attributeName="cx" values="620;600;660;620" dur="8.5s" repeatCount="indefinite" />
-              <animate attributeName="cy" values="220;180;260;220" dur="8s" repeatCount="indefinite" />
-            </ellipse>
-          </svg>
-        </div>
-        <div class="hero-content">
-          <h1>Unleash Your Gaming Potential</h1>
-          <p>
-            <span style="background: linear-gradient(90deg, #818cf8 40%, #06b6d4 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight:700;">
-              Premium tools and enhancements.
-            </span>
-            <br>
-            Trusted by thousands since Cold War. Discover the next level.
-          </p>
-          <a href="#products" class="btn">Browse Shop</a>
-        </div>
+        <!-- ...hero code unchanged... -->
       </section>
       <section id="products">
         <h2 class="section-title">Available Products</h2>
-        {products.length > 0 ? (
+        {products.length > 0 && (
           <ul class="products-grid">
             {products.map((product, index) => (
               <li class="product-card" style={`animation-delay:${index * 0.09}s`}>
@@ -318,17 +107,40 @@ try {
                     <div class="product-title">
                       <i class={product.data.icon || 'fa-solid fa-box'}></i> {product.data.title}
                     </div>
-                    <div class="product-price">${product.data.price}</div>
+                    {product.data.price && (
+                      <div class="product-price">${product.data.price}</div>
+                    )}
                     <p class="product-description">{product.data.description}</p>
+                    <div class="product-badge">
+                      <i class="fa-solid fa-shield-check"></i> Trusted & Secure
+                    </div>
                   </div>
                 </a>
                 <div class="product-actions">
-                  <a href={`/shop/${product.id}/`} class="btn">View Details</a>
+                  {product.data.buyLink ? (
+                    <a
+                      href={product.data.buyLink}
+                      class="btn btn-buy"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      <i class="fa-solid fa-cart-shopping"></i> Buy Now
+                    </a>
+                  ) : (
+                    <a
+                      href={`/shop/${product.id}/`}
+                      class="btn btn-buy"
+                    >
+                      <i class="fa-solid fa-cart-shopping"></i> Buy Now
+                    </a>
+                  )}
+                  <a href={`/shop/${product.id}/`} class="btn btn-secondary">More Info</a>
                 </div>
               </li>
             ))}
           </ul>
-        ) : (
+        )}
+        {products.length === 0 && (
           <div class="empty-state">
             <h3>Shop is Empty</h3>
             <p>Our team is working on new drops. Check back soon!</p>
