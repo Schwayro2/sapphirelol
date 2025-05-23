@@ -23,10 +23,15 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         --bg: #ffffff;
         --card: #f9fafb;
         --border: #e5e7eb;
-        --radius: 14px;
-        --shadow: 0 8px 32px rgba(99,102,241,0.12);
+        --radius: 10px;
+        --shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
         --plasma-gradient: linear-gradient(90deg, #ff41ca, #5f007f, #2335be, #c321a5, #2af5ff);
-        --glow: 0 0 64px 0 #a5b4fc, 0 0 32px 8px #2af5ff60;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
 
       body {
@@ -36,103 +41,149 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         line-height: 1.5;
         scroll-behavior: smooth;
       }
+
       main {
         max-width: 1000px;
         margin: auto;
         padding: 1.5rem;
       }
+
       .hero {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         text-align: center;
-        padding: 4.5rem 1rem 3.5rem;
+        padding: 5rem 1rem 3rem;
         opacity: 0;
         transform: translateY(20px);
         transition: all 0.8s cubic-bezier(.46,.03,.52,.96);
         position: relative;
-        min-height: 430px;
-        background: transparent;
+        overflow: visible;
+        min-height: 340px;
       }
+
       .hero.visible {
         opacity: 1;
         transform: translateY(0);
       }
+
+      .hero-imgui {
+        position: absolute;
+        left: 54%;
+        top: 55%;
+        transform: translate(-50%, -55%) scale(1) rotate(-2deg);
+        z-index: 2;
+        pointer-events: none;
+        width: 340px;
+        max-width: 70vw;
+        min-width: 220px;
+        filter: drop-shadow(0 8px 32px rgba(99,102,241,0.19));
+        transition: transform 0.7s cubic-bezier(.77,0,.18,1);
+        will-change: transform, filter;
+        opacity: 0.98;
+        animation: floatImgui 3.5s ease-in-out infinite alternate;
+      }
+      @keyframes floatImgui {
+        0% { transform: translate(-50%, -55%) scale(1) rotate(-2deg);}
+        100% { transform: translate(-50%, -62%) scale(1.025) rotate(-5deg);}
+      }
+      @media (max-width: 700px) {
+        .hero-imgui { display: none; }
+        .hero { min-height: 0; }
+      }
+
       .hero h1 {
-        font-size: 2.8rem;
+        font-size: 2.5rem;
         font-weight: 700;
         background: var(--plasma-gradient);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        margin-bottom: 0.7rem;
-        letter-spacing: -1.5px;
+        margin-bottom: 0.75rem;
+        position: relative;
+        z-index: 2;
       }
+
       .hero p {
         color: var(--text-light);
-        margin-bottom: 1.7rem;
-        font-size: 1.25rem;
-        max-width: 560px;
-        margin-left: auto;
-        margin-right: auto;
+        margin-bottom: 1.5rem;
+        font-size: 1.125rem;
+        position: relative;
+        z-index: 2;
       }
-      .btn-group {
-        display: flex;
-        gap: 0.9rem;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-bottom: 2.3rem;
-      }
+
       .btn {
-        padding: 0.75rem 1.5rem;
+        padding: 0.65rem 1.25rem;
         border-radius: var(--radius);
         font-weight: 600;
         text-decoration: none;
-        transition: 0.3s;
-        font-size: 1.08rem;
-        box-shadow: 0 2px 8px #b2b9ff18;
+        transition: 0.3s ease;
+        position: relative;
+        z-index: 2;
       }
+
       .btn-primary {
         background: var(--primary);
         color: white;
       }
-      .btn-primary:hover { background: var(--primary-dark); }
-      .btn:not(.btn-primary) {
-        border: 1px solid var(--border);
-        color: var(--primary);
-        background: transparent;
+
+      .btn-primary:hover {
+        background: var(--primary-dark);
       }
-      .btn:not(.btn-primary):hover {
-        background: #f0f1fa;
+
+      .section-title {
+        text-align: center;
+        font-size: 1.75rem;
+        margin: 3rem 0 1.5rem;
+        background: var(--plasma-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
       }
-      .hero-imgui-center {
-        width: 520px;
-        max-width: 95vw;
-        margin: 0 auto;
-        margin-top: 0;
-        margin-bottom: 0;
-        border-radius: 18px;
-        box-shadow: var(--glow), 0 6px 36px #6366f122;
-        filter: drop-shadow(0 12px 36px #8eb5fd30);
-        will-change: transform, filter;
-        transition: transform 0.8s cubic-bezier(.46,.03,.52,.96), box-shadow 0.4s;
-        position: relative;
-        z-index: 2;
-        background: transparent;
-        animation: floatImguiCenter 4s ease-in-out infinite alternate;
+
+      .grid {
+        display: grid;
+        gap: 1.5rem;
       }
-      @keyframes floatImguiCenter {
-        0% { transform: scale(1) translateY(0); }
-        100% { transform: scale(1.03) translateY(-22px); }
-      }
-      @media (max-width: 700px) {
-        .hero-imgui-center {
-          width: 99vw;
-          min-width: 0;
-          max-width: 99vw;
+
+      @media (min-width: 768px) {
+        .products-grid, .testimonials-grid {
+          grid-template-columns: repeat(3, 1fr);
         }
-        .hero h1 { font-size: 2.1rem; }
-        .hero { padding: 2.5rem 0.5rem 2.2rem; }
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 1.25rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.5s cubic-bezier(.46,.03,.52,.96);
+        position: relative;
+      }
+
+      .card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .card h3 {
+        background: var(--plasma-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-size: 1.2rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      @keyframes fadeOut {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(20px); }
       }
     </style>
   </head>
@@ -140,22 +191,21 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <Header />
     <main>
       <section class="hero animate-on-scroll">
-        <h1>Next-Level Game Enhancements</h1>
-        <p>
-          Discover cutting-edge tools engineered for elite gamers who demand stealth, precision, and top-tier performance.
-        </p>
-        <div class="btn-group">
-          <a href="#products" class="btn btn-primary">Explore Products</a>
-          <a href="#features" class="btn">How It Works</a>
-        </div>
-        <img
-          src="https://files.catbox.moe/s0z1tu.png"
-          alt="ImGui Menu Screenshot"
-          class="hero-imgui-center"
-          id="imguiMenu"
-        />
-      </section>
-
+  <h1>Next-Level Game Enhancements</h1>
+  <p>Discover cutting-edge tools engineered for elite gamers who demand stealth, precision, and top-tier performance.</p>
+  <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center;">
+    <a href="#products" class="btn btn-primary">Explore Products</a>
+    <a href="#features" class="btn" style="border: 1px solid var(--border); color: var(--primary);">How It Works</a>
+  </div>
+  <!-- ImGui menu floating image -->
+  <img
+    src="https://files.catbox.moe/s0z1tu.png"
+    alt="ImGui Menu Screenshot"
+    class="hero-imgui"
+    id="imguiMenu"
+  />
+</section>
+      <!-- (the rest of your page continues as before) -->
       <section id="products" class="animate-on-scroll">
         <h2 class="section-title">Premium Products</h2>
         <div class="grid products-grid">
@@ -214,12 +264,12 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       </section>
     </main>
     <Footer />
-
     <script>
-      // Animate on scroll for cards/sections
+      // Scroll animation (already smooth), but let's add parallax on the ImGui image!
       document.addEventListener('DOMContentLoaded', () => {
+        // Animate on scroll for cards/sections
         const animatedEls = document.querySelectorAll('.animate-on-scroll, .card');
-        const observer = new window.IntersectionObserver(entries => {
+        const observer = new IntersectionObserver(entries => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add('visible');
@@ -235,8 +285,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         if (imguiMenu) {
           window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
+            // Move up & down a little as page scrolls, with a clamp
             imguiMenu.style.transform =
-              `scale(1.06) translateY(${Math.min(scrolled / 9, 40)}px)`;
+              `translate(-50%, calc(-55% - ${Math.min(scrolled / 8, 35)}px)) scale(1.05) rotate(${(-2 - scrolled / 150)}deg)`;
           });
         }
       });
