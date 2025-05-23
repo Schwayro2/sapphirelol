@@ -49,14 +49,14 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       }
 
       .hero {
-        text-align: center;
-        padding: 5rem 1rem 3rem;
         opacity: 0;
         transform: translateY(20px);
         transition: all 0.8s cubic-bezier(.46,.03,.52,.96);
         position: relative;
         overflow: visible;
         min-height: 340px;
+        padding: 3.5rem 1rem 3rem;
+        text-align: left;
       }
 
       .hero.visible {
@@ -64,32 +64,23 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         transform: translateY(0);
       }
 
-      .hero-imgui {
-        position: absolute;
-        left: 54%;
-        top: 55%;
-        transform: translate(-50%, -55%) scale(1) rotate(-2deg);
+      .hero-flex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        max-width: 900px;
+        margin: 0 auto;
+        position: relative;
+        flex-wrap: wrap;
+      }
+      .hero-content {
+        flex: 1 1 350px;
+        min-width: 270px;
         z-index: 2;
-        pointer-events: none;
-        width: 340px;
-        max-width: 70vw;
-        min-width: 220px;
-        filter: drop-shadow(0 8px 32px rgba(99,102,241,0.19));
-        transition: transform 0.7s cubic-bezier(.77,0,.18,1);
-        will-change: transform, filter;
-        opacity: 0.98;
-        animation: floatImgui 3.5s ease-in-out infinite alternate;
+        text-align: left;
       }
-      @keyframes floatImgui {
-        0% { transform: translate(-50%, -55%) scale(1) rotate(-2deg);}
-        100% { transform: translate(-50%, -62%) scale(1.025) rotate(-5deg);}
-      }
-      @media (max-width: 700px) {
-        .hero-imgui { display: none; }
-        .hero { min-height: 0; }
-      }
-
-      .hero h1 {
+      .hero-content h1 {
         font-size: 2.5rem;
         font-weight: 700;
         background: var(--plasma-gradient);
@@ -99,14 +90,54 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         margin-bottom: 0.75rem;
         position: relative;
         z-index: 2;
+        text-align: left;
       }
-
-      .hero p {
+      .hero-content p {
         color: var(--text-light);
         margin-bottom: 1.5rem;
         font-size: 1.125rem;
         position: relative;
         z-index: 2;
+      }
+      .hero-content .btn-group {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin-bottom: 1rem;
+      }
+      .hero-imgui-wrap {
+        flex: 1 1 280px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 220px;
+        max-width: 400px;
+        position: relative;
+      }
+      .hero-imgui {
+        width: 100%;
+        max-width: 350px;
+        min-width: 200px;
+        filter: drop-shadow(0 8px 32px rgba(99,102,241,0.16));
+        opacity: 0.98;
+        will-change: transform, filter;
+        animation: floatImgui 3.5s ease-in-out infinite alternate;
+        transition: transform 0.7s cubic-bezier(.77,0,.18,1);
+      }
+      @keyframes floatImgui {
+        0% { transform: scale(1) rotate(-2deg);}
+        100% { transform: scale(1.03) rotate(-5deg);}
+      }
+      @media (max-width: 900px) {
+        .hero-flex { flex-direction: column; gap: 1.25rem; }
+        .hero-imgui { max-width: 90vw; }
+        .hero-imgui-wrap { max-width: 100%; }
+        .hero-content { text-align: center; }
+        .hero-content h1 { text-align: center; }
+      }
+      @media (max-width: 700px) {
+        .hero-imgui { display: none; }
       }
 
       .btn {
@@ -118,14 +149,20 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         position: relative;
         z-index: 2;
       }
-
       .btn-primary {
         background: var(--primary);
         color: white;
       }
-
       .btn-primary:hover {
         background: var(--primary-dark);
+      }
+      .btn:not(.btn-primary) {
+        border: 1px solid var(--border);
+        color: var(--primary);
+        background: transparent;
+      }
+      .btn:not(.btn-primary):hover {
+        background: #f0f1fa;
       }
 
       .section-title {
@@ -191,21 +228,25 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <Header />
     <main>
       <section class="hero animate-on-scroll">
-  <h1>Next-Level Game Enhancements</h1>
-  <p>Discover cutting-edge tools engineered for elite gamers who demand stealth, precision, and top-tier performance.</p>
-  <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center;">
-    <a href="#products" class="btn btn-primary">Explore Products</a>
-    <a href="#features" class="btn" style="border: 1px solid var(--border); color: var(--primary);">How It Works</a>
-  </div>
-  <!-- ImGui menu floating image -->
-  <img
-    src="https://files.catbox.moe/s0z1tu.png"
-    alt="ImGui Menu Screenshot"
-    class="hero-imgui"
-    id="imguiMenu"
-  />
-</section>
-      <!-- (the rest of your page continues as before) -->
+        <div class="hero-flex">
+          <div class="hero-content">
+            <h1>Next-Level Game Enhancements</h1>
+            <p>Discover cutting-edge tools engineered for elite gamers who demand stealth, precision, and top-tier performance.</p>
+            <div class="btn-group">
+              <a href="#products" class="btn btn-primary">Explore Products</a>
+              <a href="#features" class="btn">How It Works</a>
+            </div>
+          </div>
+          <div class="hero-imgui-wrap">
+            <img
+              src="https://files.catbox.moe/s0z1tu.png"
+              alt="ImGui Menu Screenshot"
+              class="hero-imgui"
+              id="imguiMenu"
+            />
+          </div>
+        </div>
+      </section>
       <section id="products" class="animate-on-scroll">
         <h2 class="section-title">Premium Products</h2>
         <div class="grid products-grid">
@@ -264,12 +305,12 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       </section>
     </main>
     <Footer />
+
     <script>
-      // Scroll animation (already smooth), but let's add parallax on the ImGui image!
+      // Animate on scroll for cards/sections
       document.addEventListener('DOMContentLoaded', () => {
-        // Animate on scroll for cards/sections
         const animatedEls = document.querySelectorAll('.animate-on-scroll, .card');
-        const observer = new IntersectionObserver(entries => {
+        const observer = new window.IntersectionObserver(entries => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add('visible');
@@ -285,9 +326,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         if (imguiMenu) {
           window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
-            // Move up & down a little as page scrolls, with a clamp
             imguiMenu.style.transform =
-              `translate(-50%, calc(-55% - ${Math.min(scrolled / 8, 35)}px)) scale(1.05) rotate(${(-2 - scrolled / 150)}deg)`;
+              `scale(1.05) translateY(${Math.min(scrolled / 8, 35)}px) rotate(${-2 - scrolled / 150}deg)`;
           });
         }
       });
