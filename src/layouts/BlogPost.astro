@@ -61,9 +61,9 @@ const {
         align-items: center;
         justify-content: center;
         gap: 0.7em;
-        margin: 1.2em auto 1.2em auto;
-        font-size: 1.12rem;
-        padding: 0.82em 2.4em;
+        margin: 2em auto 1.5em auto;
+        font-size: 1.17rem;
+        padding: 0.92em 2.8em;
         border-radius: 13px;
         background: linear-gradient(90deg, #06b6d4, #6366f1 85%);
         color: #fff;
@@ -101,7 +101,6 @@ const {
       }
     </style>
     <script>
-      // Optional: Example click handler for "Buy Now"
       function buyNowClicked(e) {
         e.preventDefault();
         alert('Your checkout/modal/handler goes here!');
@@ -127,6 +126,10 @@ const {
               )}
             </div>
             <h1>{title}</h1>
+            <hr />
+          </div>
+          <slot />
+          <div style="text-align:center;">
             <a
               class="buy-btn"
               href="#"
@@ -135,9 +138,7 @@ const {
               <i class="fa-solid fa-cart-shopping"></i>
               {price ? `Buy Now – $${price}` : "Buy Now"}
             </a>
-            <hr />
           </div>
-          <slot />
         </div>
       </article>
     </main>
