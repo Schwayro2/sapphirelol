@@ -23,15 +23,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         --bg: #ffffff;
         --card: #f9fafb;
         --border: #e5e7eb;
-        --radius: 10px;
-        --shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        --radius: 14px;
+        --shadow: 0 8px 32px rgba(99,102,241,0.12);
         --plasma-gradient: linear-gradient(90deg, #ff41ca, #5f007f, #2335be, #c321a5, #2af5ff);
-      }
-
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+        --glow: 0 0 64px 0 #a5b4fc, 0 0 32px 8px #2af5ff60;
       }
 
       body {
@@ -41,121 +36,67 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         line-height: 1.5;
         scroll-behavior: smooth;
       }
-
       main {
         max-width: 1000px;
         margin: auto;
         padding: 1.5rem;
       }
-
       .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 4.5rem 1rem 3.5rem;
         opacity: 0;
         transform: translateY(20px);
         transition: all 0.8s cubic-bezier(.46,.03,.52,.96);
         position: relative;
-        overflow: visible;
-        min-height: 340px;
-        padding: 3.5rem 1rem 3rem;
-        text-align: left;
+        min-height: 430px;
+        background: transparent;
       }
-
       .hero.visible {
         opacity: 1;
         transform: translateY(0);
       }
-
-      .hero-flex {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 2.5rem;
-        max-width: 900px;
-        margin: 0 auto;
-        position: relative;
-        flex-wrap: wrap;
-      }
-      .hero-content {
-        flex: 1 1 350px;
-        min-width: 270px;
-        z-index: 2;
-        text-align: left;
-      }
-      .hero-content h1 {
-        font-size: 2.5rem;
+      .hero h1 {
+        font-size: 2.8rem;
         font-weight: 700;
         background: var(--plasma-gradient);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        margin-bottom: 0.75rem;
-        position: relative;
-        z-index: 2;
-        text-align: left;
+        margin-bottom: 0.7rem;
+        letter-spacing: -1.5px;
       }
-      .hero-content p {
+      .hero p {
         color: var(--text-light);
-        margin-bottom: 1.5rem;
-        font-size: 1.125rem;
-        position: relative;
-        z-index: 2;
+        margin-bottom: 1.7rem;
+        font-size: 1.25rem;
+        max-width: 560px;
+        margin-left: auto;
+        margin-right: auto;
       }
-      .hero-content .btn-group {
+      .btn-group {
         display: flex;
-        gap: 0.75rem;
+        gap: 0.9rem;
         flex-wrap: wrap;
-        justify-content: flex-start;
-        margin-bottom: 1rem;
-      }
-      .hero-imgui-wrap {
-        flex: 1 1 280px;
-        display: flex;
-        align-items: center;
         justify-content: center;
-        min-width: 220px;
-        max-width: 400px;
-        position: relative;
+        margin-bottom: 2.3rem;
       }
-      .hero-imgui {
-        width: 100%;
-        max-width: 350px;
-        min-width: 200px;
-        filter: drop-shadow(0 8px 32px rgba(99,102,241,0.16));
-        opacity: 0.98;
-        will-change: transform, filter;
-        animation: floatImgui 3.5s ease-in-out infinite alternate;
-        transition: transform 0.7s cubic-bezier(.77,0,.18,1);
-      }
-      @keyframes floatImgui {
-        0% { transform: scale(1) rotate(-2deg);}
-        100% { transform: scale(1.03) rotate(-5deg);}
-      }
-      @media (max-width: 900px) {
-        .hero-flex { flex-direction: column; gap: 1.25rem; }
-        .hero-imgui { max-width: 90vw; }
-        .hero-imgui-wrap { max-width: 100%; }
-        .hero-content { text-align: center; }
-        .hero-content h1 { text-align: center; }
-      }
-      @media (max-width: 700px) {
-        .hero-imgui { display: none; }
-      }
-
       .btn {
-        padding: 0.65rem 1.25rem;
+        padding: 0.75rem 1.5rem;
         border-radius: var(--radius);
         font-weight: 600;
         text-decoration: none;
-        transition: 0.3s ease;
-        position: relative;
-        z-index: 2;
+        transition: 0.3s;
+        font-size: 1.08rem;
+        box-shadow: 0 2px 8px #b2b9ff18;
       }
       .btn-primary {
         background: var(--primary);
         color: white;
       }
-      .btn-primary:hover {
-        background: var(--primary-dark);
-      }
+      .btn-primary:hover { background: var(--primary-dark); }
       .btn:not(.btn-primary) {
         border: 1px solid var(--border);
         color: var(--primary);
@@ -164,63 +105,34 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       .btn:not(.btn-primary):hover {
         background: #f0f1fa;
       }
-
-      .section-title {
-        text-align: center;
-        font-size: 1.75rem;
-        margin: 3rem 0 1.5rem;
-        background: var(--plasma-gradient);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-
-      .grid {
-        display: grid;
-        gap: 1.5rem;
-      }
-
-      @media (min-width: 768px) {
-        .products-grid, .testimonials-grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
-        .features-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      .card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        padding: 1.25rem;
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.5s cubic-bezier(.46,.03,.52,.96);
+      .hero-imgui-center {
+        width: 520px;
+        max-width: 95vw;
+        margin: 0 auto;
+        margin-top: 0;
+        margin-bottom: 0;
+        border-radius: 18px;
+        box-shadow: var(--glow), 0 6px 36px #6366f122;
+        filter: drop-shadow(0 12px 36px #8eb5fd30);
+        will-change: transform, filter;
+        transition: transform 0.8s cubic-bezier(.46,.03,.52,.96), box-shadow 0.4s;
         position: relative;
+        z-index: 2;
+        background: transparent;
+        animation: floatImguiCenter 4s ease-in-out infinite alternate;
       }
-
-      .card.visible {
-        opacity: 1;
-        transform: translateY(0);
+      @keyframes floatImguiCenter {
+        0% { transform: scale(1) translateY(0); }
+        100% { transform: scale(1.03) translateY(-22px); }
       }
-
-      .card h3 {
-        background: var(--plasma-gradient);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        font-size: 1.2rem;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      @keyframes fadeOut {
-        from { opacity: 1; transform: translateY(0); }
-        to { opacity: 0; transform: translateY(20px); }
+      @media (max-width: 700px) {
+        .hero-imgui-center {
+          width: 99vw;
+          min-width: 0;
+          max-width: 99vw;
+        }
+        .hero h1 { font-size: 2.1rem; }
+        .hero { padding: 2.5rem 0.5rem 2.2rem; }
       }
     </style>
   </head>
@@ -228,25 +140,22 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <Header />
     <main>
       <section class="hero animate-on-scroll">
-        <div class="hero-flex">
-          <div class="hero-content">
-            <h1>Next-Level Game Enhancements</h1>
-            <p>Discover cutting-edge tools engineered for elite gamers who demand stealth, precision, and top-tier performance.</p>
-            <div class="btn-group">
-              <a href="#products" class="btn btn-primary">Explore Products</a>
-              <a href="#features" class="btn">How It Works</a>
-            </div>
-          </div>
-          <div class="hero-imgui-wrap">
-            <img
-              src="https://files.catbox.moe/s0z1tu.png"
-              alt="ImGui Menu Screenshot"
-              class="hero-imgui"
-              id="imguiMenu"
-            />
-          </div>
+        <h1>Next-Level Game Enhancements</h1>
+        <p>
+          Discover cutting-edge tools engineered for elite gamers who demand stealth, precision, and top-tier performance.
+        </p>
+        <div class="btn-group">
+          <a href="#products" class="btn btn-primary">Explore Products</a>
+          <a href="#features" class="btn">How It Works</a>
         </div>
+        <img
+          src="https://files.catbox.moe/s0z1tu.png"
+          alt="ImGui Menu Screenshot"
+          class="hero-imgui-center"
+          id="imguiMenu"
+        />
       </section>
+
       <section id="products" class="animate-on-scroll">
         <h2 class="section-title">Premium Products</h2>
         <div class="grid products-grid">
@@ -327,7 +236,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
           window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
             imguiMenu.style.transform =
-              `scale(1.05) translateY(${Math.min(scrolled / 8, 35)}px) rotate(${-2 - scrolled / 150}deg)`;
+              `scale(1.06) translateY(${Math.min(scrolled / 9, 40)}px)`;
           });
         }
       });
