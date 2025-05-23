@@ -28,11 +28,11 @@ try {
         --bg: #f6f8fc;
         --text: #22223b;
         --muted: #737373;
-        --card-bg: rgba(255,255,255,0.8);
+        --card-bg: rgba(255,255,255,0.86);
         --card-blur: blur(10px);
         --border: #e5e7eb;
         --radius: 16px;
-        --shadow: 0 8px 32px 0 rgba(99, 102, 241, 0.10), 0 1.5px 3.5px rgba(0,0,0,0.03);
+        --shadow: 0 8px 32px 0 rgba(99, 102, 241, 0.09), 0 1.5px 3.5px rgba(0,0,0,0.03);
         --transition: all 0.3s cubic-bezier(.4,0,.2,1);
       }
 
@@ -65,28 +65,32 @@ try {
         z-index: 1;
       }
 
-      .hero::after {
-        content: '';
-        position: absolute;
-        top: 10%;
-        left: 30%;
-        width: 240px;
-        height: 240px;
-        background: radial-gradient(circle, rgba(99,102,241,0.09) 0%, transparent 70%);
-        z-index: 0;
-        filter: blur(2px);
-        animation: fadePulse 8s infinite alternate;
-      }
-      @keyframes fadePulse {
-        0% { opacity: 0.7; }
-        100% { opacity: 1; }
-      }
-
       .hero-content {
         position: relative;
-        z-index: 1;
+        z-index: 2;
         padding: 2.5rem 1.5rem;
+        width: 100%;
+        max-width: 520px;
+        margin: 0 auto;
       }
+
+      .hero-gif {
+        position: absolute;
+        right: 4%;
+        bottom: 4%;
+        width: 200px;
+        height: 200px;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0.87;
+        filter: drop-shadow(0 2px 16px rgba(99,102,241,0.16));
+        animation: floatHero 3.5s ease-in-out infinite alternate;
+      }
+      @keyframes floatHero {
+        from { transform: translateY(0px);}
+        to { transform: translateY(-20px);}
+      }
+
       .hero h1 {
         font-size: 3rem;
         font-weight: 800;
@@ -103,13 +107,17 @@ try {
         display: inline-block;
         background: var(--primary);
         color: white;
-        padding: 0.8rem 2.2rem;
+        padding: 0.75rem 2.1rem;
         border-radius: var(--radius);
         font-weight: 600;
         text-decoration: none;
         font-size: 1rem;
+        border: none;
+        cursor: pointer;
         box-shadow: 0 2px 10px 0 rgba(99,102,241,0.07);
         transition: var(--transition);
+        margin-top: 0.8rem;
+        margin-bottom: 0;
       }
       .btn:hover, .btn:focus {
         background: var(--accent);
@@ -136,7 +144,7 @@ try {
         background: var(--card-bg);
         border: 1px solid var(--border);
         border-radius: var(--radius);
-        padding: 1.3rem 1.2rem 1.8rem 1.2rem;
+        padding: 1.2rem 1.2rem 1.8rem 1.2rem;
         box-shadow: var(--shadow);
         backdrop-filter: var(--card-blur);
         opacity: 0;
@@ -146,6 +154,7 @@ try {
         display: flex;
         flex-direction: column;
         align-items: stretch;
+        min-height: 410px;
       }
 
       .product-card.visible {
@@ -157,28 +166,28 @@ try {
         width: 100%;
         border-radius: var(--radius);
         object-fit: cover;
-        height: 175px;
-        margin-bottom: 1.1rem;
-        box-shadow: 0 2px 10px 0 rgba(60,60,100,0.05);
+        height: 170px;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 10px 0 rgba(60,60,100,0.04);
       }
 
       .product-title {
-        font-size: 1.24rem;
+        font-size: 1.16rem;
         color: var(--primary);
         font-weight: 700;
         margin-bottom: 0.4rem;
         display: flex;
         align-items: center;
-        gap: 0.55em;
+        gap: 0.45em;
       }
 
       .product-title i {
-        font-size: 1.08em;
+        font-size: 1.1em;
         color: var(--accent);
       }
 
       .product-price {
-        font-size: 1.14rem;
+        font-size: 1.07rem;
         font-weight: 600;
         color: #333;
         margin-bottom: 0.7rem;
@@ -188,12 +197,21 @@ try {
         font-size: 1rem;
         color: var(--muted);
         flex: 1 1 auto;
+        margin-bottom: 0.9rem;
       }
 
-      .product-card .btn {
-        margin-top: 1.1rem;
-        font-size: 0.98rem;
-        width: 100%;
+      .product-actions {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        margin-top: auto;
+      }
+
+      .product-actions .btn {
+        width: auto;
+        min-width: 120px;
+        margin: 0;
+        font-size: 0.97rem;
       }
 
       .empty-state {
@@ -210,11 +228,13 @@ try {
         .hero h1 { font-size: 2.2rem; }
         main { padding: 1rem; }
         .section-title { font-size: 1.5rem; }
+        .hero-gif { width: 120px; height: 120px; right: 3%; bottom: 2%; }
       }
       @media (max-width: 600px) {
         .hero-content { padding: 1.1rem 0.1rem; }
         .hero { min-height: 36vh; }
         .products-grid { gap: 1.1rem; }
+        .hero-gif { display: none; }
       }
     </style>
   </head>
@@ -227,6 +247,8 @@ try {
           <p>Premium tools and enhancements, trusted by thousands since Cold War. Discover the next level.</p>
           <a href="#products" class="btn">Browse Shop</a>
         </div>
+        <!-- Example animated GIF or SVG animation in the hero (replace src with your own or use a cool free GIF) -->
+        <img class="hero-gif" src="https://media.giphy.com/media/26uf6qaxqHpYXgjWU/giphy.gif" alt="Animated controller" loading="lazy" />
       </section>
       <section id="products">
         <h2 class="section-title">Available Products</h2>
@@ -234,7 +256,7 @@ try {
           <ul class="products-grid">
             {products.map((product, index) => (
               <li class="product-card" style={`animation-delay:${index * 0.09}s`}>
-                <a href={`/shop/${product.id}/`}>
+                <a href={`/shop/${product.id}/`} tabindex="-1" aria-hidden="true" style="display:block;">
                   <img src={product.data.heroImage} alt={product.data.title} class="product-image" />
                   <div>
                     <div class="product-title">
@@ -242,9 +264,11 @@ try {
                     </div>
                     <div class="product-price">${product.data.price}</div>
                     <p class="product-description">{product.data.description}</p>
-                    <a href={`/shop/${product.id}/`} class="btn">View Details</a>
                   </div>
                 </a>
+                <div class="product-actions">
+                  <a href={`/shop/${product.id}/`} class="btn">View Details</a>
+                </div>
               </li>
             ))}
           </ul>
