@@ -53,12 +53,40 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         padding: 5rem 1rem 3rem;
         opacity: 0;
         transform: translateY(20px);
-        transition: all 0.8s ease-out;
+        transition: all 0.8s cubic-bezier(.46,.03,.52,.96);
+        position: relative;
+        overflow: visible;
+        min-height: 340px;
       }
 
       .hero.visible {
         opacity: 1;
         transform: translateY(0);
+      }
+
+      .hero-imgui {
+        position: absolute;
+        left: 54%;
+        top: 55%;
+        transform: translate(-50%, -55%) scale(1) rotate(-2deg);
+        z-index: 2;
+        pointer-events: none;
+        width: 340px;
+        max-width: 70vw;
+        min-width: 220px;
+        filter: drop-shadow(0 8px 32px rgba(99,102,241,0.19));
+        transition: transform 0.7s cubic-bezier(.77,0,.18,1);
+        will-change: transform, filter;
+        opacity: 0.98;
+        animation: floatImgui 3.5s ease-in-out infinite alternate;
+      }
+      @keyframes floatImgui {
+        0% { transform: translate(-50%, -55%) scale(1) rotate(-2deg);}
+        100% { transform: translate(-50%, -62%) scale(1.025) rotate(-5deg);}
+      }
+      @media (max-width: 700px) {
+        .hero-imgui { display: none; }
+        .hero { min-height: 0; }
       }
 
       .hero h1 {
@@ -69,12 +97,16 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         background-clip: text;
         color: transparent;
         margin-bottom: 0.75rem;
+        position: relative;
+        z-index: 2;
       }
 
       .hero p {
         color: var(--text-light);
         margin-bottom: 1.5rem;
         font-size: 1.125rem;
+        position: relative;
+        z-index: 2;
       }
 
       .btn {
@@ -83,6 +115,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         font-weight: 600;
         text-decoration: none;
         transition: 0.3s ease;
+        position: relative;
+        z-index: 2;
       }
 
       .btn-primary {
@@ -113,7 +147,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         .products-grid, .testimonials-grid {
           grid-template-columns: repeat(3, 1fr);
         }
-
         .features-grid {
           grid-template-columns: repeat(2, 1fr);
         }
@@ -127,7 +160,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         box-shadow: var(--shadow);
         opacity: 0;
         transform: translateY(30px);
-        transition: all 0.5s ease-out;
+        transition: all 0.5s cubic-bezier(.46,.03,.52,.96);
+        position: relative;
       }
 
       .card.visible {
@@ -163,40 +197,46 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
           <a href="#products" class="btn btn-primary">Explore Products</a>
           <a href="#features" class="btn" style="border: 1px solid var(--border); color: var(--primary);">How It Works</a>
         </div>
+        <!-- ImGui menu floating image -->
+        <img
+          src="/DbdTUroqtUw-HD-removebg-preview.png"
+          alt="ImGui Menu Screenshot"
+          class="hero-imgui"
+          id="imguiMenu"
+        />
       </section>
-
-       <section id="products" class="animate-on-scroll">
-  <h2 class="section-title">Premium Products</h2>
-  <div class="grid products-grid">
-    <div class="card">
-      <h3>BO6 / Warzone External</h3>
-      <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.95rem;">
-        <li>Aimbot with smoothing</li>
-        <li>ESP (Players, Loot, Vehicles)</li>
-        <li>Config support</li>
-        <li>Stream-proof</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Permanent HWID Spoofer</h3>
-      <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.95rem;">
-        <li>UEFI kernel-based</li>
-        <li>Spoofs serials & SMBIOS</li>
-        <li>Stealth boot cleanup</li>
-        <li>Persistent across reboots</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Temporary HWID Spoofer</h3>
-      <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.95rem;">
-        <li>Instant spoof on launch</li>
-        <li>Resets on reboot</li>
-        <li>Compatible with most AC</li>
-      </ul>
-    </div>
-  </div>
-</section>
-      
+      <!-- (the rest of your page continues as before) -->
+      <section id="products" class="animate-on-scroll">
+        <h2 class="section-title">Premium Products</h2>
+        <div class="grid products-grid">
+          <div class="card">
+            <h3>BO6 / Warzone External</h3>
+            <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.95rem;">
+              <li>Aimbot with smoothing</li>
+              <li>ESP (Players, Loot, Vehicles)</li>
+              <li>Config support</li>
+              <li>Stream-proof</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Permanent HWID Spoofer</h3>
+            <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.95rem;">
+              <li>UEFI kernel-based</li>
+              <li>Spoofs serials & SMBIOS</li>
+              <li>Stealth boot cleanup</li>
+              <li>Persistent across reboots</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Temporary HWID Spoofer</h3>
+            <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.95rem;">
+              <li>Instant spoof on launch</li>
+              <li>Resets on reboot</li>
+              <li>Compatible with most AC</li>
+            </ul>
+          </div>
+        </div>
+      </section>
       <section id="features" class="animate-on-scroll">
         <h2 class="section-title">Why Choose Us?</h2>
         <div class="grid features-grid">
@@ -214,7 +254,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
           </div>
         </div>
       </section>
-
       <section class="testimonials animate-on-scroll">
         <h2 class="section-title">User Feedback</h2>
         <div class="grid testimonials-grid">
@@ -225,9 +264,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       </section>
     </main>
     <Footer />
-
     <script>
+      // Scroll animation (already smooth), but let's add parallax on the ImGui image!
       document.addEventListener('DOMContentLoaded', () => {
+        // Animate on scroll for cards/sections
         const animatedEls = document.querySelectorAll('.animate-on-scroll, .card');
         const observer = new IntersectionObserver(entries => {
           entries.forEach(entry => {
@@ -238,8 +278,18 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             }
           });
         }, { threshold: 0.1 });
-
         animatedEls.forEach(el => observer.observe(el));
+
+        // Parallax for ImGui menu image in hero
+        const imguiMenu = document.getElementById('imguiMenu');
+        if (imguiMenu) {
+          window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            // Move up & down a little as page scrolls, with a clamp
+            imguiMenu.style.transform =
+              `translate(-50%, calc(-55% - ${Math.min(scrolled / 8, 35)}px)) scale(1.05) rotate(${(-2 - scrolled / 150)}deg)`;
+          });
+        }
       });
     </script>
   </body>
