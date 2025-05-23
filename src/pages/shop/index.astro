@@ -7,8 +7,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 
-// Get blog posts sorted by publication date (newest first)
-const posts = (await getCollection('shop')).sort(
+// Get shop items sorted by publication date (newest first)
+const products = (await getCollection('shop')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
@@ -16,89 +16,189 @@ const posts = (await getCollection('shop')).sort(
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <style>
-      /* Main layout styles */
-      main {
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 1rem;
+    <BaseHead title={`${SITE_TITLE} Shop`} description="Premium gaming enhancements and tools" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style is:global>
+      :root {
+        --primary: #6366f1;
+        --primary-dark: #4f46e5;
+        --text: #1f2937;
+        --text-light: #6b7280;
+        --bg: #ffffff;
+        --card: #f9fafb;
+        --border: #e5e7eb;
+        --radius: 10px;
+        --shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        --plasma-gradient: linear-gradient(90deg, #ff41ca, #5f007f, #2335be, #c321a5, #2af5ff);
       }
-      
-      /* Posts grid */
-      .posts-grid {
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.5;
+        scroll-behavior: smooth;
+      }
+
+      main {
+        max-width: 1200px;
+        margin: auto;
+        padding: 2rem 1.5rem;
+      }
+
+      .hero {
+        text-align: center;
+        padding: 3rem 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: var(--plasma-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 1rem;
+      }
+
+      .hero p {
+        color: var(--text-light);
+        font-size: 1.125rem;
+        max-width: 700px;
+        margin: 0 auto 1.5rem;
+      }
+
+      .products-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         list-style: none;
         padding: 0;
-        margin: 2rem 0;
       }
-      
-      /* Featured post (first item) */
-      .featured-post {
-        grid-column: 1 / -1;
-        text-align: center;
+
+      .product-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        opacity: 0;
+        transform: translateY(30px);
       }
-      
-      .featured-post .post-title {
-        font-size: 2rem;
-        margin: 1rem 0 0.5rem;
+
+      .product-card.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
-      
-      /* Regular posts */
-      .post-card {
-        transition: transform 0.2s ease;
-      }
-      
-      .post-card:hover {
+
+      .product-card:hover {
         transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
       }
-      
-      .post-image {
+
+      .product-image {
         width: 100%;
-        height: auto;
-        border-radius: 12px;
-        margin-bottom: 1rem;
-        transition: box-shadow 0.2s ease;
+        height: 200px;
+        object-fit: cover;
+        border-bottom: 1px solid var(--border);
       }
-      
-      .post-card:hover .post-image {
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+
+      .product-content {
+        padding: 1.25rem;
       }
-      
-      .post-title {
+
+      .product-title {
         font-size: 1.25rem;
+        margin: 0 0 0.5rem;
+        background: var(--plasma-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .product-price {
+        font-weight: 600;
+        color: var(--primary);
+        font-size: 1.1rem;
         margin: 0.5rem 0;
-        color: var(--black);
       }
-      
-      .post-date {
-        color: var(--gray);
+
+      .product-description {
+        color: var(--text-light);
+        font-size: 0.95rem;
+        margin: 0.75rem 0;
+      }
+
+      .product-features {
+        margin: 0.75rem 0;
+        padding-left: 1.25rem;
         font-size: 0.9rem;
-        margin: 0;
+        color: var(--text-light);
       }
-      
-      .post-link {
+
+      .product-features li {
+        margin-bottom: 0.25rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.65rem 1.25rem;
+        border-radius: var(--radius);
+        font-weight: 600;
         text-decoration: none;
-        color: inherit;
+        transition: 0.3s ease;
+        text-align: center;
+        width: 100%;
+        margin-top: 0.75rem;
       }
-      
-      .post-card:hover .post-title,
-      .post-card:hover .post-date {
-        color: var(--accent);
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
       }
-      
-      /* Responsive adjustments */
+
+      .btn-primary:hover {
+        background: var(--primary-dark);
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 1.75rem;
+        margin: 3rem 0 1.5rem;
+        background: var(--plasma-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
       @media (max-width: 768px) {
-        .posts-grid {
+        .products-grid {
           grid-template-columns: 1fr;
-          gap: 1.5rem;
         }
         
-        .featured-post .post-title {
-          font-size: 1.5rem;
+        .hero h1 {
+          font-size: 2rem;
         }
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
       }
     </style>
   </head>
@@ -106,26 +206,39 @@ const posts = (await getCollection('shop')).sort(
     <Header />
     
     <main>
-      <h1>Welcome to {SITE_TITLE}</h1>
-      <p class="site-description">{SITE_DESCRIPTION}</p>
-      
-      <section aria-label="Latest blog posts">
-        <ul class="posts-grid">
-          {posts.map((post, index) => (
-            <li class={index === 0 ? 'featured-post' : 'post-card'}>
-              <a href={`/blog/${post.id}/`} class="post-link">
+      <section class="hero animate-on-scroll">
+        <h1>Premium Gaming Tools</h1>
+        <p>Unlock your full potential with our cutting-edge enhancements, designed for competitive players who demand excellence.</p>
+      </section>
+
+      <section aria-label="Our Products">
+        <h2 class="section-title animate-on-scroll">Shop Products</h2>
+        <ul class="products-grid">
+          {products.map((product, index) => (
+            <li class="product-card animate-on-scroll">
+              <a href={`/shop/${product.id}/`} class="product-link">
                 <img 
-                  width={720} 
-                  height={360} 
-                  src={post.data.heroImage} 
-                  alt={post.data.title} 
-                  class="post-image"
-                  loading={index === 0 ? 'eager' : 'lazy'}
+                  src={product.data.heroImage} 
+                  alt={product.data.title}
+                  class="product-image"
+                  loading={index < 3 ? 'eager' : 'lazy'}
+                  width={400}
+                  height={200}
                 />
-                <h2 class="post-title">{post.data.title}</h2>
-                <p class="post-date">
-                  <FormattedDate date={post.data.pubDate} />
-                </p>
+                <div class="product-content">
+                  <h3 class="product-title">
+                    <i class={product.data.icon || 'fas fa-gamepad'}></i>
+                    {product.data.title}
+                  </h3>
+                  <div class="product-price">${product.data.price}</div>
+                  <p class="product-description">{product.data.description}</p>
+                  <ul class="product-features">
+                    {product.data.features.map(feature => (
+                      <li>{feature}</li>
+                    ))}
+                  </ul>
+                  <a href={`/shop/${product.id}/`} class="btn btn-primary">View Details</a>
+                </div>
               </a>
             </li>
           ))}
@@ -134,5 +247,20 @@ const posts = (await getCollection('shop')).sort(
     </main>
     
     <Footer />
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const animatedEls = document.querySelectorAll('.animate-on-scroll, .product-card');
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.1 });
+
+        animatedEls.forEach(el => observer.observe(el));
+      });
+    </script>
   </body>
 </html>
