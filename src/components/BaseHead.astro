@@ -10,6 +10,7 @@ interface Props {
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
 const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 ---
 
@@ -38,35 +39,9 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
 
-<!-- Font Awesome for Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-<!-- Social Links (Discord & GitHub only) -->
-<style>
-  .social-icons-head {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 1.2rem 0 0 0;
-  }
-  .social-icons-head a {
-    color: #5865F2;
-    font-size: 1.4rem;
-    transition: color 0.2s;
-    text-decoration: none;
-  }
-  .social-icons-head a.github {
-    color: #222;
-  }
-  .social-icons-head a:hover {
-    color: #4f46e5;
-  }
-</style>
-<div class="social-icons-head">
-  <a href="https://discord.gg/AAzErV3Rpt" target="_blank" rel="noopener" aria-label="Discord">
-    <i class="fab fa-discord"></i>
-  </a>
-  <a href="https://github.com/YOURGITHUB" class="github" target="_blank" rel="noopener" aria-label="GitHub">
-    <i class="fab fa-github"></i>
-  </a>
-</div>
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(image, Astro.url)} />
