@@ -5,7 +5,6 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
 
 // Get shop items with error handling
 let products = [];
@@ -25,23 +24,21 @@ try {
 <html lang="en">
   <head>
     <BaseHead title={`${SITE_TITLE} Shop`} description="Premium gaming enhancements and tools" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style is:global>
-      /* Your existing CSS remains unchanged */
       :root {
         --primary: #6366f1;
         --primary-dark: #4f46e5;
         --text: #1f2937;
         --text-light: #6b7280;
-        --bg: #ffffff;
-        --card: #f9fafb;
+        --bg: #f0f4f8;
+        --card: #ffffff;
         --border: #e5e7eb;
-        --radius: 10px;
-        --shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        --radius: 12px;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         --plasma-gradient: linear-gradient(90deg, #ff41ca, #5f007f, #2335be, #c321a5, #2af5ff);
       }
 
@@ -55,7 +52,7 @@ try {
         font-family: 'Inter', sans-serif;
         color: var(--text);
         background: var(--bg);
-        line-height: 1.5;
+        line-height: 1.6;
         scroll-behavior: smooth;
       }
 
@@ -67,30 +64,29 @@ try {
 
       .hero {
         text-align: center;
-        padding: 3rem 1rem;
+        padding: 4rem 1rem;
+        background: var(--plasma-gradient);
+        color: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
         margin-bottom: 2rem;
       }
 
       .hero h1 {
-        font-size: 2.5rem;
+        font-size: 3rem;
         font-weight: 700;
-        background: var(--plasma-gradient);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
         margin-bottom: 1rem;
       }
 
       .hero p {
-        color: var(--text-light);
-        font-size: 1.125rem;
+        font-size: 1.25rem;
         max-width: 700px;
         margin: 0 auto 1.5rem;
       }
 
       .products-grid {
         display: grid;
-        gap: 1.5rem;
+        gap: 2rem;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         list-style: none;
         padding: 0;
@@ -103,96 +99,66 @@ try {
         box-shadow: var(--shadow);
         overflow: hidden;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        opacity: 0;
-        transform: translateY(30px);
-      }
-
-      .product-card.visible {
-        opacity: 1;
-        transform: translateY(0);
       }
 
       .product-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
       }
 
       .product-image {
         width: 100%;
         height: 200px;
         object-fit: cover;
-        border-bottom: 1px solid var(--border);
       }
 
       .product-content {
-        padding: 1.25rem;
+        padding: 1.5rem;
       }
 
       .product-title {
-        font-size: 1.25rem;
+        font-size: 1.5rem;
         margin: 0 0 0.5rem;
-        background: var(--plasma-gradient);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+        color: var(--primary);
       }
 
       .product-price {
         font-weight: 600;
         color: var(--primary);
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         margin: 0.5rem 0;
       }
 
       .product-description {
         color: var(--text-light);
-        font-size: 0.95rem;
+        font-size: 1rem;
         margin: 0.75rem 0;
-      }
-
-      .product-features {
-        margin: 0.75rem 0;
-        padding-left: 1.25rem;
-        font-size: 0.9rem;
-        color: var(--text-light);
-      }
-
-      .product-features li {
-        margin-bottom: 0.25rem;
       }
 
       .btn {
         display: inline-block;
-        padding: 0.65rem 1.25rem;
+        padding: 0.75rem 1.5rem;
         border-radius: var(--radius);
         font-weight: 600;
         text-decoration: none;
-        transition: 0.3s ease;
+        transition: background 0.3s ease, transform 0.3s ease;
         text-align: center;
         width: 100%;
-        margin-top: 0.75rem;
-      }
-
-      .btn-primary {
+        margin-top: 1rem;
         background: var(--primary);
         color: white;
       }
 
-      .btn-primary:hover {
+      .btn:hover {
         background: var(--primary-dark);
+        transform: translateY(-2px);
       }
 
       .section-title {
         text-align: center;
-        font-size: 1.75rem;
+        font-size: 2rem;
         margin: 3rem 0 1.5rem;
-        background: var(--plasma-gradient);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+        color: var(--text);
       }
 
       .empty-state {
@@ -204,18 +170,9 @@ try {
       }
 
       @media (max-width: 768px) {
-        .products-grid {
-          grid-template-columns: 1fr;
-        }
-        
         .hero h1 {
-          font-size: 2rem;
+          font-size: 2.5rem;
         }
-      }
-
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
       }
     </style>
   </head>
@@ -223,18 +180,18 @@ try {
     <Header />
     
     <main>
-      <section class="hero animate-on-scroll">
+      <section class="hero">
         <h1>Premium Gaming Tools</h1>
         <p>Unlock your full potential with our cutting-edge enhancements, designed for competitive players who demand excellence.</p>
       </section>
 
       <section aria-label="Our Products">
-        <h2 class="section-title animate-on-scroll">Shop Products</h2>
+        <h2 class="section-title">Shop Products</h2>
         
         {products.length > 0 ? (
           <ul class="products-grid">
             {products.map((product, index) => (
-              <li class="product-card animate-on-scroll">
+              <li class="product-card">
                 <a href={`/shop/${product.id}/`} class="product-link">
                   <img 
                     src={product.data.heroImage} 
@@ -251,12 +208,7 @@ try {
                     </h3>
                     <div class="product-price">${product.data.price}</div>
                     <p class="product-description">{product.data.description}</p>
-                    <ul class="product-features">
-                      {product.data.features?.map(feature => (
-                        <li>{feature}</li>
-                      ))}
-                    </ul>
-                    <a href={`/shop/${product.id}/`} class="btn btn-primary">View Details</a>
+                    <a href={`/shop/${product.id}/`} class="btn">View Details</a>
                   </div>
                 </a>
               </li>
@@ -275,7 +227,7 @@ try {
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const animatedEls = document.querySelectorAll('.animate-on-scroll, .product-card');
+        const animatedEls = document.querySelectorAll('.product-card');
         const observer = new IntersectionObserver(entries => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
