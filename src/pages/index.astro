@@ -12,113 +12,42 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Add GSAP for advanced animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style is:global>
       :root {
-        /* Enhanced color palette */
         --primary: #6366f1;
         --primary-dark: #4f46e5;
-        --primary-light: #818cf8;
-        --primary-lighter: #c7d2fe;
-        --accent: #f472b6;
-        --accent-dark: #db2777;
-        --accent-light: #f9a8d4;
-        --text: #0f172a;
-        --text-light: #475569;
-        --text-lighter: #94a3b8;
+        --text: #1f2937;
+        --text-light: #6b7280;
         --bg: #ffffff;
-        --bg-alt: #f8fafc;
-        --card: #f1f5f9;
-        --card-hover: #ffffff;
-        --border: #e2e8f0;
-        --border-dark: #cbd5e1;
-        --radius-sm: 8px;
-        --radius: 16px;
-        --radius-lg: 24px;
-        --shadow: 0 4px 24px rgba(99,102,241,0.08);
-        --shadow-hover: 0 8px 32px rgba(99,102,241,0.15);
-        --shadow-card: 0 1px 3px rgba(0,0,0,0.05), 0 10px 15px -5px rgba(99,102,241,0.08);
-        --shadow-card-hover: 0 1px 3px rgba(0,0,0,0.05), 0 20px 25px -5px rgba(99,102,241,0.15);
-        --plasma-gradient: linear-gradient(135deg, #4f46e5, #7e22ce, #be185d, #7e22ce, #4f46e5);
-        --glow-gradient: radial-gradient(circle at 50% 50%, rgba(99,102,241,0.15), rgba(99,102,241,0) 70%);
-        --glass-bg: rgba(255, 255, 255, 0.7);
-        --glass-border: rgba(255, 255, 255, 0.5);
+        --card: #f9fafb;
+        --border: #e5e7eb;
+        --radius: 18px;
+        --shadow: 0 4px 24px rgba(99,102,241,0.13);
+        --plasma-gradient: linear-gradient(90deg, #ff41ca, #5f007f, #2335be, #c321a5, #2af5ff);
       }
-      
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      
-      html {
-        scroll-behavior: smooth;
-      }
-      
       body {
-        font-family: 'Outfit', sans-serif;
+        font-family: 'Inter', sans-serif;
         color: var(--text);
         background: var(--bg);
-        overflow-x: hidden;
-        line-height: 1.6;
       }
-      
       main {
-        max-width: 1200px;
+        max-width: 1000px;
         margin: auto;
         padding: 1.5rem;
-        position: relative;
       }
 
-      /* Background particles */
-      .particles-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: -1;
-        overflow: hidden;
-      }
-      
-      .particle {
-        position: absolute;
-        background: var(--primary-light);
-        border-radius: 50%;
-        opacity: 0.2;
-        pointer-events: none;
-      }
-      
-      /* Noise texture overlay */
-      .noise-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        opacity: 0.015;
-        pointer-events: none;
-        z-index: 1;
-      }
-
-      /* HERO SECTION */
       .hero {
         position: relative;
         text-align: center;
-        min-height: 650px;
-        padding: 3rem 1rem 4rem 1rem;
+        min-height: 550px;
+        padding: 2rem 1rem 3.5rem 1rem;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-end;
         overflow: visible;
         background: transparent;
-        margin-bottom: 3rem;
       }
 
       .hero-bg {
@@ -127,132 +56,60 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         top: 45%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 500px;
-        height: 350px;
+        width: 430px;
+        height: 310px;
         border-radius: 50%;
         background: var(--plasma-gradient);
-        filter: blur(70px) brightness(1.12) opacity(0.55);
+        filter: blur(60px) brightness(1.12) opacity(0.55);
         z-index: 0;
         pointer-events: none;
         animation: plasmaGlow 6s ease-in-out infinite alternate;
       }
-      
-      .hero-bg::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--plasma-gradient);
-        filter: blur(80px) brightness(1.2) opacity(0.4);
-        animation: plasmaRotate 15s linear infinite;
-        border-radius: 40%;
-      }
-      
-      .hero-accent {
-        position: absolute;
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        background: var(--accent);
-        filter: blur(60px) opacity(0.15);
-        z-index: 0;
-      }
-      
-      .hero-accent-1 {
-        top: 20%;
-        left: 15%;
-        animation: float 20s ease-in-out infinite alternate;
-      }
-      
-      .hero-accent-2 {
-        bottom: 15%;
-        right: 10%;
-        width: 180px;
-        height: 180px;
-        background: var(--primary);
-        animation: float 15s ease-in-out infinite alternate-reverse;
-      }
-      
       @keyframes plasmaGlow {
-        0% { filter: blur(70px) brightness(1.08) opacity(0.50); transform: scale(1);}
-        50% { filter: blur(80px) brightness(1.17) opacity(0.60); transform: scale(1.05);}
-        100% { filter: blur(75px) brightness(1.12) opacity(0.55); transform: scale(1);}
-      }
-      
-      @keyframes plasmaRotate {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        from { filter: blur(60px) brightness(1.08) opacity(0.50);}
+        to   { filter: blur(68px) brightness(1.17) opacity(0.60);}
       }
 
-      .hero-imgui-container {
-        position: relative;
-        z-index: 2;
-        margin-bottom: 2.5rem;
-        perspective: 1000px;
-      }
-      
       .hero-imgui {
-        width: 420px;
-        max-width: 90vw;
+        z-index: 2;
+        width: 370px;
+        max-width: 88vw;
         min-width: 220px;
-        box-shadow: 0 15px 60px rgba(99,102,241,0.25), 0 3px 15px rgba(90,0,160,0.2);
-        border-radius: var(--radius-lg);
+        position: relative;
+        margin-bottom: 1.6rem;
+        box-shadow: 0 8px 48px 0 rgba(99,102,241,0.17), 0 1.5px 10px rgba(90,0,160,0.13);
+        border-radius: 22px;
         background: rgba(255,255,255,0.07);
         backdrop-filter: blur(1.7px) saturate(1.06);
-        transition: all 0.7s cubic-bezier(.77,0,.18,1);
+        transition: transform 0.7s cubic-bezier(.77,0,.18,1);
         opacity: 1;
         animation: floatImgui 4.5s ease-in-out infinite alternate;
-        transform-style: preserve-3d;
       }
-      
-      .hero-imgui::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: var(--radius-lg);
-        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
-        pointer-events: none;
-      }
-      
-      .hero-imgui-glow {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 10px;
-        left: 0;
-        background: var(--primary);
-        filter: blur(90px);
-        opacity: 0.15;
-        z-index: -1;
-        border-radius: 50%;
-        animation: glowPulse 4s ease-in-out infinite alternate;
-      }
-      
-      @keyframes glowPulse {
-        0% { opacity: 0.1; transform: scale(0.8); }
-        100% { opacity: 0.2; transform: scale(1.1); }
-      }
-      
-      .hero-imgui:hover {
-        transform: translateY(-10px) scale(1.03) rotate(-3deg) !important;
-        box-shadow: 0 25px 80px rgba(99,102,241,0.3), 0 5px 20px rgba(90,0,160,0.25);
-        cursor: pointer;
-      }
-      
       @keyframes floatImgui {
         0% { transform: translateY(0) scale(1.0) rotate(-3.2deg);}
         100% { transform: translateY(-18px) scale(1.025) rotate(-5deg);}
       }
-      
+      @media (max-width: 700px) {
+        .hero {
+          min-height: 0;
+          padding-top: 2rem;
+        }
+        .hero-imgui {
+          width: 98vw;
+          min-width: 0;
+          max-width: 97vw;
+          margin-bottom: 1rem;
+        }
+        .hero-bg {
+          width: 320px;
+          height: 140px;
+        }
+      }
+
       .hero h1 {
-        font-size: 3.5rem;
-        font-weight: 800;
-        margin-bottom: 1rem;
+        font-size: 2.85rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
         margin-top: 0;
         background: var(--plasma-gradient);
         -webkit-background-clip: text;
@@ -260,24 +117,15 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         color: transparent;
         position: relative;
         z-index: 3;
-        letter-spacing: -1.5px;
-        opacity: 0;
-        transform: translateY(30px);
-        line-height: 1.1;
+        letter-spacing: -2px;
       }
-      
       .hero p {
         color: var(--text-light);
-        margin-bottom: 2rem;
-        font-size: 1.25rem;
+        margin-bottom: 1.7rem;
+        font-size: 1.13rem;
         position: relative;
         z-index: 3;
-        opacity: 0;
-        transform: translateY(30px);
-        max-width: 600px;
-        font-weight: 400;
       }
-      
       .hero-btns {
         display: flex;
         gap: 1.1rem;
@@ -286,1103 +134,263 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         margin-top: 1.6rem;
         z-index: 3;
         position: relative;
-        opacity: 0;
-        transform: translateY(30px);
       }
-      
       .btn {
-        padding: 0.9rem 2rem;
-        border-radius: var(--radius);
+        padding: 0.7rem 1.6rem;
+        border-radius: 22px;
         font-weight: 600;
-        font-size: 1.1rem;
+        font-size: 1.08rem;
         text-decoration: none;
         border: none;
         outline: none;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 5px 15px rgba(99,102,241,0.1);
+        box-shadow: 0 0.5px 4px rgba(99,102,241,0.09);
         cursor: pointer;
         background: white;
         color: var(--primary);
-        transition: all 0.3s cubic-bezier(.47,1.64,.41,.8);
-        position: relative;
-        overflow: hidden;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
+        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
       }
-      
-      .btn::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 0%;
-        height: 100%;
-        background: rgba(255,255,255,0.1);
-        transition: width 0.3s ease;
-      }
-      
-      .btn:hover::before {
-        width: 100%;
-      }
-      
       .btn-primary {
         background: var(--primary);
         color: white;
       }
-      
       .btn-primary:hover, .btn:hover {
         background: var(--primary-dark);
         color: #fff;
-        box-shadow: 0 5px 20px rgba(90,0,160,0.2);
-        transform: translateY(-3px);
-      }
-      
-      .btn i {
-        font-size: 1.1rem;
-        transition: transform 0.3s ease;
-      }
-      
-      .btn:hover i {
-        transform: translateX(3px);
+        box-shadow: 0 1.5px 16px rgba(90,0,160,0.13);
       }
 
       /* SECTION TITLES */
-      .section-header {
-        text-align: center;
-        margin: 6rem 0 3rem 0;
-        position: relative;
-      }
-      
-      .section-subtitle {
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        color: var(--primary);
-        margin-bottom: 0.5rem;
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      
       .section-title {
         text-align: center;
-        font-size: 2.5rem;
-        font-weight: 700;
+        font-size: 1.75rem;
+        margin: 3.5rem 0 2.2rem 0;
         background: var(--plasma-gradient);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        letter-spacing: -1px;
-        position: relative;
-        opacity: 0;
-        transform: translateY(30px);
-        margin: 0;
-      }
-      
-      .section-title::after {
-        content: '';
-        position: absolute;
-        bottom: -15px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 3px;
-        background: var(--plasma-gradient);
-        transition: width 1s ease;
-      }
-      
-      .section-title.visible::after {
-        width: 80px;
-      }
-      
-      .section-description {
-        max-width: 700px;
-        margin: 2rem auto 3rem auto;
-        color: var(--text-light);
-        font-size: 1.1rem;
-        text-align: center;
-        opacity: 0;
-        transform: translateY(20px);
+        letter-spacing: -1.2px;
       }
 
-      /* GRIDS */
-      .products-grid, .features-grid, .testimonials-grid {
+      /* PRODUCTS GRID */
+      .products-grid {
         display: grid;
-        gap: 2.5rem;
+        gap: 2rem;
         grid-template-columns: 1fr;
       }
-      
-      @media (min-width: 768px) {
-        .products-grid, .features-grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
-        .testimonials-grid {
+      @media (min-width: 700px) {
+        .products-grid {
           grid-template-columns: repeat(3, 1fr);
         }
       }
-      
-      @media (min-width: 1024px) {
-        .products-grid, .features-grid, .testimonials-grid {
-          gap: 3rem;
-        }
-      }
-      
-      /* CARD STYLES */
       .card {
         background: var(--card);
-        border: 1px solid var(--border);
-        padding: 2rem;
+        border: 1.5px solid var(--border);
+        padding: 1.3rem 1.25rem 1.5rem 1.25rem;
         border-radius: var(--radius);
-        box-shadow: var(--shadow-card);
+        box-shadow: var(--shadow);
         opacity: 0;
         transform: translateY(30px);
         transition: all 0.5s cubic-bezier(.46,.03,.52,.96);
         position: relative;
         z-index: 1;
-        min-height: 250px;
+        min-height: 210px;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        overflow: hidden;
       }
-      
-      .card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: var(--plasma-gradient);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.5s ease;
-      }
-      
-      .card:hover::before {
-        transform: scaleX(1);
-      }
-      
-      .card::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--glow-gradient);
-        opacity: 0;
-        transition: opacity 0.5s ease;
-        z-index: -1;
-      }
-      
-      .card:hover::after {
-        opacity: 1;
-      }
-      
       .card.visible {
         opacity: 1;
         transform: translateY(0);
       }
-      
-      .card:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-card-hover);
-        border-color: rgba(99,102,241,0.3);
-        background: var(--card-hover);
-      }
-      
-      .card-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 50px;
-        height: 50px;
-        border-radius: 12px;
-        background: rgba(99,102,241,0.1);
-        margin-bottom: 1.25rem;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.3s ease;
-      }
-      
-      .card-icon::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--plasma-gradient);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-      
-      .card:hover .card-icon::before {
-        opacity: 1;
-      }
-      
-      .card-icon i {
-        font-size: 1.5rem;
-        color: var(--primary);
-        position: relative;
-        z-index: 1;
-        transition: color 0.3s ease;
-      }
-      
-      .card:hover .card-icon i {
-        color: white;
-      }
-      
       .card h3 {
-        font-size: 1.4rem;
-        font-weight: 700;
-        margin-bottom: 0.75rem;
-        color: var(--text);
-        transition: color 0.3s ease;
-      }
-      
-      .card:hover h3 {
         background: var(--plasma-gradient);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-      }
-      
-      .card ul {
-        margin-top: 0.8rem;
-        padding-left: 1.15rem;
-        font-size: 1.05rem;
-        color: var(--text-light);
-        line-height: 1.8;
-      }
-      
-      .card li {
-        position: relative;
-        transition: transform 0.3s ease;
-        margin-bottom: 0.5rem;
-      }
-      
-      .card:hover li {
-        transform: translateX(5px);
-        transition-delay: calc(0.05s * var(--i));
-      }
-      
-      .card-badge {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: rgba(99,102,241,0.1);
-        color: var(--primary);
-        font-size: 0.75rem;
+        font-size: 1.15rem;
         font-weight: 600;
-        padding: 0.25rem 0.75rem;
-        border-radius: 20px;
-        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.55rem;
       }
-      
-      .card:hover .card-badge {
-        background: var(--primary);
-        color: white;
-      }
-
-      /* FEATURES GRID SPECIFIC */
-      .features-grid .card {
-        padding: 2.5rem 2rem;
-      }
-      
-      .features-grid .card p {
-        margin-top: 0.8rem;
+      .card ul {
+        margin-top: 0.4rem;
+        padding-left: 1.15rem;
+        font-size: 0.98rem;
         color: var(--text-light);
-        font-size: 1.05rem;
         line-height: 1.7;
       }
-      
-      .features-grid .card-icon {
-        width: 60px;
-        height: 60px;
-        border-radius: 15px;
+      /* FEATURES GRID */
+      .features-grid {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 1fr;
       }
-      
-      .features-grid .card-icon i {
-        font-size: 1.8rem;
+      @media (min-width: 700px) {
+        .features-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
       }
-      
-      .features-grid .card:hover .card-icon {
-        transform: scale(1.1) rotate(5deg);
+      .features-grid .card p {
+        margin-top: 0.5rem;
+        color: var(--text-light);
+        font-size: 1.05rem;
       }
 
-      /* TESTIMONIALS SPECIFIC */
+      /* TESTIMONIALS */
+      .testimonials-grid {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 700px) {
+        .testimonials-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
       .testimonials .card {
-        min-height: 200px;
+        min-height: 150px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
-        padding: 2.5rem 2rem;
       }
-      
       .testimonials .card p {
-        font-size: 1.1rem;
+        font-size: 1.04rem;
         font-style: italic;
         color: var(--text);
-        margin-bottom: 1.2rem;
-        position: relative;
-        line-height: 1.7;
+        margin-bottom: 0.6rem;
       }
-      
-      .testimonials .card p::before {
-        content: '"';
-        font-size: 4rem;
-        position: absolute;
-        top: -30px;
-        left: -15px;
-        opacity: 0.1;
-        color: var(--primary);
-        font-family: serif;
-        transition: all 0.3s ease;
-      }
-      
-      .testimonials .card:hover p::before {
-        opacity: 0.2;
-        transform: translateY(-5px);
-      }
-      
-      .testimonial-author {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-      
-      .author-avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: var(--plasma-gradient);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-weight: 600;
-        font-size: 1rem;
-      }
-      
-      .author-info strong {
-        display: block;
-        color: var(--text);
-        font-size: 1rem;
-        font-weight: 600;
-      }
-      
-      .author-info span {
-        font-size: 0.85rem;
-        color: var(--text-lighter);
-      }
-      
-      /* Floating elements */
-      .floating-element {
-        position: absolute;
-        border-radius: 50%;
-        background: var(--plasma-gradient);
-        filter: blur(40px);
-        opacity: 0.1;
-        z-index: -1;
-      }
-      
-      .float-1 {
-        width: 200px;
-        height: 200px;
-        top: 20%;
-        left: -100px;
-        animation: float 15s ease-in-out infinite alternate;
-      }
-      
-      .float-2 {
-        width: 150px;
-        height: 150px;
-        bottom: 10%;
-        right: -50px;
-        animation: float 12s ease-in-out infinite alternate-reverse;
-      }
-      
-      .float-3 {
-        width: 100px;
-        height: 100px;
-        top: 60%;
-        left: 10%;
-        animation: float 10s ease-in-out infinite alternate;
-      }
-      
-      @keyframes float {
-        0% { transform: translate(0, 0) rotate(0deg); }
-        50% { transform: translate(20px, -20px) rotate(180deg); }
-        100% { transform: translate(-20px, 20px) rotate(360deg); }
-      }
-      
-      /* Cursor trail effect */
-      .cursor-trail {
-        position: fixed;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: var(--primary);
-        pointer-events: none;
-        mix-blend-mode: screen;
-        z-index: 9999;
-        opacity: 0;
-        transition: opacity 0.2s ease;
-      }
-      
-      /* Glass card effect */
-      .glass-card {
-        background: var(--glass-bg);
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--glass-border);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
-      }
-      
-      /* Decorative elements */
-      .deco-line {
-        position: absolute;
-        height: 3px;
-        background: var(--plasma-gradient);
-        opacity: 0.3;
-        border-radius: 3px;
-      }
-      
-      .deco-dot {
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--primary);
-      }
-      
-      .deco-circle {
-        position: absolute;
-        border: 2px dashed var(--primary-lighter);
-        border-radius: 50%;
-        opacity: 0.2;
-      }
-      
-      /* CTA Section */
-      .cta-section {
-        margin: 8rem 0 4rem 0;
-        padding: 4rem 2rem;
-        border-radius: var(--radius-lg);
-        background: var(--plasma-gradient);
-        position: relative;
-        overflow: hidden;
-        text-align: center;
-      }
-      
-      .cta-content {
-        position: relative;
-        z-index: 2;
-        max-width: 700px;
-        margin: 0 auto;
-      }
-      
-      .cta-title {
-        color: white;
-        font-size: 2.5rem;
+      .testimonials .card strong {
+        color: var(--primary-dark);
+        font-size: 0.98rem;
         font-weight: 700;
-        margin-bottom: 1.5rem;
-        letter-spacing: -1px;
-      }
-      
-      .cta-text {
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 1.1rem;
-        margin-bottom: 2rem;
-      }
-      
-      .cta-btn {
-        background: white;
-        color: var(--primary);
-        padding: 1rem 2.5rem;
-        border-radius: var(--radius);
-        font-weight: 600;
-        font-size: 1.1rem;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-      }
-      
-      .cta-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-      }
-      
-      .cta-bg-circle {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.1);
-      }
-      
-      .cta-bg-circle-1 {
-        width: 300px;
-        height: 300px;
-        top: -150px;
-        right: -100px;
-      }
-      
-      .cta-bg-circle-2 {
-        width: 200px;
-        height: 200px;
-        bottom: -100px;
-        left: -50px;
-      }
-      
-      /* RESPONSIVE DESIGN */
-      @media (max-width: 1024px) {
-        .hero h1 {
-          font-size: 3rem;
-        }
-        .hero p {
-          font-size: 1.15rem;
-        }
-        .section-title {
-          font-size: 2.2rem;
-        }
-        .cta-title {
-          font-size: 2.2rem;
-        }
-        .card {
-          padding: 1.5rem;
-        }
-        .features-grid .card {
-          padding: 2rem 1.5rem;
-        }
-        .testimonials .card {
-          padding: 2rem 1.5rem;
-        }
-      }
-      
-      @media (max-width: 768px) {
-        .hero {
-          min-height: auto;
-          padding: 2rem 1rem 3rem 1rem;
-        }
-        .hero-bg {
-          width: 350px;
-          height: 250px;
-          filter: blur(60px) brightness(1.1) opacity(0.5);
-        }
-        .hero-imgui {
-          width: 90vw;
-          max-width: 350px;
-        }
-        .hero h1 {
-          font-size: 2.5rem;
-        }
-        .hero p {
-          font-size: 1.1rem;
-          max-width: 90%;
-        }
-        .hero-btns {
-          gap: 0.8rem;
-        }
-        .btn {
-          padding: 0.8rem 1.5rem;
-          font-size: 1rem;
-        }
-        .section-header {
-          margin: 4rem 0 2rem 0;
-        }
-        .section-title {
-          font-size: 2rem;
-        }
-        .section-description {
-          font-size: 1rem;
-          margin: 1.5rem auto 2rem auto;
-        }
-        .products-grid, .features-grid, .testimonials-grid {
-          grid-template-columns: 1fr;
-          gap: 1.5rem;
-        }
-        .card {
-          min-height: auto;
-        }
-        .cta-section {
-          margin: 6rem 0 3rem 0;
-          padding: 3rem 1.5rem;
-        }
-        .cta-title {
-          font-size: 2rem;
-        }
-        .cta-text {
-          font-size: 1rem;
-        }
-        .cta-btn {
-          padding: 0.9rem 2rem;
-          font-size: 1rem;
-        }
-        /* Simplify animations on mobile */
-        .card:hover {
-          transform: translateY(-3px);
-        }
-        .card:hover li {
-          transform: translateX(3px);
-        }
-        .features-grid .card:hover .card-icon {
-          transform: scale(1.05) rotate(3deg);
-        }
-        .hero-imgui:hover {
-          transform: translateY(-5px) scale(1.02) rotate(-3deg) !important;
-        }
-        .cursor-trail {
-          display: none; /* Hide cursor trail on touch devices */
-        }
-      }
-      
-      @media (max-width: 480px) {
-        .hero h1 {
-          font-size: 2rem;
-        }
-        .hero p {
-          font-size: 1rem;
-        }
-        .hero-btns {
-          flex-direction: column;
-          align-items: center;
-        }
-        .section-title {
-          font-size: 1.8rem;
-        }
-        .section-description {
-          font-size: 0.95rem;
-        }
-        .card h3 {
-          font-size: 1.2rem;
-        }
-        .card ul {
-          font-size: 0.95rem;
-        }
-        .cta-title {
-          font-size: 1.8rem;
-        }
-        .cta-text {
-          font-size: 0.95rem;
-        }
-        .cta-btn {
-          padding: 0.8rem 1.8rem;
-          font-size: 0.95rem;
-        }
-        .floating-element, .deco-line, .deco-dot, .deco-circle {
-          display: none; /* Hide decorative elements on small screens */
-        }
-      }
-      
-      /* Reduced motion preferences */
-      @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-          scroll-behavior: auto !important;
-        }
-        .hero-imgui {
-          animation: none;
-        }
-        .hero-bg, .hero-bg::after {
-          animation: none;
-        }
-        .hero-accent {
-          animation: none;
-        }
-        .floating-element {
-          animation: none;
-        }
-        .cursor-trail {
-          display: none;
-        }
-        /* Keep entrance animations minimal */
-        .hero h1, .hero p, .hero-btns, .section-subtitle, .section-title, .section-description, .card {
-          opacity: 1;
-          transform: translateY(0);
-        }
       }
     </style>
   </head>
   <body>
     <Header />
-    <div class="particles-container" id="particles"></div>
-    <div class="noise-overlay"></div>
     <main>
-      <!-- Floating background elements -->
-      <div class="floating-element float-1"></div>
-      <div class="floating-element float-2"></div>
-      <div class="floating-element float-3"></div>
-      
-      <!-- Decorative elements -->
-      <div class="deco-line" style="width: 80px; top: 15%; left: 5%;"></div>
-      <div class="deco-line" style="width: 120px; bottom: 25%; right: 10%;"></div>
-      <div class="deco-dot" style="top: 20%; right: 15%;"></div>
-      <div class="deco-dot" style="bottom: 30%; left: 20%;"></div>
-      <div class="deco-circle" style="width: 100px; height: 100px; top: 10%; right: 5%;"></div>
-      <div class="deco-circle" style="width: 150px; height: 150px; bottom: 15%; left: 8%;"></div>
-      
       <!-- HERO SECTION -->
-      <section class="hero">
+      <section class="hero animate-on-scroll">
         <div class="hero-bg"></div>
-        <div class="hero-accent hero-accent-1"></div>
-        <div class="hero-accent hero-accent-2"></div>
-        
-        <div class="hero-imgui-container">
-          <div class="hero-imgui-glow"></div>
-          <img
-            src="https://files.catbox.moe/nw8y4u.png"
-            alt="ImGui Menu Showcase"
-            class="hero-imgui"
-            id="imguiMenu"
-            loading="eager"
-            draggable="false"
-          />
-        </div>
-        
-        <h1 id="heroTitle">Next-Level Game Enhancements</h1>
-        <p id="heroText">
+        <img
+          src="https://files.catbox.moe/nw8y4u.png"
+          alt="ImGui Menu Showcase"
+          class="hero-imgui"
+          id="imguiMenu"
+          loading="eager"
+          draggable="false"
+        />
+        <h1>Next-Level Game Enhancements</h1>
+        <p>
           Discover cutting-edge tools engineered for elite gamers who demand stealth, precision, and top-tier performance.
         </p>
-        <div class="hero-btns" id="heroBtns">
-          <a href="#products" class="btn btn-primary">Explore Products <i class="fas fa-arrow-right"></i></a>
+        <div class="hero-btns">
+          <a href="#products" class="btn btn-primary">Explore Products</a>
           <a href="#features" class="btn" style="border: 1.5px solid var(--primary); background: rgba(99,102,241,0.03);">How It Works</a>
         </div>
       </section>
 
       <!-- PRODUCTS SECTION -->
-      <section id="products">
-        <div class="section-header">
-          <div class="section-subtitle" id="productsSubtitle">Our Solutions</div>
-          <h2 class="section-title">Premium Products</h2>
-          <p class="section-description" id="productsDescription">
-            Cutting-edge gaming enhancements designed for competitive players who demand the absolute best performance and features.
-          </p>
-        </div>
-        
+      <section id="products" class="animate-on-scroll">
+        <h2 class="section-title">Premium Products</h2>
         <div class="products-grid">
           <div class="card">
-            <div class="card-badge">Popular</div>
-            <div class="card-icon">
-              <i class="fas fa-crosshairs"></i>
-            </div>
             <h3>BO6 / Warzone External</h3>
             <ul>
-              <li style="--i:1">Aimbot with smoothing</li>
-              <li style="--i:2">ESP (Players, Loot, Vehicles)</li>
-              <li style="--i:3">Config support</li>
-              <li style="--i:4">Stream-proof</li>
+              <li>Aimbot with smoothing</li>
+              <li>ESP (Players, Loot, Vehicles)</li>
+              <li>Config support</li>
+              <li>Stream-proof</li>
             </ul>
           </div>
           <div class="card">
-            <div class="card-icon">
-              <i class="fas fa-microchip"></i>
-            </div>
             <h3>Permanent HWID Spoofer</h3>
             <ul>
-              <li style="--i:1">UEFI kernel-based</li>
-              <li style="--i:2">Spoofs serials & SMBIOS</li>
-              <li style="--i:3">Stealth boot cleanup</li>
-              <li style="--i:4">Persistent across reboots</li>
+              <li>UEFI kernel-based</li>
+              <li>Spoofs serials & SMBIOS</li>
+              <li>Stealth boot cleanup</li>
+              <li>Persistent across reboots</li>
             </ul>
           </div>
           <div class="card">
-            <div class="card-icon">
-              <i class="fas fa-shield-alt"></i>
-            </div>
             <h3>Temporary HWID Spoofer</h3>
             <ul>
-              <li style="--i:1">Instant spoof on launch</li>
-              <li style="--i:2">Resets on reboot</li>
-              <li style="--i:3">Compatible with most AC</li>
+              <li>Instant spoof on launch</li>
+              <li>Resets on reboot</li>
+              <li>Compatible with most AC</li>
             </ul>
           </div>
         </div>
       </section>
 
       <!-- FEATURES SECTION -->
-      <section id="features">
-        <div class="section-header">
-          <div class="section-subtitle" id="featuresSubtitle">Benefits</div>
-          <h2 class="section-title">Why Choose Us?</h2>
-          <p class="section-description" id="featuresDescription">
-            Our solutions stand out with industry-leading technology, exceptional performance, and continuous updates.
-          </p>
-        </div>
-        
+      <section id="features" class="animate-on-scroll">
+        <h2 class="section-title">Why Choose Us?</h2>
         <div class="features-grid">
           <div class="card">
-            <div class="card-icon">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-            <h3>Undetected!</h3>
+            <h3><i class="fas fa-shield-alt"></i> Undetected!</h3>
             <p>Our software has its own stealthy methods and receives consistent backend updates to avoid detection by modern anti-cheat systems.</p>
           </div>
           <div class="card">
-            <div class="card-icon">
-              <i class="fas fa-bolt"></i>
-            </div>
-            <h3>Good Performance</h3>
+            <h3><i class="fas fa-bolt"></i> Good Performance</h3>
             <p>Built for speed and stability, our solutions are lightweight and optimized to maintain flawless performance without game interruptions.</p>
           </div>
           <div class="card">
-            <div class="card-icon">
-              <i class="fas fa-sync-alt"></i>
-            </div>
-            <h3>Always Updated</h3>
+            <h3><i class="fas fa-sync-alt"></i> Always Updated</h3>
             <p>Stay ahead with tools that are updated daily, ensuring compatibility with every patch, update, and meta change in your favorite games.</p>
           </div>
         </div>
       </section>
 
       <!-- TESTIMONIALS SECTION -->
-      <section class="testimonials">
-        <div class="section-header">
-          <div class="section-subtitle" id="testimonialsSubtitle">Testimonials</div>
-          <h2 class="section-title">User Feedback</h2>
-          <p class="section-description" id="testimonialsDescription">
-            Don't just take our word for it - hear what our satisfied users have to say about their experience.
-          </p>
-        </div>
-        
+      <section class="testimonials animate-on-scroll">
+        <h2 class="section-title">User Feedback</h2>
         <div class="testimonials-grid">
-          <div class="card glass-card">
+          <div class="card">
             <p>"I've been using the Fortnite Suite across multiple seasons—still undetected, insanely responsive, and always ahead of the curve."</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">P</div>
-              <div class="author-info">
-                <strong>ProPlayer123</strong>
-                <span>Verified User</span>
-              </div>
-            </div>
+            <strong>- ProPlayer123</strong>
           </div>
-          <div class="card glass-card">
+          <div class="card">
             <p>"Went from Diamond to Immortal in just two weeks thanks to the seamless aim assist and smart radar features. Unreal advantage!"</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">C</div>
-              <div class="author-info">
-                <strong>CompetitiveGamer</strong>
-                <span>Premium Member</span>
-              </div>
-            </div>
+            <strong>- CompetitiveGamer</strong>
           </div>
-          <div class="card glass-card">
+          <div class="card">
             <p>"Support was lightning-fast and extremely helpful. Setup was smooth and I felt confident within minutes of installing."</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">S</div>
-              <div class="author-info">
-                <strong>StreamerXYZ</strong>
-                <span>New User</span>
-              </div>
-            </div>
+            <strong>- StreamerXYZ</strong>
           </div>
-        </div>
-      </section>
-      
-      <!-- CTA SECTION -->
-      <section class="cta-section">
-        <div class="cta-bg-circle cta-bg-circle-1"></div>
-        <div class="cta-bg-circle cta-bg-circle-2"></div>
-        <div class="cta-content">
-          <h2 class="cta-title">Ready to Elevate Your Game?</h2>
-          <p class="cta-text">Join thousands of satisfied players who have transformed their gaming experience with our premium solutions.</p>
-          <a href="#products" class="cta-btn">Get Started Now <i class="fas fa-arrow-right"></i></a>
         </div>
       </section>
     </main>
     <Footer />
-    
     <script>
+      // Animate on scroll for cards/sections
       document.addEventListener('DOMContentLoaded', () => {
-        // Initialize GSAP
-        gsap.registerPlugin(ScrollTrigger);
-        
-        // Hero animations
-        const heroTl = gsap.timeline();
-        heroTl.to("#heroTitle", {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out"
-        })
-        .to("#heroText", {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out"
-        }, "-=0.6")
-        .to("#heroBtns", {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out"
-        }, "-=0.6");
-        
-        // Section animations
-        const sectionElements = [
-          { subtitle: "#productsSubtitle", title: "#products .section-title", description: "#productsDescription" },
-          { subtitle: "#featuresSubtitle", title: "#features .section-title", description: "#featuresDescription" },
-          { subtitle: "#testimonialsSubtitle", title: "#testimonials .section-title", description: "#testimonialsDescription" }
-        ];
-        
-        sectionElements.forEach((section, index) => {
-          const sectionTl = gsap.timeline({
-            scrollTrigger: {
-              trigger: section.subtitle,
-              start: "top 80%",
-              toggleActions: "play none none none"
+        const animatedEls = document.querySelectorAll('.animate-on-scroll, .card');
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            } else {
+              entry.target.classList.remove('visible');
             }
           });
-          
-          sectionTl.to(section.subtitle, {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power3.out"
-          })
-          .to(section.title, {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power3.out",
-            onComplete: () => {
-              document.querySelectorAll('.section-title')[index].classList.add('visible');
-            }
-          }, "-=0.4")
-          .to(section.description, {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power3.out"
-          }, "-=0.6");
-        });
-        
-        // Card animations with stagger
-        const sections = gsap.utils.toArray('section');
-        sections.forEach(section => {
-          const cards = section.querySelectorAll('.card');
-          gsap.to(cards, {
-            scrollTrigger: {
-              trigger: section,
-              start: "top 70%",
-              toggleActions: "play none none none"
-            },
-            opacity: 1,
-            y: 0,
-            stagger: 0.15,
-            duration: 0.8,
-            ease: "power3.out",
-            onComplete: () => {
-              cards.forEach(card => card.classList.add('visible'));
-            }
-          });
-        });
-        
-        // Parallax for ImGui menu image in hero
+        }, { threshold: 0.1 });
+        animatedEls.forEach(el => observer.observe(el));
+
+        // Parallax for ImGui menu image in hero (bonus: slight tilt with scroll)
         const imguiMenu = document.getElementById('imguiMenu');
         if (imguiMenu) {
-          // Disable 3D tilt on touch devices
-          const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-          
           window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
             imguiMenu.style.transform =
-              `translateY(${-scrolled/14}px) scale(${1.06 - scrolled/2000}) rotate(${-3.5-scrolled/170}deg)`;
-          });
-          
-          if (!isTouchDevice) {
-            // Add 3D tilt effect on mouse move for non-touch devices
-            const hero = document.querySelector('.hero');
-            hero.addEventListener('mousemove', (e) => {
-              const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-              const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-              imguiMenu.style.transform = `translateY(${-window.scrollY/14}px) rotateY(${xAxis}deg) rotateX(${yAxis}deg) rotate(${-3.5-window.scrollY/170}deg)`;
-            });
-            
-            hero.addEventListener('mouseleave', () => {
-              imguiMenu.style.transform = `translateY(${-window.scrollY/14}px) rotateY(0deg) rotateX(0deg) rotate(${-3.5-window.scrollY/170}deg)`;
-            });
-          }
-        }
-        
-        // Create background particles
-        const particlesContainer = document.getElementById('particles');
-        const particleCount = window.innerWidth > 768 ? 20 : 10; // Fewer particles on mobile
-        
-        for (let i = 0; i < particleCount; i++) {
-          createParticle();
-        }
-        
-        function createParticle() {
-          const particle = document.createElement('div');
-          particle.classList.add('particle');
-          
-          // Random size between 5 and 15px
-          const size = Math.random() * 10 + 5;
-          particle.style.width = `${size}px`;
-          particle.style.height = `${size}px`;
-          
-          // Random position
-          const posX = Math.random() * window.innerWidth;
-          const posY = Math.random() * window.innerHeight;
-          particle.style.left = `${posX}px`;
-          particle.style.top = `${posY}px`;
-          
-          // Random opacity
-          particle.style.opacity = Math.random() * 0.3;
-          
-          // Random color from gradient
-          const colors = ['rgba(99,102,241,0.5)', 'rgba(244,114,182,0.5)', 'rgba(79,70,229,0.5)'];
-          particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-          
-          // Animation
-          const duration = Math.random() * 20 + 10;
-          particle.style.animation = `float ${duration}s ease-in-out infinite alternate`;
-          particle.style.animationDelay = `${Math.random() * 5}s`;
-          
-          particlesContainer.appendChild(particle);
-        }
-        
-        // Cursor trail effect (disable on touch)
-        if (!('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
-          const trailCount = 20;
-          const trails = [];
-          
-          for (let i = 0; i < trailCount; i++) {
-            const trail = document.createElement('div');
-            trail.classList.add('cursor-trail');
-            document.body.appendChild(trail);
-            trails.push({
-              element: trail,
-              x: 0,
-              y: 0,
-              size: Math.max(5, 15 - i * 0.5),
-              speed: 0.2 - i * 0.01
-            });
-          }
-          
-          window.addEventListener('mousemove', (e) => {
-            trails.forEach((trail, index) => {
-              setTimeout(() => {
-                trail.x = e.clientX;
-                trail.y = e.clientY;
-                trail.element.style.opacity = 0.5 - (index * 0.02);
-                trail.element.style.width = `${trail.size}px`;
-                trail.element.style.height = `${trail.size}px`;
-                trail.element.style.left = `${trail.x}px`;
-                trail.element.style.top = `${trail.y}px`;
-              }, index * 40);
-            });
+              `translateY(${-scrolled/14}px) scale(1.06) rotate(${-3.5-scrolled/170}deg)`;
           });
         }
       });
     </script>
   </body>
 </html>
-
