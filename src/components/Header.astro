@@ -3,7 +3,7 @@ import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
 ---
 
-<header>
+<header class="animate__animated animate__fadeInDown">
 	<nav>
 		<h2><a href="/">{SITE_TITLE}</a></h2>
 		<div class="internal-links">
@@ -23,12 +23,12 @@ import { SITE_TITLE } from '../consts';
 	</nav>
 </header>
 <style>
-	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
+        header {
+                margin: 0;
+                padding: 0 1em;
+                background: var(--header-bg, white);
+                box-shadow: 0 2px 8px rgba(var(--black), 5%);
+        }
 	h2 {
 		margin: 0;
 		font-size: 1em;
@@ -43,12 +43,12 @@ import { SITE_TITLE } from '../consts';
 		align-items: center;
 		justify-content: space-between;
 	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
+        nav a {
+                padding: 1em 0.5em;
+                color: var(--header-link-color, var(--black));
+                border-bottom: 4px solid transparent;
+                text-decoration: none;
+        }
 	nav a.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
@@ -64,11 +64,16 @@ import { SITE_TITLE } from '../consts';
 	.social-links a:last-child {
 		margin-right: 0;
 	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
-	}
+        @media (max-width: 720px) {
+                .social-links {
+                        display: none;
+                }
+        }
+
+        html[data-theme='dark'] header {
+                --header-bg: #1f2937;
+                --header-link-color: #f9fafb;
+        }
 </style>
 <!-- Add Font Awesome if not already loaded globally -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
