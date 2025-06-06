@@ -31,7 +31,8 @@
     "check": "astro build && tsc && wrangler deploy --dry-run",
     "deploy": "astro build && wrangler deploy",
     "dev": "astro dev",
-    "preview": "astro build && wrangler dev"
+    "preview": "astro build && wrangler dev",
+    "test": "node tests/shopCollection.test.js"
   },
   "type": "module"
 }

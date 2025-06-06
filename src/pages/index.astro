@@ -384,10 +384,19 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         // Parallax for ImGui menu image in hero (bonus: slight tilt with scroll)
         const imguiMenu = document.getElementById('imguiMenu');
         if (imguiMenu) {
-          window.addEventListener('scroll', () => {
-            const scrolled = window.scrollY;
+          let latest = 0;
+          let ticking = false;
+          const update = () => {
             imguiMenu.style.transform =
-              `translateY(${-scrolled/14}px) scale(1.06) rotate(${-3.5-scrolled/170}deg)`;
+              `translateY(${-latest/14}px) scale(1.06) rotate(${-3.5-latest/170}deg)`;
+            ticking = false;
+          };
+          window.addEventListener('scroll', () => {
+            latest = window.scrollY;
+            if (!ticking) {
+              requestAnimationFrame(update);
+              ticking = true;
+            }
           });
         }
       });
