@@ -384,7 +384,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
               entry.target.classList.remove('visible');
             }
           });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.2 });
         animatedEls.forEach(el => observer.observe(el));
 
         // Parallax for ImGui menu image in hero (bonus: slight tilt with scroll)

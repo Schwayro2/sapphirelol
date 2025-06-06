@@ -116,17 +116,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         margin-bottom: 0.2rem;
       }
 
-      /* Fade-in Animation */
-      .fade-in-section {
-        opacity: 0;
-        transform: translateY(32px);
-        transition: opacity 0.75s cubic-bezier(.4,0,.2,1), transform 0.75s cubic-bezier(.4,0,.2,1);
-        will-change: opacity, transform;
-      }
-      .fade-in-section.visible {
-        opacity: 1;
-        transform: none;
-      }
     </style>
   </head>
   <body>
@@ -172,7 +161,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
               obs.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.18 });
+        }, { threshold: 0.2 });
         fadeEls.forEach(el => observer.observe(el));
       });
     </script>

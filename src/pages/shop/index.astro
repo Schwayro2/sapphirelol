@@ -349,7 +349,7 @@ try {
           entries.forEach(entry => {
             if (entry.isIntersecting) entry.target.classList.add('visible');
           });
-        }, { threshold: 0.07 });
+        }, { threshold: 0.2 });
         document.querySelectorAll('.product-card').forEach(el => observer.observe(el));
       });
     </script>
