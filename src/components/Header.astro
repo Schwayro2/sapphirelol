@@ -12,10 +12,13 @@ import { SITE_TITLE } from '../consts';
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
 		<div class="social-links">
-			<a href="https://discord.gg/AAzErV3Rpt" target="_blank" rel="noopener">
-				<span class="sr-only">Join our Discord</span>
-				<i class="fab fa-discord" style="font-size: 32px; color: #5865F2;"></i>
-			</a>
+                        <a href="https://discord.gg/AAzErV3Rpt" target="_blank" rel="noopener">
+                                <span class="sr-only">Join our Discord</span>
+                                <i class="fab fa-discord" style="font-size: 32px; color: #5865F2;"></i>
+                        </a>
+                        <button id="themeToggle" aria-label="Toggle dark mode">
+                                <i class="fa-solid fa-moon"></i>
+                        </button>
 		</div>
 	</nav>
 </header>
@@ -55,17 +58,47 @@ import { SITE_TITLE } from '../consts';
 		display: flex;
 		align-items: center;
 	}
-	.social-links a {
-		margin-right: 0.5em;
-	}
-	.social-links a:last-child {
-		margin-right: 0;
-	}
+        .social-links a {
+                margin-right: 0.5em;
+        }
+        .social-links a:last-child {
+                margin-right: 0;
+        }
+        #themeToggle {
+                background: none;
+                border: none;
+                cursor: pointer;
+                font-size: 1.25rem;
+                color: var(--black);
+                margin-left: 0.5em;
+        }
+        [data-theme="dark"] header {
+                background: #1f2937;
+        }
+        [data-theme="dark"] nav a {
+                color: #e5e7eb;
+        }
 	@media (max-width: 720px) {
 		.social-links {
 			display: none;
 		}
 	}
 </style>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+                const toggle = document.getElementById('themeToggle');
+                const stored = localStorage.getItem('theme');
+                if (stored) {
+                        document.documentElement.dataset.theme = stored;
+                } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                        document.documentElement.dataset.theme = 'dark';
+                }
+                toggle.addEventListener('click', () => {
+                        const newTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+                        document.documentElement.dataset.theme = newTheme;
+                        localStorage.setItem('theme', newTheme);
+                });
+        });
+</script>
 <!-- Add Font Awesome if not already loaded globally -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />

@@ -4,6 +4,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import BackToTop from '../components/BackToTop.astro';
 
 // All props (optional, safe defaults)
 const {
@@ -74,6 +75,16 @@ const {
         cursor: pointer;
         text-decoration: none;
       }
+      [data-theme='dark'] body {
+        background: #111827;
+        color: #e5e7eb;
+      }
+      [data-theme='dark'] .prose {
+        color: #e5e7eb;
+      }
+      [data-theme='dark'] .buy-btn {
+        background: linear-gradient(90deg, #0ea5e9, #6366f1 85%);
+      }
       .buy-btn:hover, .buy-btn:focus {
         background: linear-gradient(95deg, #6366f1, #06b6d4 85%);
         color: #fff;
@@ -143,5 +154,7 @@ const {
       </article>
     </main>
     <Footer />
+    <BackToTop />
+    <script type="module" src="/scripts/scroll.js"></script>
   </body>
 </html>
