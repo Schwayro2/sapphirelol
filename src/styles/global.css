@@ -15,33 +15,37 @@
   --box-shadow:
     0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
     0 16px 32px rgba(var(--gray), 33%);
+
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --text: #1f2937;
+  --text-light: #6b7280;
+  --bg: #ffffff;
+  --card: #f9fafb;
+  --border: #e5e7eb;
+  --radius: 18px;
+  --shadow: 0 4px 24px rgba(99, 102, 241, 0.13);
+  --plasma-gradient: linear-gradient(90deg, #ff41ca, #5f007f, #2335be, #c321a5, #2af5ff);
+  --pink: #f472b6;
+  --cyan: #06b6d4;
+  --muted: #757780;
+  --glass: rgba(255, 255, 255, 0.8);
+  --card-blur: blur(18px);
+  --transition: all 0.36s cubic-bezier(.47, 1.64, .41, .8);
 }
-@font-face {
-  font-family: "Atkinson";
-  src: url("/fonts/atkinson-regular.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Atkinson";
-  src: url("/fonts/atkinson-bold.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+
 body {
-  font-family: "Atkinson", sans-serif;
+  font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
   text-align: left;
-  background: linear-gradient(var(--gray-gradient)) no-repeat;
-  background-size: 100% 600px;
+  background: var(--bg);
   word-wrap: break-word;
   overflow-wrap: break-word;
-  color: rgb(var(--gray-dark));
+  color: var(--text);
   font-size: 20px;
-  line-height: 1.7;
+  line-height: 1.5;
+  scroll-behavior: smooth;
 }
 main {
   width: 720px;
