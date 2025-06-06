@@ -9,7 +9,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -25,6 +24,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         --radius: 10px;
         --shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
         --plasma-gradient: linear-gradient(90deg, #ff41ca, #5f007f, #2335be, #c321a5, #2af5ff);
+      }
+      html[data-theme='dark'] {
+        --text: #e5e7eb;
+        --text-light: #9ca3af;
+        --bg: #1f2937;
+        --card: #111827;
+        --border: #374151;
       }
 
       body {

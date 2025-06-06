@@ -1,5 +1,3 @@
-fix this
-
 ---
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
@@ -21,7 +19,6 @@ try {
 <html lang="en">
   <head>
     <BaseHead title={`${SITE_TITLE} Shop`} description="Premium gaming enhancements and tools" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style is:global>
       :root {
@@ -38,6 +35,13 @@ try {
         --shadow: 0 8px 40px 0 rgba(99, 102, 241, 0.13), 0 2px 8px rgba(70,80,180,0.06);
         --card-blur: blur(18px);
         --transition: all 0.36s cubic-bezier(.47,1.64,.41,.8);
+      }
+      html[data-theme='dark'] {
+        --bg: #1f2937;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --glass: rgba(17,24,39,0.8);
+        --border: #374151;
       }
 
       html, body {
