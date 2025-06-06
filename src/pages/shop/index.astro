@@ -1,5 +1,3 @@
-fix this
-
 ---
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
@@ -25,15 +23,12 @@ try {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style is:global>
       :root {
-        --primary: #6366f1;
-        --accent: #818cf8;
-        --pink: #f472b6;
-        --cyan: #06b6d4;
-        --bg: #f7faff;
-        --text: #232946;
-        --muted: #757780;
+        --primary: var(--accent);
+        --bg: rgb(var(--gray-light));
+        --text: rgb(var(--gray-dark));
+        --muted: rgb(var(--gray));
         --glass: rgba(255,255,255,0.80);
-        --border: #ececf6;
+        --border: rgb(var(--gray-light));
         --radius: 18px;
         --shadow: 0 8px 40px 0 rgba(99, 102, 241, 0.13), 0 2px 8px rgba(70,80,180,0.06);
         --card-blur: blur(18px);
@@ -94,7 +89,7 @@ try {
         font-weight: 800;
         margin-bottom: 1.1rem;
         letter-spacing: -2px;
-        background: linear-gradient(90deg, var(--primary), var(--pink), var(--cyan));
+        background: linear-gradient(90deg, var(--primary), var(--accent));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -129,7 +124,7 @@ try {
         left: -30%;
         width: 160%;
         height: 220%;
-        background: linear-gradient(115deg, var(--cyan), transparent 60%);
+        background: linear-gradient(115deg, var(--accent), transparent 60%);
         opacity: 0.12;
         filter: blur(24px);
         z-index: 0;
@@ -137,7 +132,7 @@ try {
         transition: opacity 0.24s cubic-bezier(.47,1.64,.41,.8);
       }
       .btn:hover, .btn:focus {
-        background: linear-gradient(95deg, var(--cyan), var(--primary));
+        background: linear-gradient(95deg, var(--accent), var(--primary));
         transform: scale(1.04) translateY(-3px);
         box-shadow: 0 8px 28px 0 rgba(99,102,241,0.18);
       }
@@ -244,7 +239,7 @@ try {
         box-shadow: 0 1.5px 8px 0 rgba(99,102,241,0.12);
       }
       .product-actions .btn:hover, .product-actions .btn:focus {
-        background: linear-gradient(95deg, var(--cyan), var(--primary));
+        background: linear-gradient(95deg, var(--accent), var(--primary));
         box-shadow: 0 8px 20px 0 rgba(99,102,241,0.17);
       }
       .empty-state {
@@ -299,7 +294,7 @@ try {
         <div class="hero-content">
           <h1>Unleash Your Gaming Potential</h1>
           <p>
-            <span style="background: linear-gradient(90deg, #818cf8 40%, #06b6d4 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight:700;">
+            <span style="background: linear-gradient(90deg, var(--primary) 40%, var(--accent) 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight:700;">
               Premium tools and enhancements.
             </span>
             <br>
