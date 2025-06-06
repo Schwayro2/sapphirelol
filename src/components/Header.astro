@@ -13,7 +13,7 @@ import { SITE_TITLE } from '../consts';
 		</div>
                 <div class="social-links">
                         <button class="theme-toggle" onclick="window.toggleTheme()" aria-label="Toggle dark mode">
-                                <i class="fas fa-moon"></i>
+                                <i id="theme-icon" class="fas"></i>
                         </button>
                         <a href="https://discord.gg/AAzErV3Rpt" target="_blank" rel="noopener">
                                 <span class="sr-only">Join our Discord</span>
@@ -80,7 +80,19 @@ import { SITE_TITLE } from '../consts';
 	}
 </style>
 <script>
-  window.toggleTheme = function() {
+  const icon = document.getElementById('theme-icon');
+
+  function updateIcon(isDark) {
+    if (isDark) {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    } else {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+  }
+
+  window.toggleTheme = function () {
     const root = document.documentElement;
     const isDark = root.getAttribute('data-theme') === 'dark';
     if (isDark) {
@@ -90,7 +102,13 @@ import { SITE_TITLE } from '../consts';
       root.setAttribute('data-theme', 'dark');
       localStorage.setItem('theme', 'dark');
     }
-  }
+    updateIcon(!isDark);
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const root = document.documentElement;
+    updateIcon(root.getAttribute('data-theme') === 'dark');
+  });
 </script>
 <!-- Add Font Awesome if not already loaded globally -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
