@@ -5,8 +5,8 @@
  */
 
 :root {
-  --accent: #7F00FF;
-  --accent-dark: #000d8a;
+  --accent: #6366f1;
+  --accent-dark: #4f46e5;
   --black: 15, 18, 25;
   --gray: 96, 115, 159;
   --gray-light: 229, 233, 240;
@@ -15,6 +15,25 @@
   --box-shadow:
     0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
     0 16px 32px rgba(var(--gray), 33%);
+
+  /* site-wide color palette */
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --text: #1f2937;
+  --text-light: #6b7280;
+  --bg: #ffffff;
+  --card: #f9fafb;
+  --border: #e5e7eb;
+  --radius: 18px;
+  --shadow: 0 4px 24px rgba(99, 102, 241, 0.13);
+  --plasma-gradient: linear-gradient(90deg, #ff41ca, #5f007f, #2335be, #c321a5, #2af5ff);
+  --accent-light: #818cf8;
+  --pink: #f472b6;
+  --cyan: #06b6d4;
+  --muted: #757780;
+  --glass: rgba(255, 255, 255, 0.8);
+  --card-blur: blur(18px);
+  --transition: all 0.36s cubic-bezier(.47, 1.64, .41, .8);
 }
 @font-face {
   font-family: "Atkinson";
