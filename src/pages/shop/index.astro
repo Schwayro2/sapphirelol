@@ -4,6 +4,7 @@ fix this
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import BackToTop from '../../components/BackToTop.astro';
 import { SITE_TITLE } from '../../consts';
 import { getCollection } from 'astro:content';
 
@@ -38,6 +39,16 @@ try {
         --shadow: 0 8px 40px 0 rgba(99, 102, 241, 0.13), 0 2px 8px rgba(70,80,180,0.06);
         --card-blur: blur(18px);
         --transition: all 0.36s cubic-bezier(.47,1.64,.41,.8);
+      }
+      [data-theme='dark'] {
+        --primary: #818cf8;
+        --accent: #6366f1;
+        --bg: #111827;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --glass: rgba(31,41,55,0.85);
+        --border: #374151;
+        --shadow: 0 8px 40px 0 rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3);
       }
 
       html, body {
@@ -149,6 +160,17 @@ try {
         font-weight: 800;
         color: var(--primary);
         letter-spacing: -1px;
+      }
+      .search-input {
+        width: 100%;
+        max-width: 420px;
+        margin: 0 auto 1.8rem auto;
+        padding: 0.6rem 0.9rem;
+        font-size: 1rem;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--glass);
+        display: block;
       }
 
       /* PRODUCTS GRID */
@@ -310,6 +332,7 @@ try {
       </section>
       <section id="products">
         <h2 class="section-title">Available Products</h2>
+        <input id="searchInput" class="search-input" type="search" placeholder="Search products..." />
         {products.length > 0 ? (
           <ul class="products-grid">
             {products.map((product, index) => (
@@ -339,14 +362,18 @@ try {
       </section>
     </main>
     <Footer />
+    <BackToTop />
+    <script type="module" src="/scripts/scroll.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const observer = new window.IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('visible');
+        const searchInput = document.getElementById('searchInput');
+        searchInput?.addEventListener('input', () => {
+          const term = searchInput.value.toLowerCase();
+          document.querySelectorAll('.product-card').forEach(card => {
+            const title = card.querySelector('.product-title')?.textContent.toLowerCase() || '';
+            card.style.display = title.includes(term) ? '' : 'none';
           });
-        }, { threshold: 0.07 });
-        document.querySelectorAll('.product-card').forEach(el => observer.observe(el));
+        });
       });
     </script>
   </body>

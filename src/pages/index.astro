@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import BackToTop from '../components/BackToTop.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 <!doctype html>
@@ -25,6 +26,16 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         --radius: 18px;
         --shadow: 0 4px 24px rgba(99,102,241,0.13);
         --plasma-gradient: linear-gradient(90deg, #ff41ca, #5f007f, #2335be, #c321a5, #2af5ff);
+      }
+      [data-theme='dark'] {
+        --primary: #818cf8;
+        --primary-dark: #6366f1;
+        --text: #f3f4f6;
+        --text-light: #9ca3af;
+        --bg: #111827;
+        --card: #1f2937;
+        --border: #374151;
+        --shadow: 0 4px 24px rgba(0,0,0,0.35);
       }
       body {
         font-family: 'Inter', sans-serif;
@@ -366,22 +377,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       </section>
     </main>
     <Footer />
+    <BackToTop />
+    <script type="module" src="/scripts/scroll.js"></script>
     <script>
-      // Animate on scroll for cards/sections
       document.addEventListener('DOMContentLoaded', () => {
-        const animatedEls = document.querySelectorAll('.animate-on-scroll, .card');
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-            } else {
-              entry.target.classList.remove('visible');
-            }
-          });
-        }, { threshold: 0.1 });
-        animatedEls.forEach(el => observer.observe(el));
-
-        // Parallax for ImGui menu image in hero (bonus: slight tilt with scroll)
         const imguiMenu = document.getElementById('imguiMenu');
         if (imguiMenu) {
           window.addEventListener('scroll', () => {
