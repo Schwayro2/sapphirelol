@@ -38,9 +38,14 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         background: var(--bg);
       }
       main {
+        width: 100%;
         max-width: 1000px;
         margin: auto;
         padding: 1.5rem;
+      }
+
+      @media (max-width: 480px) {
+        main { padding: 1rem; }
       }
 
       .hero {
@@ -110,6 +115,12 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
           width: 320px;
           height: 140px;
         }
+      }
+
+      @media (max-width: 480px) {
+        .hero h1 { font-size: 2rem; }
+        .hero p { font-size: 1rem; }
+        .section-title { font-size: 1.4rem; }
       }
 
       .hero h1 {
@@ -384,7 +395,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
               entry.target.classList.remove('visible');
             }
           });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.2 });
         animatedEls.forEach(el => observer.observe(el));
 
         // Parallax for ImGui menu image in hero (bonus: slight tilt with scroll)
