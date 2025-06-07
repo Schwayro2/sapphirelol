@@ -38,9 +38,14 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         background: var(--bg);
       }
       main {
+        width: 100%;
         max-width: 1000px;
         margin: auto;
         padding: 1.5rem;
+      }
+
+      @media (max-width: 480px) {
+        main { padding: 1rem; }
       }
 
       .hero {

@@ -18,6 +18,10 @@
   --fade-offset: 32px;
   --slide-offset: 20px;
 }
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 @font-face {
   font-family: "Atkinson";
   src: url("/fonts/atkinson-regular.woff") format("woff");
@@ -41,6 +45,7 @@ body {
   background-size: 100% 600px;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  overflow-x: hidden;
   color: rgb(var(--gray-dark));
   font-size: 20px;
   line-height: 1.7;
@@ -147,6 +152,12 @@ hr {
   }
   h2 {
     font-size: 1.8em;
+  }
+}
+
+@media (max-width: 360px) {
+  body {
+    font-size: 14px;
   }
 }
 
