@@ -4,8 +4,12 @@ import { SITE_TITLE } from '../consts';
 ---
 
 <header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+        <nav>
+                <h2 class="logo">
+                        <a href="/">
+                                <img src="/favicon.svg" alt={SITE_TITLE} width="32" height="32" />
+                        </a>
+                </h2>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/shop">Shop</HeaderLink>
@@ -29,10 +33,16 @@ import { SITE_TITLE } from '../consts';
 		background: white;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
 	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
+        h2 {
+                margin: 0;
+                font-size: 1em;
+        }
+
+        .logo img {
+                display: block;
+                width: 32px;
+                height: 32px;
+        }
 
 	h2 a,
 	h2 a.active {
