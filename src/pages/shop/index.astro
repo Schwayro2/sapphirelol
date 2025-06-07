@@ -35,6 +35,7 @@ try {
         --shadow: 0 8px 40px 0 rgba(99, 102, 241, 0.13), 0 2px 8px rgba(70,80,180,0.06);
         --card-blur: blur(18px);
         --transition: all 0.36s cubic-bezier(.47,1.64,.41,.8);
+        --hero-bg: linear-gradient(120deg, #e0e7ff 10%, #f7faff 100%);
       }
       html[data-theme='dark'] {
         --bg: #1f2937;
@@ -42,6 +43,7 @@ try {
         --muted: #9ca3af;
         --glass: rgba(17,24,39,0.8);
         --border: #374151;
+        --hero-bg: linear-gradient(120deg, #374151 10%, #1f2937 100%);
       }
 
       html, body {
@@ -70,7 +72,7 @@ try {
         justify-content: center;
         text-align: center;
         box-shadow: var(--shadow);
-        background: linear-gradient(120deg, #e0e7ff 10%, #f7faff 100%);
+        background: var(--hero-bg);
         z-index: 1;
       }
       .hero-blobs {
