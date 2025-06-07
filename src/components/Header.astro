@@ -1,13 +1,14 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
+import logoUrl from '../../public/favicon.svg?url';
 ---
 
 <header>
         <nav>
                 <h2 class="logo">
                         <a href="/">
-                                <img src="/favicon.svg" alt={SITE_TITLE} width="32" height="32" />
+                                <img src={logoUrl} alt="Sapphire logo" width="32" height="32" />
                         </a>
                 </h2>
 		<div class="internal-links">
