@@ -384,21 +384,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     </main>
     <Footer />
     <script>
-      // Animate on scroll for cards/sections
       document.addEventListener('DOMContentLoaded', () => {
-        const animatedEls = document.querySelectorAll('.animate-on-scroll, .card');
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-            } else {
-              entry.target.classList.remove('visible');
-            }
-          });
-        }, { threshold: 0.2 });
-        animatedEls.forEach(el => observer.observe(el));
-
-        // Parallax for ImGui menu image in hero (bonus: slight tilt with scroll)
         const imguiMenu = document.getElementById('imguiMenu');
         if (imguiMenu) {
           window.addEventListener('scroll', () => {

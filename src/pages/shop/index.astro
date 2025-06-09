@@ -355,15 +355,6 @@ try {
       </section>
     </main>
     <Footer />
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const observer = new window.IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('visible');
-          });
-        }, { threshold: 0.2 });
-        document.querySelectorAll('.product-card, .hero-content').forEach(el => observer.observe(el));
-      });
-    </script>
+    <!-- Scroll animations handled globally -->
   </body>
 </html>
