@@ -201,6 +201,10 @@ hr {
   transform: none;
 }
 
+.shadow {
+  box-shadow: var(--box-shadow);
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
