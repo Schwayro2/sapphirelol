@@ -5,12 +5,12 @@
  */
 
 :root {
-  --accent: #7F00FF;
-  --accent-dark: #000d8a;
-  --black: 15, 18, 25;
-  --gray: 96, 115, 159;
-  --gray-light: 229, 233, 240;
-  --gray-dark: 34, 41, 57;
+  --accent: #7c3aed;
+  --accent-dark: #4c1d95;
+  --black: 20, 24, 31;
+  --gray: 100, 116, 139;
+  --gray-light: 232, 236, 243;
+  --gray-dark: 55, 65, 81;
   --gray-gradient: rgba(var(--gray-light), 50%), #fff;
   --plasma-shadow:
     0 4px 12px rgba(255, 65, 202, 0.3),
@@ -236,12 +236,12 @@ body {
 }
 
 html[data-theme='dark'] {
-  --accent: #b271ff;
-  --accent-dark: #7f00ff;
+  --accent: #c084fc;
+  --accent-dark: #a855f7;
   --black: 245, 245, 245;
-  --gray: 150, 160, 180;
-  --gray-light: 40, 44, 52;
-  --gray-dark: 220, 224, 234;
+  --gray: 148, 163, 184;
+  --gray-light: 45, 49, 57;
+  --gray-dark: 229, 231, 235;
   --gray-gradient: #111, rgba(var(--gray-light), 50%);
   color-scheme: dark;
 }
@@ -253,5 +253,5 @@ html[data-theme='dark'] body {
 }
 
 html[data-theme='dark'] header {
-  background: #1e1e1e;
+  background: #171717;
 }

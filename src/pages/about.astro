@@ -14,8 +14,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style is:global>
       :root {
-        --primary: #6366f1;
-        --primary-dark: #4f46e5;
+        --primary: var(--accent);
+        --primary-dark: #5b21b6;
         --text: #1f2937;
         --text-light: #6b7280;
         --bg: #ffffff;
@@ -23,7 +23,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         --border: #e5e7eb;
         --radius: 10px;
         --shadow: var(--plasma-shadow);
-        --plasma-gradient: linear-gradient(90deg, #ff41ca, #5f007f, #2335be, #c321a5, #2af5ff);
+        --plasma-gradient: linear-gradient(90deg, var(--accent), #06b6d4, #ec4899);
       }
       html[data-theme='dark'] {
         --text: #e5e7eb;

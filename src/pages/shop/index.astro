@@ -22,8 +22,8 @@ try {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style is:global>
       :root {
-        --primary: #6366f1;
-        --accent: #818cf8;
+        --primary: var(--accent);
+        --accent: #8b5cf6;
         --pink: #f472b6;
         --cyan: #06b6d4;
         --bg: #f7faff;
@@ -35,7 +35,7 @@ try {
         --shadow: var(--plasma-shadow);
         --card-blur: blur(18px);
         --transition: all 0.36s cubic-bezier(.47,1.64,.41,.8);
-        --hero-bg: linear-gradient(120deg, #eef2ff 10%, #f7faff 100%);
+        --hero-bg: linear-gradient(120deg, #f5f3ff 10%, #f7faff 100%);
       }
       html[data-theme='dark'] {
         --bg: #1f2937;
@@ -43,7 +43,7 @@ try {
         --muted: #9ca3af;
         --glass: rgba(17,24,39,0.8);
         --border: #374151;
-        --hero-bg: linear-gradient(120deg, #475569 10%, #1f2937 100%);
+        --hero-bg: linear-gradient(120deg, #312e81 10%, #1f2937 100%);
       }
 
       html, body {
