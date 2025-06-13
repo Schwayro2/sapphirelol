@@ -1,11 +1,16 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
+import logoUrl from '../../public/favicon.svg?url';
 ---
 
 <header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+        <nav>
+                <h2 class="logo">
+                        <a href="/">
+                                <img src={logoUrl} alt="Sapphire logo" width="32" height="32" />
+                        </a>
+                </h2>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/shop">Shop</HeaderLink>
@@ -25,30 +30,41 @@ import { SITE_TITLE } from '../consts';
 <style>
         header {
                 margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
+                padding: 0 1em;
+                background: white;
+                box-shadow: var(--box-shadow);
+        }
+        h2 {
+                margin: 0;
+                font-size: 1em;
+        }
+
+        .logo img {
+                display: block;
+                width: 32px;
+                height: 32px;
+        }
 
 	h2 a,
 	h2 a.active {
 		text-decoration: none;
 	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
+       nav {
+               display: flex;
+               align-items: center;
+               justify-content: space-between;
+               max-width: 100%;
+       }
+       .internal-links {
+               display: flex;
+               gap: 0.5em;
+       }
+       nav a {
+               padding: 1em 0.5em;
+               color: var(--black);
+               border-bottom: 4px solid transparent;
+               text-decoration: none;
+       }
 	nav a.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
@@ -70,14 +86,27 @@ import { SITE_TITLE } from '../consts';
         .social-links a {
                 margin-right: 0.5em;
         }
-	.social-links a:last-child {
-		margin-right: 0;
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
-	}
+       .social-links a:last-child {
+               margin-right: 0;
+       }
+       @media (max-width: 720px) {
+               nav {
+                       flex-direction: column;
+                       align-items: flex-start;
+                       gap: 0.25em;
+               }
+               .internal-links {
+                       flex-wrap: wrap;
+                       justify-content: center;
+                       width: 100%;
+               }
+               nav a {
+                       padding: 0.75em 0.5em;
+               }
+               .social-links {
+                       display: none;
+               }
+       }
 </style>
 <script>
   const icon = document.getElementById('theme-icon');

@@ -22,8 +22,8 @@ try {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style is:global>
       :root {
-        --primary: #6366f1;
-        --accent: #818cf8;
+        --primary: var(--accent);
+        --accent: #8b5cf6;
         --pink: #f472b6;
         --cyan: #06b6d4;
         --bg: #f7faff;
@@ -32,9 +32,10 @@ try {
         --glass: rgba(255,255,255,0.80);
         --border: #ececf6;
         --radius: 18px;
-        --shadow: 0 8px 40px 0 rgba(99, 102, 241, 0.13), 0 2px 8px rgba(70,80,180,0.06);
+        --shadow: var(--plasma-shadow);
         --card-blur: blur(18px);
         --transition: all 0.36s cubic-bezier(.47,1.64,.41,.8);
+        --hero-bg: linear-gradient(120deg, #f5f3ff 10%, #f7faff 100%);
       }
       html[data-theme='dark'] {
         --bg: #1f2937;
@@ -42,6 +43,7 @@ try {
         --muted: #9ca3af;
         --glass: rgba(17,24,39,0.8);
         --border: #374151;
+        --hero-bg: linear-gradient(120deg, #312e81 10%, #1f2937 100%);
       }
 
       html, body {
@@ -53,6 +55,7 @@ try {
         min-height: 100%;
       }
       main {
+        width: 100%;
         max-width: 1280px;
         margin: auto;
         padding: 3rem 1.2rem 2.5rem 1.2rem;
@@ -70,7 +73,7 @@ try {
         justify-content: center;
         text-align: center;
         box-shadow: var(--shadow);
-        background: linear-gradient(120deg, #e0e7ff 10%, #f7faff 100%);
+        background: var(--hero-bg);
         z-index: 1;
       }
       .hero-blobs {
@@ -79,20 +82,22 @@ try {
         height: 100%;
         z-index: 1;
         pointer-events: none;
+        mix-blend-mode: overlay;
         top: 0; left: 0;
       }
-      .hero-content {
-        position: relative;
-        z-index: 2;
-        padding: 3.5rem 1.5rem;
-        width: 100%;
-        max-width: 520px;
-        margin: 0 auto;
-        background: rgba(255,255,255,0.08);
-        border-radius: var(--radius);
-        box-shadow: 0 4px 40px 0 rgba(99,102,241,0.07);
-        backdrop-filter: blur(4px);
-      }
+        .hero-content {
+          position: relative;
+          z-index: 2;
+          padding: 3.5rem 1.5rem;
+          width: 100%;
+          max-width: 520px;
+          margin: 0 auto;
+          background: var(--glass);
+          border: 1px solid var(--border);
+          border-radius: var(--radius);
+          box-shadow: var(--shadow);
+          backdrop-filter: blur(4px);
+        }
       .hero h1 {
         font-size: 3.1rem;
         font-weight: 800;
@@ -159,7 +164,7 @@ try {
       .products-grid {
         display: grid;
         gap: 2.2rem;
-        grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         padding-bottom: 3rem;
       }
       .product-card {
@@ -223,7 +228,7 @@ try {
       .product-price {
         font-size: 1.07rem;
         font-weight: 600;
-        color: #444;
+        color: var(--text);
         margin-bottom: 0.73rem;
       }
       .product-description {
@@ -271,6 +276,13 @@ try {
         .hero { min-height: 36vh; }
         .products-grid { gap: 1.1rem; }
       }
+
+      @media (max-width: 480px) {
+        main { padding: 1rem 0.75rem; }
+        .hero h1 { font-size: 1.8rem; }
+        .hero p { font-size: 1rem; }
+        .hero-content { padding: 1rem; }
+      }
     </style>
   </head>
   <body>
@@ -300,7 +312,7 @@ try {
             </ellipse>
           </svg>
         </div>
-        <div class="hero-content">
+        <div class="hero-content fade-in-section">
           <h1>Unleash Your Gaming Potential</h1>
           <p>
             <span style="background: linear-gradient(90deg, #818cf8 40%, #06b6d4 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight:700;">
@@ -343,15 +355,6 @@ try {
       </section>
     </main>
     <Footer />
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const observer = new window.IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('visible');
-          });
-        }, { threshold: 0.07 });
-        document.querySelectorAll('.product-card').forEach(el => observer.observe(el));
-      });
-    </script>
+    <!-- Scroll animations handled globally -->
   </body>
 </html>

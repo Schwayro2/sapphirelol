@@ -14,16 +14,16 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style is:global>
       :root {
-        --primary: #6366f1;
-        --primary-dark: #4f46e5;
+        --primary: var(--accent);
+        --primary-dark: #5b21b6;
         --text: #1f2937;
         --text-light: #6b7280;
         --bg: #ffffff;
         --card: #f9fafb;
         --border: #e5e7eb;
         --radius: 18px;
-        --shadow: 0 4px 24px rgba(99,102,241,0.13);
-        --plasma-gradient: linear-gradient(90deg, #ff41ca, #5f007f, #2335be, #c321a5, #2af5ff);
+        --shadow: var(--plasma-shadow);
+        --plasma-gradient: linear-gradient(90deg, var(--accent), #06b6d4, #ec4899);
       }
       html[data-theme='dark'] {
         --text: #e5e7eb;
@@ -38,9 +38,14 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         background: var(--bg);
       }
       main {
+        width: 100%;
         max-width: 1000px;
         margin: auto;
         padding: 1.5rem;
+      }
+
+      @media (max-width: 480px) {
+        main { padding: 1rem; }
       }
 
       .hero {
@@ -110,6 +115,12 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
           width: 320px;
           height: 140px;
         }
+      }
+
+      @media (max-width: 480px) {
+        .hero h1 { font-size: 2rem; }
+        .hero p { font-size: 1rem; }
+        .section-title { font-size: 1.4rem; }
       }
 
       .hero h1 {
@@ -373,21 +384,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     </main>
     <Footer />
     <script>
-      // Animate on scroll for cards/sections
       document.addEventListener('DOMContentLoaded', () => {
-        const animatedEls = document.querySelectorAll('.animate-on-scroll, .card');
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-            } else {
-              entry.target.classList.remove('visible');
-            }
-          });
-        }, { threshold: 0.1 });
-        animatedEls.forEach(el => observer.observe(el));
-
-        // Parallax for ImGui menu image in hero (bonus: slight tilt with scroll)
         const imguiMenu = document.getElementById('imguiMenu');
         if (imguiMenu) {
           window.addEventListener('scroll', () => {
