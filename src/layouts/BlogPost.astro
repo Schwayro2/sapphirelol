@@ -1,0 +1,147 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+
+// All props (optional, safe defaults)
+const {
+  title = '',
+  description = '',
+  pubDate = '',
+  updatedDate = '',
+  heroImage = '',
+  price = ''
+} = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+      main {
+        width: calc(100% - 2em);
+        max-width: 100%;
+        margin: 0;
+      }
+      .hero-image {
+        width: 100%;
+      }
+      .hero-image img {
+        display: block;
+        margin: 0 auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 32px 0 rgba(99,102,241,0.14);
+        max-width: 100%;
+        height: auto;
+      }
+      .prose {
+        width: 720px;
+        max-width: calc(100% - 2em);
+        margin: auto;
+        padding: 1em;
+        color: #20222A;
+      }
+      .title {
+        margin-bottom: 1em;
+        padding: 1em 0;
+        text-align: center;
+        line-height: 1;
+      }
+      .title h1 {
+        margin: 0 0 0.5em 0;
+        font-size: 2.2em;
+        font-weight: 800;
+        letter-spacing: -1px;
+      }
+      .buy-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.7em;
+        margin: 2em auto 1.5em auto;
+        font-size: 1.17rem;
+        padding: 0.92em 2.8em;
+        border-radius: 13px;
+        background: linear-gradient(90deg, #06b6d4, #6366f1 85%);
+        color: #fff;
+        font-weight: 700;
+        box-shadow: 0 6px 22px 0 rgba(99,102,241,0.14);
+        transition: background 0.18s, transform 0.16s;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .buy-btn:hover, .buy-btn:focus {
+        background: linear-gradient(95deg, #6366f1, #06b6d4 85%);
+        color: #fff;
+        transform: scale(1.04) translateY(-2px);
+        text-decoration: none;
+      }
+      .date {
+        margin-bottom: 0.5em;
+        color: #62636D;
+        font-size: 0.99em;
+      }
+      .last-updated-on {
+        font-style: italic;
+      }
+      @media (max-width: 800px) {
+        .prose {
+          width: 99vw;
+          max-width: 99vw;
+          padding: 0.5em;
+        }
+        .hero-image img {
+          width: 100vw;
+          max-width: 99vw;
+        }
+      }
+    </style>
+    <script>
+      function buyNowClicked(e) {
+        e.preventDefault();
+        alert('Your checkout/modal/handler goes here!');
+      }
+      window.buyNowClicked = buyNowClicked;
+    </script>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <article>
+        <div class="hero-image">
+          {heroImage && <img width={1020} height={510} src={heroImage} alt={title} />}
+        </div>
+        <div class="prose">
+          <div class="title">
+            <div class="date">
+              <FormattedDate date={pubDate} />
+              {updatedDate && (
+                <div class="last-updated-on">
+                  Last updated on <FormattedDate date={updatedDate} />
+                </div>
+              )}
+            </div>
+            <h1>{title}</h1>
+            <hr />
+          </div>
+          <slot />
+          <div style="text-align:center;">
+            <a
+              class="buy-btn"
+              href="#"
+              onclick="buyNowClicked(event)"
+            >
+              <i class="fa-solid fa-cart-shopping"></i>
+              {price ? `Buy Now – $${price}` : "Buy Now"}
+            </a>
+          </div>
+        </div>
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>

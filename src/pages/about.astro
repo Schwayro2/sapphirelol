@@ -1,0 +1,174 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style is:global>
+      :root {
+        --primary: #6366f1;
+        --primary-dark: #4f46e5;
+        --text: #1f2937;
+        --text-light: #6b7280;
+        --bg: #ffffff;
+        --card: #f9fafb;
+        --border: #e5e7eb;
+        --radius: 10px;
+        --shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        --plasma-gradient: linear-gradient(90deg, #ff41ca, #5f007f, #2335be, #c321a5, #2af5ff);
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.5;
+        scroll-behavior: smooth;
+      }
+
+      main {
+        max-width: 1000px;
+        margin: auto;
+        padding: 2rem 1.5rem;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 1.75rem;
+        margin: 3rem 0 2rem;
+        background: var(--plasma-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .about-description {
+        max-width: 700px;
+        margin: 0 auto 2.5rem auto;
+        color: var(--text-light);
+        text-align: center;
+        font-size: 1.08rem;
+      }
+
+      .grid {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      @media (min-width: 768px) {
+        .grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 2rem 1.2rem 1.2rem 1.2rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: all 0.3s;
+      }
+
+      .pfp {
+        width: 74px;
+        height: 74px;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+        border: 3px solid var(--primary);
+        object-fit: cover;
+        box-shadow: 0 1px 8px rgba(99,102,241,0.13);
+      }
+
+      .card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+        background: var(--plasma-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .card p {
+        color: var(--text-light);
+        font-size: 0.98rem;
+        font-weight: 500;
+        margin-bottom: 0.2rem;
+      }
+
+      /* Fade-in Animation */
+      .fade-in-section {
+        opacity: 0;
+        transform: translateY(32px);
+        transition: opacity 0.75s cubic-bezier(.4,0,.2,1), transform 0.75s cubic-bezier(.4,0,.2,1);
+        will-change: opacity, transform;
+      }
+      .fade-in-section.visible {
+        opacity: 1;
+        transform: none;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section id="about-server">
+        <h2 class="section-title fade-in-section">About Us</h2>
+        <div class="about-description fade-in-section">
+          We've been providing high-quality cheats and private builds since <b>Black Ops Cold War</b> (2020), 
+          serving a loyal community of gamers who want the best tools, legit support, and active updates. 
+          Our team prides itself on reliability, fast support, and keeping our products undetected and cutting-edge across every COD title since launch.
+          <br /><br />
+          Need help or want to buy? Reach out directly to any of our team below.
+        </div>
+        <h2 class="section-title fade-in-section" style="margin-top:2.8rem;">Meet the Team</h2>
+        <div class="grid">
+          <div class="card fade-in-section">
+            <img class="pfp" src="https://cdn.discordapp.com/avatars/875177225517936660/a_cc0c18a639ff6d2f5e7d184ebbe4d4ea.webp?size=128" alt="Schwayro PFP" />
+            <h3>Schwayro</h3>
+            <p>Owner</p>
+          </div>
+          <div class="card fade-in-section">
+            <img class="pfp" src="https://cdn.discordapp.com/avatars/404376878883930113/f8cce57e483acc66552f39a09810120b.webp?size=128" alt="Chaotic PFP" />
+            <h3>Chaotic</h3>
+            <p>Admin</p>
+          </div>
+          <div class="card fade-in-section">
+            <img class="pfp" src="https://cdn.discordapp.com/avatars/401189470671470603/285601fe5e8c6b800f09e4bc532df65a.webp?size=128" alt="Diego PFP" />
+            <h3>Diego</h3>
+            <p>Admin</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const fadeEls = document.querySelectorAll('.fade-in-section');
+        const observer = new window.IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.18 });
+        fadeEls.forEach(el => observer.observe(el));
+      });
+    </script>
+  </body>
+</html>
